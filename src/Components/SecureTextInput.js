@@ -7,6 +7,7 @@ import {
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
 import { Feather } from "@expo/vector-icons";
+import MyText from "./MyText";
 export default function textInput({ label, placeholder }) {
   const [value, setValue] = useState("");
   const [visibility, setVisibility] = useState(false);
@@ -15,7 +16,7 @@ export default function textInput({ label, placeholder }) {
   };
   return (
     <>
-      <Text style={styles.label}>{label}</Text>
+      <MyText style={styles.label} text={label} fontStyle="Regular" />
       <View style={styles.row}>
         <TextInput
           style={styles.TextInput}
@@ -54,7 +55,6 @@ const styles = StyleSheet.create({
   },
   label: {
     color: theme.colors.primary,
-    fontWeight: "bold",
     fontSize: theme.sizes.fourteen,
     marginTop: hp(2),
   },

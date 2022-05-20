@@ -11,6 +11,7 @@ import Text from "../../Components/NormalText";
 import TextInput from "../../Components/TextInput.js";
 import SecureTextInput from "../../Components/SecureTextInput";
 import Button from "../../Components/Button";
+import MyText from "../../Components/MyText";
 const Login = ({ navigation }) => {
   return (
     <Container>
@@ -20,19 +21,35 @@ const Login = ({ navigation }) => {
           source={require("../../../assets/logo.png")}
         />
         <View style={styles.form}>
-          <Title style={styles.title}>Iniciar Sesion</Title>
-          <Text>Ingrese sus credenciales para poder iniciar sesion</Text>
+          <MyText
+            style={styles.title}
+            text={"iniciar sesión"}
+            fontStyle="Regular"
+          />
+          <MyText
+            style={styles.subtitle}
+            text={"Ingrese sus credenciales para poder iniciar sesion"}
+            fontStyle="Regular"
+          />
           <TextInput placeholder="Ingrese el email" label={"Email"} />
           <SecureTextInput
             placeholder="Ingrese la contrasena"
-            label={"Contrasena"}
+            label={"Contraseña"}
           />
         </View>
-        <Button style={styles.button} label={"Iniciar Sesion"} />
+        <Button style={styles.button} label={"Iniciar Sesion"} onPress />
         <View style={styles.row}>
-          <Text style={styles.forgetText}>Olvide mi contrasena</Text>
-          <TouchableOpacity onPress={()=>navigation.navigate('Register')}>
-            <Text style={styles.accountCreate}>Crear una cuenta</Text>
+          <MyText
+            style={styles.forgetText}
+            text={"Olvide mi contraseña"}
+            fontStyle="Regular"
+          />
+          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+            <MyText
+              style={styles.accountCreate}
+              text={"Crear una cuenta"}
+              fontStyle="Regular"
+            />
           </TouchableOpacity>
         </View>
       </View>
@@ -53,12 +70,18 @@ const styles = StyleSheet.create({
     height: hp(40),
   },
   logo: {
-    width: wp(63),
+    width: wp(60),
     height: hp(24),
     marginBottom: hp(2),
+    resizeMode: "contain",
   },
   title: {
     textAlign: "left",
+    fontSize: hp(4),
+  },
+  subtitle: {
+    fontSize: 15,
+    color: "gray",
   },
   row: {
     flexDirection: "row",
@@ -68,6 +91,8 @@ const styles = StyleSheet.create({
   },
   button: {
     marginBottom: hp(5),
+    height: hp(6),
+    justifyContent: "center",
   },
   forgetText: {
     color: theme.colors.secondary,

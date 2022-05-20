@@ -2,11 +2,14 @@ import { Text, StyleSheet, TextStyle } from "react-native";
 import React from "react";
 import { theme } from "../theme";
 import { Button } from "react-native-paper";
-import { heightPercentageToDP as hp, widthPercentageToDP as wp} from "react-native-responsive-screen";
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from "react-native-responsive-screen";
 
-export default function button({ label, style = {} }) {
+export default function button({ label, style = {}, onPress }) {
   return (
-    <Button style={[style,styles.button]} mode="contained" onPress={() => console.log("Pressed")}>
+    <Button style={[style, styles.button]} mode="contained" onPress={onPress}>
       {label}
     </Button>
   );
