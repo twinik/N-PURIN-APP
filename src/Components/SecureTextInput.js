@@ -8,7 +8,7 @@ import {
 } from "react-native-responsive-screen";
 import { Feather } from "@expo/vector-icons";
 import MyText from "./MyText";
-export default function textInput({ label, placeholder }) {
+export default function textInput({ label, placeholder, ...props }) {
   const [value, setValue] = useState("");
   const [visibility, setVisibility] = useState(false);
   const handleChange = (text) => {
@@ -25,6 +25,7 @@ export default function textInput({ label, placeholder }) {
           value={value}
           onChangeText={handleChange}
           secureTextEntry={!visibility}
+          {...props}
         />
         {!visibility ? (
           <Feather

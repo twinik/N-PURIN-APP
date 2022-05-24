@@ -19,22 +19,28 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 
 const validations = Yup.object().shape({
-  nVacas: Yup.number()
-    .required("Seleccione cantidad de vacas")
-    .positive("Cantidad inválida")
-    .integer("Cantidad inválida")
-    .label("Cantidad de vacas"),
-  raza: Yup.string().required("Seleccione una raza").label("Raza"),
-  alimentacion: Yup.string()
-    .required("Seleccione un tipo de alimentación")
-    .label("Alimentación"),
-  estabulacion: Yup.string()
-    .required("Seleccione un tipo de estabulación")
-    .label("Estabulación"),
+  tipo: Yup.string().required("Seleccione un tipo").label("Tipo"),
+  dimensiones: Yup.string()
+    .required("Seleccione una dimension")
+    .label("Dimensiones"),
+  bomba: Yup.string().required("Seleccione un tipo de bomba").label("Bomba"),
+  tecnologia: Yup.string()
+    .required("Seleccione un tipo de tecnología")
+    .label("Tecnología"),
 });
 
-const Data0 = ({ route, navigation }) => {
-  const { email, password } = route.params;
+const Data2 = ({ route, navigation }) => {
+  const {
+    email,
+    password,
+    nVacas,
+    raza,
+    alimentacion,
+    estabulacion,
+    agua,
+    sistLimpieza,
+    solidos,
+  } = route.params;
   const [loaded] = useFonts({
     Main: require("../../../../assets/fonts/Staatliches.ttf"),
   });
@@ -44,19 +50,26 @@ const Data0 = ({ route, navigation }) => {
   return (
     <Formik
       initialValues={{
-        nVacas: 0,
-        raza: "",
-        alimentacion: "",
-        estabulacion: "",
+        tipo: "",
+        dimensiones: "",
+        bomba: "",
+        tecnologia: "",
       }}
       onSubmit={(values) =>
         navigation.navigate("Data1", {
           email: email,
           password: password,
-          nVacas: values.nVacas,
-          raza: values.raza,
-          alimentacion: values.alimentacion,
-          estabulacion: values.estabulacion,
+          nVacas: nVacas,
+          raza: raza,
+          alimentacion: alimentacion,
+          estabulacion: estabulacion,
+          agua: agua,
+          sistLimpieza: sistLimpieza,
+          solidos: solidos,
+          tipo: values.tipo,
+          dimensiones: values.dimensiones,
+          bomba: values.bomba,
+          tecnologia: values.tecnologia,
         })
       }
       validationSchema={validations}
@@ -82,7 +95,7 @@ const Data0 = ({ route, navigation }) => {
                   />
                   <MyText
                     style={{ fontSize: 22 }}
-                    text={"1/3"}
+                    text={"3/3"}
                     fontStyle="Regular"
                   />
                 </View>
@@ -96,20 +109,32 @@ const Data0 = ({ route, navigation }) => {
               </View>
 
               <View style={styles.form_box}>
-                <TextInput
-                  placeholder="Ingrese N° de vacas"
-                  label={"N° de vacas"}
-                  onChangeText={handleChange("nVacas")}
-                  onBlur={handleBlur("nVacas")}
-                  value={values.nVacas}
-                  keyboardType="numeric"
-                  keyboardAppearance="dark"
-                  returnKeyType="next"
-                  returnKeyLabel="next"
-                />
-                {errors.nVacas && touched.nVacas && (
+                <View style={styles.input_box}>
                   <MyText
-                    text={errors.nVacas}
+                    style={styles.inputLabel}
+                    text={"Tipo"}
+                    fontStyle="Regular"
+                  />
+
+                  <Picker
+                    prompt="Seleccione un tipo"
+                    selectedValue={values.tipo}
+                    onValueChange={(itemValue, itemIndex) =>
+                      setFieldValue("tipo", itemValue)
+                    }
+                    placeholder="Seleccione un tipo"
+                  >
+                    <Picker.Item label="Bulldog" value="bd" color="black" />
+                    <Picker.Item
+                      label="Golden Retriever"
+                      value="gr"
+                      color="black"
+                    />
+                  </Picker>
+                </View>
+                {errors.tipo && touched.tipo && (
+                  <MyText
+                    text={errors.tipo}
                     fontStyle="Regular"
                     style={styles.errorText}
                   />
@@ -118,15 +143,15 @@ const Data0 = ({ route, navigation }) => {
                 <View style={styles.input_box}>
                   <MyText
                     style={styles.inputLabel}
-                    text={"Raza"}
+                    text={"Dimensiones"}
                     fontStyle="Regular"
                   />
 
                   <Picker
-                    prompt="Seleccione una raza"
-                    selectedValue={values.raza}
+                    prompt="Seleccione una dimension"
+                    selectedValue={values.dimensiones}
                     onValueChange={(itemValue, itemIndex) =>
-                      setFieldValue("raza", itemValue)
+                      setFieldValue("dimensiones", itemValue)
                     }
                     placeholder="Seleccione una ruta"
                   >
@@ -138,9 +163,9 @@ const Data0 = ({ route, navigation }) => {
                     />
                   </Picker>
                 </View>
-                {errors.raza && touched.raza && (
+                {errors.dimensiones && touched.dimensiones && (
                   <MyText
-                    text={errors.raza}
+                    text={errors.dimensiones}
                     fontStyle="Regular"
                     style={styles.errorText}
                   />
@@ -149,14 +174,14 @@ const Data0 = ({ route, navigation }) => {
                 <View style={styles.input_box}>
                   <MyText
                     style={styles.inputLabel}
-                    text={"Tipo de alimentación"}
+                    text={"Bomba(s)"}
                     fontStyle="Regular"
                   />
                   <Picker
-                    prompt="Seleccione un tipo de alimentación"
-                    selectedValue={values.alimentacion}
+                    prompt="Seleccione un tipo de bomba"
+                    selectedValue={values.bomba}
                     onValueChange={(itemValue, itemIndex) =>
-                      setFieldValue("alimentacion", itemValue)
+                      setFieldValue("bomba", itemValue)
                     }
                   >
                     <Picker.Item label="Carnivora" value="dni" color="black" />
@@ -167,9 +192,9 @@ const Data0 = ({ route, navigation }) => {
                     />
                   </Picker>
                 </View>
-                {errors.alimentacion && touched.alimentacion && (
+                {errors.bomba && touched.bomba && (
                   <MyText
-                    text={errors.alimentacion}
+                    text={errors.bomba}
                     fontStyle="Regular"
                     style={styles.errorText}
                   />
@@ -177,15 +202,15 @@ const Data0 = ({ route, navigation }) => {
                 <View style={styles.input_box}>
                   <MyText
                     style={styles.inputLabel}
-                    text={"Tipo de estabulación"}
+                    text={"Tecnología"}
                     fontStyle="Regular"
                   />
                   <Picker
-                    selectedValue={values.estabulacion}
+                    selectedValue={values.tecnologia}
                     onValueChange={(itemValue, itemIndex) =>
-                      setFieldValue("estabulacion", itemValue)
+                      setFieldValue("tecnologia", itemValue)
                     }
-                    prompt="Seleccione un tipo de estabulación"
+                    prompt="Seleccione un tipo de tecnologia"
                   >
                     <Picker.Item label="Granja" value="dni" color="black" />
                     <Picker.Item
@@ -195,9 +220,9 @@ const Data0 = ({ route, navigation }) => {
                     />
                   </Picker>
                 </View>
-                {errors.estabulacion && touched.estabulacion && (
+                {errors.tecnologia && touched.tecnologia && (
                   <MyText
-                    text={errors.estabulacion}
+                    text={errors.tecnologia}
                     fontStyle="Regular"
                     style={styles.errorText}
                   />
@@ -207,7 +232,7 @@ const Data0 = ({ route, navigation }) => {
               <View style={styles.btn_box}>
                 <Button
                   style={styles.button}
-                  label={"Continuar"}
+                  label={"Finalizar"}
                   onPress={handleSubmit}
                 />
               </View>
@@ -219,7 +244,7 @@ const Data0 = ({ route, navigation }) => {
   );
 };
 
-export default Data0;
+export default Data2;
 
 const styles = StyleSheet.create({
   container: {
@@ -236,7 +261,7 @@ const styles = StyleSheet.create({
     height: hp(15),
   },
   form_box: {
-    height: hp(55),
+    height: hp(57),
     paddingTop: 10,
     paddingBottom: 10,
   },

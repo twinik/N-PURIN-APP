@@ -5,7 +5,7 @@ import { theme } from "../theme";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import MyText from "./MyText";
 
-export default function textInput({ label, placeholder }) {
+export default function textInput({ label, placeholder, ...props }) {
   const [value, setValue] = useState("");
   const handleChange = (text) => {
     setValue(text);
@@ -19,6 +19,7 @@ export default function textInput({ label, placeholder }) {
         placeholder={placeholder}
         value={value}
         onChangeText={handleChange}
+        {...props}
       />
     </>
   );

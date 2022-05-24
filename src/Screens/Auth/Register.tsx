@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
+import React from "react";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -12,7 +12,38 @@ import Button from "../../Components/Button";
 import MyText from "../../Components/MyText";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { useFonts } from "expo-font";
-const Login = ({ navigation }) => {
+import { Formik } from "formik";
+import * as Yup from "yup";
+
+const validations = Yup.object().shape({
+  email: Yup.string()
+    .email("Por favor ingrese un email valido")
+    .required("Email es requerido")
+    .label("Email"),
+  password: Yup.string()
+    .matches(
+      /\w*[a-z]\w*/,
+      "La contraseña debe tener al menos una letra minuscula"
+    )
+    .matches(
+      /\w*[A-Z]\w*/,
+      "La contraseña debe tener al menos una letra mayuscula"
+    )
+    .matches(/\d/, "La contraseña debe tener al menos un numero")
+    .min(8, ({ min }) => `La contraseña debe tener al menos ${min} caracteres`)
+    .required("Contraseña es requerida")
+    .label("Contraseña"),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password"), null], "Las contraseñas no coinciden")
+    .required("Confirmar contraseña es requerida")
+    .label("Confirmar contraseña"),
+  acceptTerms: Yup.bool().oneOf(
+    [true],
+    "Debe aceptar los terminos y condiciones"
+  ),
+});
+
+const Register = ({ navigation }) => {
   const [loaded] = useFonts({
     Main: require("./../../../assets/fonts/Staatliches.ttf"),
   });
@@ -20,63 +51,150 @@ const Login = ({ navigation }) => {
     return null;
   }
   return (
-    <Container>
-      <View style={styles.container}>
-        <View style={styles.form}>
-          <MyText
-            style={styles.title}
-            text={"Crear una cuenta"}
-            fontStyle="Regular"
-          />
-          <TextInput placeholder="Ingrese el Email" label={"Email"} />
-          <SecureTextInput
-            placeholder="Ingrese la contraseña"
-            label={"Contraseña"}
-          />
-          <SecureTextInput
-            placeholder="Confirme la contraseña"
-            label={"Contraseña"}
-          />
-          <View style={{ marginTop: hp(1.5), width: wp(70) }}>
-            <BouncyCheckbox
-              size={25}
-              fillColor={theme.colors.primary}
-              unfillColor="#FFFFFF"
-              text="Acepto los terminos y condiciones establecidos por la ley n°237 de la Republica Argentina"
-              iconStyle={{ borderColor: theme.colors.primary }}
-              textStyle={[
-                styles.checkBoxText,
-                { fontFamily: "Main", textDecorationLine: "none" },
-              ]}
-              onPress={(isChecked: boolean) => {}}
+    <Formik
+      initialValues={{
+        email: "",
+        password: "",
+        confirmPassword: "",
+        acceptTerms: false,
+      }}
+      onSubmit={(values) =>
+        navigation.navigate("Data0", {
+          email: values.email,
+          password: values.password,
+        })
+      }
+      validationSchema={validations}
+    >
+      {({
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        setFieldValue,
+        values,
+        errors,
+        touched,
+      }) => (
+        <Container>
+          <View style={styles.container}>
+            <View style={styles.form}>
+              <MyText
+                style={styles.title}
+                text={"Crear una cuenta"}
+                fontStyle="Regular"
+              />
+              <TextInput
+                placeholder="Ingrese su email"
+                label={"Email"}
+                onChangeText={handleChange("email")}
+                onBlur={handleBlur("email")}
+                value={values.email}
+                autoCapitalize="none"
+                autoCompleteType="email"
+                keyboardType="email-address"
+                keyboardAppearance="dark"
+                returnKeyType="next"
+                returnKeyLabel="next"
+              />
+              {errors.email && touched.email && (
+                <MyText
+                  text={errors.email}
+                  fontStyle="Regular"
+                  style={styles.errorText}
+                />
+              )}
+
+              <SecureTextInput
+                placeholder="Ingrese su contraseña"
+                label={"Contraseña"}
+                onChangeText={handleChange("password")}
+                onBlur={handleBlur("password")}
+                value={values.password}
+                autoCompleteType="password"
+                autoCapitalize="none"
+                keyboardAppearance="dark"
+                returnKeyType="go"
+                returnKeyLabel="go"
+              />
+              {errors.password && touched.password && (
+                <MyText
+                  text={errors.password}
+                  fontStyle="Regular"
+                  style={styles.errorText}
+                />
+              )}
+              <SecureTextInput
+                placeholder="Confirme su contraseña"
+                label={"Confirme Contraseña"}
+                onChangeText={handleChange("confirmPassword")}
+                onBlur={handleBlur("confirmPassword")}
+                value={values.confirmPassword}
+                autoCompleteType="password"
+                autoCapitalize="none"
+                keyboardAppearance="dark"
+                returnKeyType="go"
+                returnKeyLabel="go"
+              />
+              {errors.confirmPassword && touched.confirmPassword && (
+                <MyText
+                  text={errors.confirmPassword}
+                  fontStyle="Regular"
+                  style={styles.errorText}
+                />
+              )}
+
+              <View style={{ marginTop: hp(1.5), width: wp(70) }}>
+                <BouncyCheckbox
+                  isChecked={values.acceptTerms}
+                  size={25}
+                  fillColor={theme.colors.primary}
+                  unfillColor="#FFFFFF"
+                  text="Acepto los terminos y condiciones establecidos por la ley n°237 de la Republica Nacional"
+                  iconStyle={{ borderColor: theme.colors.primary }}
+                  textStyle={[
+                    styles.checkBoxText,
+                    { fontFamily: "Main", textDecorationLine: "none" },
+                  ]}
+                  onPress={() => {
+                    setFieldValue("acceptTerms", !values.acceptTerms);
+                  }}
+                />
+                {errors.acceptTerms && touched.acceptTerms && (
+                  <MyText
+                    text={errors.acceptTerms}
+                    fontStyle="Regular"
+                    style={styles.errorText}
+                  />
+                )}
+              </View>
+            </View>
+            <Button
+              style={styles.button}
+              label={"Continuar"}
+              onPress={handleSubmit}
             />
+            <View style={styles.row}>
+              <MyText
+                style={styles.forgetText}
+                text={"¿Ya tienes una cuenta?"}
+                fontStyle="Regular"
+              />
+              <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                <MyText
+                  style={styles.accountCreate}
+                  text={"Iniciar Sesion"}
+                  fontStyle="Regular"
+                />
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-        <Button
-          style={styles.button}
-          label={"Continuar"}
-          onPress={() => navigation.navigate("Data0")}
-        />
-        <View style={styles.row}>
-          <MyText
-            style={styles.forgetText}
-            text={"¿Ya tienes una cuenta?"}
-            fontStyle="Regular"
-          />
-          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-            <MyText
-              style={styles.accountCreate}
-              text={"Iniciar Sesion"}
-              fontStyle="Regular"
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
-    </Container>
+        </Container>
+      )}
+    </Formik>
   );
 };
 
-export default Login;
+export default Register;
 
 const styles = StyleSheet.create({
   container: {
@@ -86,7 +204,7 @@ const styles = StyleSheet.create({
   },
   form: {
     width: wp(80),
-    height: hp(47),
+    height: hp(52),
   },
   logo: {
     width: wp(60),
@@ -124,6 +242,10 @@ const styles = StyleSheet.create({
   },
   checkBoxText: {
     color: "gray",
+    fontSize: hp(1.5),
+  },
+  errorText: {
+    color: "red",
     fontSize: hp(1.5),
   },
 });

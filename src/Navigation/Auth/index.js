@@ -3,6 +3,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "../../Screens/Auth/Login";
 import Register from "../../Screens/Auth/Register";
 import Data0 from "../../Screens/Auth/Data/Data0";
+import Data1 from "../../Screens/Auth/Data/Data1";
+import Data2 from "../../Screens/Auth/Data/Data2";
 export default function index() {
   const AuthStack = createNativeStackNavigator();
 
@@ -21,6 +23,16 @@ export default function index() {
       <AuthStack.Screen
         name="Data0"
         component={Data0}
+        options={{ headerTitleAlign: "center", headerShown: false }}
+      />
+      <AuthStack.Screen
+        name="Data1"
+        component={Data1}
+        options={{ headerTitleAlign: "center", headerShown: false }}
+      />
+      <AuthStack.Screen
+        name="Data2"
+        component={Data2}
         options={{ headerTitleAlign: "center", headerShown: false }}
       />
     </AuthStack.Navigator>
