@@ -13,6 +13,7 @@ export const theme = {
     primary: "#6334e4",
     secondary: "#9d9eb3",
     black: "#2c3e42",
+    gray: "#B6B6B8",
   },
   fonts: {
     ...Platform.select({

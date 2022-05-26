@@ -6,54 +6,125 @@ import {
 } from "react-native-responsive-screen";
 import { theme } from "../../theme";
 import Container from "../../Components/Container";
-import Title from "../../Components/Title";
-import Text from "../../Components/NormalText";
 import TextInput from "../../Components/TextInput.js";
 import SecureTextInput from "../../Components/SecureTextInput";
 import Button from "../../Components/Button";
 import MyText from "../../Components/MyText";
-const Login = ({ navigation }) => {
+import { Formik } from "formik";
+import * as Yup from "yup";
+
+const validations = Yup.object().shape({
+  email: Yup.string().required("El email es requerido").label("Email"),
+  password: Yup.string()
+    .required("La contraseña es requerida")
+    .label("Contraseña"),
+});
+
+const Login = ({ navigation, route }) => {
+  /* if (route.params.email != null && route.params.password != null) {
+    const { email, password } = route.params;
+  } */
+
   return (
-    <Container>
-      <View style={styles.container}>
-        <Image
-          style={styles.logo}
-          source={require("../../../assets/logo.png")}
-        />
-        <View style={styles.form}>
-          <MyText
-            style={styles.title}
-            text={"iniciar sesión"}
-            fontStyle="Regular"
-          />
-          <MyText
-            style={styles.subtitle}
-            text={"Ingrese sus credenciales para poder iniciar sesion"}
-            fontStyle="Regular"
-          />
-          <TextInput placeholder="Ingrese el email" label={"Email"} />
-          <SecureTextInput
-            placeholder="Ingrese la contrasena"
-            label={"Contraseña"}
-          />
-        </View>
-        <Button style={styles.button} label={"Iniciar Sesion"} onPress />
-        <View style={styles.row}>
-          <MyText
-            style={styles.forgetText}
-            text={"Olvide mi contraseña"}
-            fontStyle="Regular"
-          />
-          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-            <MyText
-              style={styles.accountCreate}
-              text={"Crear una cuenta"}
-              fontStyle="Regular"
+    <Formik
+      initialValues={{
+        email: "",
+        password: "",
+      }}
+      onSubmit={(values) => {
+        alert("LogIn Success");
+      }}
+      validationSchema={validations}
+    >
+      {({
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        setFieldValue,
+        values,
+        errors,
+        touched,
+      }) => (
+        <Container>
+          <View style={styles.container}>
+            <Image
+              style={styles.logo}
+              source={require("../../../assets/logo.png")}
             />
-          </TouchableOpacity>
-        </View>
-      </View>
-    </Container>
+            <View style={styles.form}>
+              <MyText
+                style={styles.title}
+                text={"iniciar sesión"}
+                fontStyle="Regular"
+              />
+              <MyText
+                style={styles.subtitle}
+                text={"Ingrese sus credenciales para poder iniciar sesion"}
+                fontStyle="Regular"
+              />
+              <TextInput
+                placeholder="Ingrese su email"
+                label={"Email"}
+                onChangeText={handleChange("email")}
+                onBlur={handleBlur("email")}
+                value={values.email}
+                autoCapitalize="none"
+                autoCompleteType="email"
+                keyboardType="email-address"
+                keyboardAppearance="dark"
+                returnKeyType="next"
+                returnKeyLabel="next"
+              />
+              {errors.email && touched.email && (
+                <MyText
+                  text={errors.email}
+                  fontStyle="Regular"
+                  style={styles.errorText}
+                />
+              )}
+              <SecureTextInput
+                placeholder="Ingrese su contraseña"
+                label={"Contraseña"}
+                onChangeText={handleChange("password")}
+                onBlur={handleBlur("password")}
+                value={values.password}
+                autoCompleteType="password"
+                autoCapitalize="none"
+                keyboardAppearance="dark"
+                returnKeyType="go"
+                returnKeyLabel="go"
+              />
+              {errors.password && touched.password && (
+                <MyText
+                  text={errors.password}
+                  fontStyle="Regular"
+                  style={styles.errorText}
+                />
+              )}
+            </View>
+            <Button
+              style={styles.button}
+              label={"Iniciar Sesión"}
+              onPress={handleSubmit}
+            />
+            <View style={styles.row}>
+              <MyText
+                style={styles.forgetText}
+                text={"Olvide mi contraseña"}
+                fontStyle="Regular"
+              />
+              <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+                <MyText
+                  style={styles.accountCreate}
+                  text={"Crear una cuenta"}
+                  fontStyle="Regular"
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Container>
+      )}
+    </Formik>
   );
 };
 
@@ -99,5 +170,9 @@ const styles = StyleSheet.create({
   },
   accountCreate: {
     color: theme.colors.primary,
+  },
+  errorText: {
+    color: "red",
+    fontSize: hp(1.5),
   },
 });

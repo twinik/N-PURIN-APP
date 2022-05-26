@@ -1,18 +1,13 @@
-import React, { useState } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import React from "react";
+import { StyleSheet, View } from "react-native";
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
-import { Picker } from "@react-native-picker/picker";
-import DropDownPicker from "react-native-dropdown-picker";
+import RNPickerSelect from "react-native-picker-select";
 import { useFonts } from "expo-font";
 import { theme } from "../../../theme";
 import Container from "../../../Components/Container";
-import Title from "../../../Components/Title";
-import Text from "../../../Components/NormalText";
-import TextInput from "../../../Components/TextInput.js";
-import SecureTextInput from "../../../Components/SecureTextInput";
 import Button from "../../../Components/Button";
 import MyText from "../../../Components/MyText";
 import { Formik } from "formik";
@@ -55,8 +50,8 @@ const Data2 = ({ route, navigation }) => {
         bomba: "",
         tecnologia: "",
       }}
-      onSubmit={(values) =>
-        navigation.navigate("Data1", {
+      onSubmit={(values) => {
+        navigation.navigate("Login", {
           email: email,
           password: password,
           nVacas: nVacas,
@@ -70,8 +65,8 @@ const Data2 = ({ route, navigation }) => {
           dimensiones: values.dimensiones,
           bomba: values.bomba,
           tecnologia: values.tecnologia,
-        })
-      }
+        });
+      }}
       validationSchema={validations}
     >
       {({
@@ -116,21 +111,21 @@ const Data2 = ({ route, navigation }) => {
                     fontStyle="Regular"
                   />
 
-                  <Picker
-                    prompt="Seleccione un tipo"
-                    selectedValue={values.tipo}
-                    onValueChange={(itemValue, itemIndex) =>
-                      setFieldValue("tipo", itemValue)
-                    }
-                    placeholder="Seleccione un tipo"
-                  >
-                    <Picker.Item label="Bulldog" value="bd" color="black" />
-                    <Picker.Item
-                      label="Golden Retriever"
-                      value="gr"
-                      color="black"
-                    />
-                  </Picker>
+                  <RNPickerSelect
+                    onValueChange={(value) => setFieldValue("tipo", value)}
+                    value={values.tipo}
+                    useNativeAndroidPickerStyle={true}
+                    fixAndroidTouchableBug={true}
+                    doneText="Aceptar"
+                    placeholder={{
+                      label: "Seleccione un tipo",
+                      value: null,
+                    }}
+                    items={[
+                      { label: "Tipo a", value: "a" },
+                      { label: "Tipo b", value: "b" },
+                    ]}
+                  />
                 </View>
                 {errors.tipo && touched.tipo && (
                   <MyText
@@ -147,21 +142,23 @@ const Data2 = ({ route, navigation }) => {
                     fontStyle="Regular"
                   />
 
-                  <Picker
-                    prompt="Seleccione una dimension"
-                    selectedValue={values.dimensiones}
-                    onValueChange={(itemValue, itemIndex) =>
-                      setFieldValue("dimensiones", itemValue)
+                  <RNPickerSelect
+                    onValueChange={(value) =>
+                      setFieldValue("dimensiones", value)
                     }
-                    placeholder="Seleccione una ruta"
-                  >
-                    <Picker.Item label="Bulldog" value="bd" color="black" />
-                    <Picker.Item
-                      label="Golden Retriever"
-                      value="gr"
-                      color="black"
-                    />
-                  </Picker>
+                    value={values.dimensiones}
+                    useNativeAndroidPickerStyle={true}
+                    fixAndroidTouchableBug={true}
+                    doneText="Aceptar"
+                    placeholder={{
+                      label: "Seleccione una dimension",
+                      value: null,
+                    }}
+                    items={[
+                      { label: "500mts", value: "a" },
+                      { label: "2400mts", value: "b" },
+                    ]}
+                  />
                 </View>
                 {errors.dimensiones && touched.dimensiones && (
                   <MyText
@@ -177,20 +174,21 @@ const Data2 = ({ route, navigation }) => {
                     text={"Bomba(s)"}
                     fontStyle="Regular"
                   />
-                  <Picker
-                    prompt="Seleccione un tipo de bomba"
-                    selectedValue={values.bomba}
-                    onValueChange={(itemValue, itemIndex) =>
-                      setFieldValue("bomba", itemValue)
-                    }
-                  >
-                    <Picker.Item label="Carnivora" value="dni" color="black" />
-                    <Picker.Item
-                      label="Vegana"
-                      value="pasaporte"
-                      color="black"
-                    />
-                  </Picker>
+                  <RNPickerSelect
+                    onValueChange={(value) => setFieldValue("bomba", value)}
+                    value={values.bomba}
+                    useNativeAndroidPickerStyle={true}
+                    fixAndroidTouchableBug={true}
+                    doneText="Aceptar"
+                    placeholder={{
+                      label: "Seleccione un tipo de bomba",
+                      value: null,
+                    }}
+                    items={[
+                      { label: "Nuclear", value: "a" },
+                      { label: "Atomica", value: "b" },
+                    ]}
+                  />
                 </View>
                 {errors.bomba && touched.bomba && (
                   <MyText
@@ -205,20 +203,23 @@ const Data2 = ({ route, navigation }) => {
                     text={"Tecnología"}
                     fontStyle="Regular"
                   />
-                  <Picker
-                    selectedValue={values.tecnologia}
-                    onValueChange={(itemValue, itemIndex) =>
-                      setFieldValue("tecnologia", itemValue)
+                  <RNPickerSelect
+                    onValueChange={(value) =>
+                      setFieldValue("tecnologia", value)
                     }
-                    prompt="Seleccione un tipo de tecnologia"
-                  >
-                    <Picker.Item label="Granja" value="dni" color="black" />
-                    <Picker.Item
-                      label="Rancho"
-                      value="pasaporte"
-                      color="black"
-                    />
-                  </Picker>
+                    value={values.tecnologia}
+                    useNativeAndroidPickerStyle={true}
+                    fixAndroidTouchableBug={true}
+                    doneText="Aceptar"
+                    placeholder={{
+                      label: "Seleccione un tipo de tecnologia",
+                      value: null,
+                    }}
+                    items={[
+                      { label: "Limpia", value: "a" },
+                      { label: "Flexible", value: "b" },
+                    ]}
+                  />
                 </View>
                 {errors.tecnologia && touched.tecnologia && (
                   <MyText

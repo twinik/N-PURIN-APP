@@ -4,8 +4,7 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
-import { Picker } from "@react-native-picker/picker";
-import DropDownPicker from "react-native-dropdown-picker";
+import RNPickerSelect from "react-native-picker-select";
 import { useFonts } from "expo-font";
 import { theme } from "../../../theme";
 import Container from "../../../Components/Container";
@@ -122,21 +121,22 @@ const Data0 = ({ route, navigation }) => {
                     fontStyle="Regular"
                   />
 
-                  <Picker
-                    prompt="Seleccione una raza"
-                    selectedValue={values.raza}
-                    onValueChange={(itemValue, itemIndex) =>
-                      setFieldValue("raza", itemValue)
-                    }
-                    placeholder="Seleccione una ruta"
-                  >
-                    <Picker.Item label="Bulldog" value="bd" color="black" />
-                    <Picker.Item
-                      label="Golden Retriever"
-                      value="gr"
-                      color="black"
-                    />
-                  </Picker>
+                  <RNPickerSelect
+                    onValueChange={(value) => setFieldValue("raza", value)}
+                    value={values.raza}
+                    useNativeAndroidPickerStyle={true}
+                    fixAndroidTouchableBug={true}
+                    doneText="Aceptar"
+                    placeholder={{
+                      label: "Seleccione una raza",
+                      value: null,
+                      color: theme.colors.gray,
+                    }}
+                    items={[
+                      { label: "Bichon Frisé", value: "a" },
+                      { label: "golden", value: "b" },
+                    ]}
+                  />
                 </View>
                 {errors.raza && touched.raza && (
                   <MyText
@@ -152,20 +152,23 @@ const Data0 = ({ route, navigation }) => {
                     text={"Tipo de alimentación"}
                     fontStyle="Regular"
                   />
-                  <Picker
-                    prompt="Seleccione un tipo de alimentación"
-                    selectedValue={values.alimentacion}
-                    onValueChange={(itemValue, itemIndex) =>
-                      setFieldValue("alimentacion", itemValue)
+                  <RNPickerSelect
+                    onValueChange={(value) =>
+                      setFieldValue("alimentacion", value)
                     }
-                  >
-                    <Picker.Item label="Carnivora" value="dni" color="black" />
-                    <Picker.Item
-                      label="Vegana"
-                      value="pasaporte"
-                      color="black"
-                    />
-                  </Picker>
+                    value={values.alimentacion}
+                    useNativeAndroidPickerStyle={true}
+                    fixAndroidTouchableBug={true}
+                    doneText="Aceptar"
+                    placeholder={{
+                      label: "Seleccione un tipo de alimentación",
+                      value: null,
+                    }}
+                    items={[
+                      { label: "Carnivora", value: "a" },
+                      { label: "Vegana", value: "b" },
+                    ]}
+                  />
                 </View>
                 {errors.alimentacion && touched.alimentacion && (
                   <MyText
@@ -180,20 +183,23 @@ const Data0 = ({ route, navigation }) => {
                     text={"Tipo de estabulación"}
                     fontStyle="Regular"
                   />
-                  <Picker
-                    selectedValue={values.estabulacion}
-                    onValueChange={(itemValue, itemIndex) =>
-                      setFieldValue("estabulacion", itemValue)
+                  <RNPickerSelect
+                    onValueChange={(value) =>
+                      setFieldValue("estabulacion", value)
                     }
-                    prompt="Seleccione un tipo de estabulación"
-                  >
-                    <Picker.Item label="Granja" value="dni" color="black" />
-                    <Picker.Item
-                      label="Rancho"
-                      value="pasaporte"
-                      color="black"
-                    />
-                  </Picker>
+                    value={values.estabulacion}
+                    useNativeAndroidPickerStyle={true}
+                    fixAndroidTouchableBug={true}
+                    doneText="Aceptar"
+                    placeholder={{
+                      label: "Seleccione un tipo de estabulación",
+                      value: null,
+                    }}
+                    items={[
+                      { label: "Messi", value: "a" },
+                      { label: "Maradona", value: "b" },
+                    ]}
+                  />
                 </View>
                 {errors.estabulacion && touched.estabulacion && (
                   <MyText

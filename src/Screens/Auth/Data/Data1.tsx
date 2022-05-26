@@ -4,8 +4,7 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
-import { Picker } from "@react-native-picker/picker";
-import DropDownPicker from "react-native-dropdown-picker";
+import RNPickerSelect from "react-native-picker-select";
 import { useFonts } from "expo-font";
 import { theme } from "../../../theme";
 import Container from "../../../Components/Container";
@@ -104,21 +103,23 @@ const Data1 = ({ route, navigation }) => {
                     text={"Sistema de  limpieza"}
                     fontStyle="Regular"
                   />
-
-                  <Picker
-                    prompt="Seleccione un sistema de limpieza"
-                    selectedValue={values.sistLimpieza}
-                    onValueChange={(itemValue, itemIndex) =>
-                      setFieldValue("sistLimpieza", itemValue)
+                  <RNPickerSelect
+                    onValueChange={(value) =>
+                      setFieldValue("sistLimpieza", value)
                     }
-                  >
-                    <Picker.Item label="Bulldog" value="bd" color="black" />
-                    <Picker.Item
-                      label="Golden Retriever"
-                      value="gr"
-                      color="black"
-                    />
-                  </Picker>
+                    value={values.sistLimpieza}
+                    useNativeAndroidPickerStyle={true}
+                    fixAndroidTouchableBug={true}
+                    doneText="Aceptar"
+                    placeholder={{
+                      label: "Seleccione un sistema de limpieza",
+                      value: null,
+                    }}
+                    items={[
+                      { label: "Acuatico", value: "a" },
+                      { label: "Intravenoso", value: "b" },
+                    ]}
+                  />
                 </View>
                 {errors.sistLimpieza && touched.sistLimpieza && (
                   <MyText
@@ -134,20 +135,21 @@ const Data1 = ({ route, navigation }) => {
                     text={"Separacion de solidos"}
                     fontStyle="Regular"
                   />
-                  <Picker
-                    prompt="Seleccione un tipo separacion de solidos"
-                    selectedValue={values.solidos}
-                    onValueChange={(itemValue, itemIndex) =>
-                      setFieldValue("solidos", itemValue)
-                    }
-                  >
-                    <Picker.Item label="Carnivora" value="dni" color="black" />
-                    <Picker.Item
-                      label="Vegana"
-                      value="pasaporte"
-                      color="black"
-                    />
-                  </Picker>
+                  <RNPickerSelect
+                    onValueChange={(value) => setFieldValue("solidos", value)}
+                    value={values.solidos}
+                    useNativeAndroidPickerStyle={true}
+                    fixAndroidTouchableBug={true}
+                    doneText="Aceptar"
+                    placeholder={{
+                      label: "Seleccione un tipo de separación de solidos",
+                      value: null,
+                    }}
+                    items={[
+                      { label: "Tamizacion", value: "a" },
+                      { label: "Tria", value: "b" },
+                    ]}
+                  />
                 </View>
                 {errors.solidos && touched.solidos && (
                   <MyText
