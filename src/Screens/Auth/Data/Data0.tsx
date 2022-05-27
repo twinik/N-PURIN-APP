@@ -13,7 +13,7 @@ import Text from "../../../Components/NormalText";
 import TextInput from "../../../Components/TextInput.js";
 import SecureTextInput from "../../../Components/SecureTextInput";
 import Button from "../../../Components/Button";
-import MyText from "../../../Components/MyText";
+import AppText from "../../../Components/AppText";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
@@ -74,19 +74,19 @@ const Data0 = ({ route, navigation }) => {
             <View style={styles.content}>
               <View style={styles.title_box}>
                 <View style={styles.title_align}>
-                  <MyText
+                  <AppText
                     style={styles.title}
                     text={"Ingreso de datos"}
                     fontStyle="Regular"
                   />
-                  <MyText
+                  <AppText
                     style={{ fontSize: 22 }}
                     text={"1/3"}
                     fontStyle="Regular"
                   />
                 </View>
                 <View style={{ flex: 1, justifyContent: "flex-end" }}>
-                  <MyText
+                  <AppText
                     style={styles.subtitle}
                     text={"Ingrese sus datos para poder continuar."}
                     fontStyle="Regular"
@@ -107,7 +107,7 @@ const Data0 = ({ route, navigation }) => {
                   returnKeyLabel="next"
                 />
                 {errors.nVacas && touched.nVacas && (
-                  <MyText
+                  <AppText
                     text={errors.nVacas}
                     fontStyle="Regular"
                     style={styles.errorText}
@@ -115,7 +115,7 @@ const Data0 = ({ route, navigation }) => {
                 )}
 
                 <View style={styles.input_box}>
-                  <MyText
+                  <AppText
                     style={styles.inputLabel}
                     text={"Raza"}
                     fontStyle="Regular"
@@ -139,7 +139,7 @@ const Data0 = ({ route, navigation }) => {
                   />
                 </View>
                 {errors.raza && touched.raza && (
-                  <MyText
+                  <AppText
                     text={errors.raza}
                     fontStyle="Regular"
                     style={styles.errorText}
@@ -147,7 +147,7 @@ const Data0 = ({ route, navigation }) => {
                 )}
 
                 <View style={styles.input_box}>
-                  <MyText
+                  <AppText
                     style={styles.inputLabel}
                     text={"Tipo de alimentación"}
                     fontStyle="Regular"
@@ -171,14 +171,14 @@ const Data0 = ({ route, navigation }) => {
                   />
                 </View>
                 {errors.alimentacion && touched.alimentacion && (
-                  <MyText
+                  <AppText
                     text={errors.alimentacion}
                     fontStyle="Regular"
                     style={styles.errorText}
                   />
                 )}
                 <View style={styles.input_box}>
-                  <MyText
+                  <AppText
                     style={styles.inputLabel}
                     text={"Tipo de estabulación"}
                     fontStyle="Regular"
@@ -202,7 +202,7 @@ const Data0 = ({ route, navigation }) => {
                   />
                 </View>
                 {errors.estabulacion && touched.estabulacion && (
-                  <MyText
+                  <AppText
                     text={errors.estabulacion}
                     fontStyle="Regular"
                     style={styles.errorText}

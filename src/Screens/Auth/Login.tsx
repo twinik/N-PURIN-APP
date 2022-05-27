@@ -9,7 +9,7 @@ import Container from "../../Components/Container";
 import TextInput from "../../Components/TextInput.js";
 import SecureTextInput from "../../Components/SecureTextInput";
 import Button from "../../Components/Button";
-import MyText from "../../Components/MyText";
+import AppText from "../../Components/AppText";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
@@ -52,12 +52,12 @@ const Login = ({ navigation, route }) => {
               source={require("../../../assets/logo.png")}
             />
             <View style={styles.form}>
-              <MyText
+              <AppText
                 style={styles.title}
                 text={"iniciar sesión"}
                 fontStyle="Regular"
               />
-              <MyText
+              <AppText
                 style={styles.subtitle}
                 text={"Ingrese sus credenciales para poder iniciar sesion"}
                 fontStyle="Regular"
@@ -76,7 +76,7 @@ const Login = ({ navigation, route }) => {
                 returnKeyLabel="next"
               />
               {errors.email && touched.email && (
-                <MyText
+                <AppText
                   text={errors.email}
                   fontStyle="Regular"
                   style={styles.errorText}
@@ -95,7 +95,7 @@ const Login = ({ navigation, route }) => {
                 returnKeyLabel="go"
               />
               {errors.password && touched.password && (
-                <MyText
+                <AppText
                   text={errors.password}
                   fontStyle="Regular"
                   style={styles.errorText}
@@ -108,13 +108,13 @@ const Login = ({ navigation, route }) => {
               onPress={handleSubmit}
             />
             <View style={styles.row}>
-              <MyText
+              <AppText
                 style={styles.forgetText}
                 text={"Olvide mi contraseña"}
                 fontStyle="Regular"
               />
               <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-                <MyText
+                <AppText
                   style={styles.accountCreate}
                   text={"Crear una cuenta"}
                   fontStyle="Regular"

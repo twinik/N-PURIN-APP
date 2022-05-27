@@ -2,7 +2,7 @@ import React from "react";
 import { Text } from "react-native";
 import { useFonts } from "expo-font";
 
-const MyText = ({ text, fontStyle, style }) => {
+const AppText = ({ text, fontStyle, style }) => {
   const [loaded] = useFonts({
     Regular: require("../../assets/fonts/Staatliches.ttf"),
   });
@@ -25,4 +25,4 @@ const MyText = ({ text, fontStyle, style }) => {
   );
 };
 
-export default MyText;
+export default AppText;

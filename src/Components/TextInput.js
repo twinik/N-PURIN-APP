@@ -3,7 +3,7 @@ import { useState } from "react";
 import React from "react";
 import { theme } from "../theme";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
-import MyText from "./MyText";
+import AppText from "./AppText";
 
 export default function textInput({ label, placeholder, ...props }) {
   const [value, setValue] = useState("");
@@ -12,7 +12,7 @@ export default function textInput({ label, placeholder, ...props }) {
   };
   return (
     <>
-      <MyText style={styles.label} text={label} fontStyle="Regular" />
+      <AppText style={styles.label} text={label} fontStyle="Regular" />
       <TextInput
         style={styles.TextInput}
         label={label}

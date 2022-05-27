@@ -13,7 +13,7 @@ import Text from "../../../Components/NormalText";
 import TextInput from "../../../Components/TextInput.js";
 import SecureTextInput from "../../../Components/SecureTextInput";
 import Button from "../../../Components/Button";
-import MyText from "../../../Components/MyText";
+import AppText from "../../../Components/AppText";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
@@ -76,19 +76,19 @@ const Data1 = ({ route, navigation }) => {
             <View style={styles.content}>
               <View style={styles.title_box}>
                 <View style={styles.title_align}>
-                  <MyText
+                  <AppText
                     style={styles.title}
                     text={"Ingreso de datos"}
                     fontStyle="Regular"
                   />
-                  <MyText
+                  <AppText
                     style={{ fontSize: 22 }}
                     text={"2/3"}
                     fontStyle="Regular"
                   />
                 </View>
                 <View style={{ flex: 1, justifyContent: "flex-end" }}>
-                  <MyText
+                  <AppText
                     style={styles.subtitle}
                     text={"Ingrese sus datos para poder continuar."}
                     fontStyle="Regular"
@@ -98,7 +98,7 @@ const Data1 = ({ route, navigation }) => {
 
               <View style={styles.form_box}>
                 <View style={styles.input_box}>
-                  <MyText
+                  <AppText
                     style={styles.inputLabel}
                     text={"Sistema de  limpieza"}
                     fontStyle="Regular"
@@ -122,7 +122,7 @@ const Data1 = ({ route, navigation }) => {
                   />
                 </View>
                 {errors.sistLimpieza && touched.sistLimpieza && (
-                  <MyText
+                  <AppText
                     text={errors.sistLimpieza}
                     fontStyle="Regular"
                     style={styles.errorText}
@@ -130,7 +130,7 @@ const Data1 = ({ route, navigation }) => {
                 )}
 
                 <View style={styles.input_box}>
-                  <MyText
+                  <AppText
                     style={styles.inputLabel}
                     text={"Separacion de solidos"}
                     fontStyle="Regular"
@@ -152,7 +152,7 @@ const Data1 = ({ route, navigation }) => {
                   />
                 </View>
                 {errors.solidos && touched.solidos && (
-                  <MyText
+                  <AppText
                     text={errors.solidos}
                     fontStyle="Regular"
                     style={styles.errorText}
@@ -171,7 +171,7 @@ const Data1 = ({ route, navigation }) => {
                   returnKeyLabel="next"
                 />
                 {errors.agua && touched.agua && (
-                  <MyText
+                  <AppText
                     text={errors.agua}
                     fontStyle="Regular"
                     style={styles.errorText}

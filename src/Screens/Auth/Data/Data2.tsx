@@ -9,7 +9,7 @@ import { useFonts } from "expo-font";
 import { theme } from "../../../theme";
 import Container from "../../../Components/Container";
 import Button from "../../../Components/Button";
-import MyText from "../../../Components/MyText";
+import AppText from "../../../Components/AppText";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
@@ -83,19 +83,19 @@ const Data2 = ({ route, navigation }) => {
             <View style={styles.content}>
               <View style={styles.title_box}>
                 <View style={styles.title_align}>
-                  <MyText
+                  <AppText
                     style={styles.title}
                     text={"Ingreso de datos"}
                     fontStyle="Regular"
                   />
-                  <MyText
+                  <AppText
                     style={{ fontSize: 22 }}
                     text={"3/3"}
                     fontStyle="Regular"
                   />
                 </View>
                 <View style={{ flex: 1, justifyContent: "flex-end" }}>
-                  <MyText
+                  <AppText
                     style={styles.subtitle}
                     text={"Ingrese sus datos para poder continuar."}
                     fontStyle="Regular"
@@ -105,7 +105,7 @@ const Data2 = ({ route, navigation }) => {
 
               <View style={styles.form_box}>
                 <View style={styles.input_box}>
-                  <MyText
+                  <AppText
                     style={styles.inputLabel}
                     text={"Tipo"}
                     fontStyle="Regular"
@@ -128,7 +128,7 @@ const Data2 = ({ route, navigation }) => {
                   />
                 </View>
                 {errors.tipo && touched.tipo && (
-                  <MyText
+                  <AppText
                     text={errors.tipo}
                     fontStyle="Regular"
                     style={styles.errorText}
@@ -136,7 +136,7 @@ const Data2 = ({ route, navigation }) => {
                 )}
 
                 <View style={styles.input_box}>
-                  <MyText
+                  <AppText
                     style={styles.inputLabel}
                     text={"Dimensiones"}
                     fontStyle="Regular"
@@ -161,7 +161,7 @@ const Data2 = ({ route, navigation }) => {
                   />
                 </View>
                 {errors.dimensiones && touched.dimensiones && (
-                  <MyText
+                  <AppText
                     text={errors.dimensiones}
                     fontStyle="Regular"
                     style={styles.errorText}
@@ -169,7 +169,7 @@ const Data2 = ({ route, navigation }) => {
                 )}
 
                 <View style={styles.input_box}>
-                  <MyText
+                  <AppText
                     style={styles.inputLabel}
                     text={"Bomba(s)"}
                     fontStyle="Regular"
@@ -191,14 +191,14 @@ const Data2 = ({ route, navigation }) => {
                   />
                 </View>
                 {errors.bomba && touched.bomba && (
-                  <MyText
+                  <AppText
                     text={errors.bomba}
                     fontStyle="Regular"
                     style={styles.errorText}
                   />
                 )}
                 <View style={styles.input_box}>
-                  <MyText
+                  <AppText
                     style={styles.inputLabel}
                     text={"Tecnología"}
                     fontStyle="Regular"
@@ -222,7 +222,7 @@ const Data2 = ({ route, navigation }) => {
                   />
                 </View>
                 {errors.tecnologia && touched.tecnologia && (
-                  <MyText
+                  <AppText
                     text={errors.tecnologia}
                     fontStyle="Regular"
                     style={styles.errorText}

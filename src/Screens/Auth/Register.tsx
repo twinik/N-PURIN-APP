@@ -9,7 +9,7 @@ import Container from "../../Components/Container";
 import TextInput from "../../Components/TextInput.js";
 import SecureTextInput from "../../Components/SecureTextInput";
 import Button from "../../Components/Button";
-import MyText from "../../Components/MyText";
+import AppText from "../../Components/AppText";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { useFonts } from "expo-font";
 import { Formik } from "formik";
@@ -78,7 +78,7 @@ const Register = ({ navigation }) => {
         <Container>
           <View style={styles.container}>
             <View style={styles.form}>
-              <MyText
+              <AppText
                 style={styles.title}
                 text={"Crear una cuenta"}
                 fontStyle="Regular"
@@ -97,7 +97,7 @@ const Register = ({ navigation }) => {
                 returnKeyLabel="next"
               />
               {errors.email && touched.email && (
-                <MyText
+                <AppText
                   text={errors.email}
                   fontStyle="Regular"
                   style={styles.errorText}
@@ -117,7 +117,7 @@ const Register = ({ navigation }) => {
                 returnKeyLabel="go"
               />
               {errors.password && touched.password && (
-                <MyText
+                <AppText
                   text={errors.password}
                   fontStyle="Regular"
                   style={styles.errorText}
@@ -136,7 +136,7 @@ const Register = ({ navigation }) => {
                 returnKeyLabel="go"
               />
               {errors.confirmPassword && touched.confirmPassword && (
-                <MyText
+                <AppText
                   text={errors.confirmPassword}
                   fontStyle="Regular"
                   style={styles.errorText}
@@ -160,7 +160,7 @@ const Register = ({ navigation }) => {
                   }}
                 />
                 {errors.acceptTerms && touched.acceptTerms && (
-                  <MyText
+                  <AppText
                     text={errors.acceptTerms}
                     fontStyle="Regular"
                     style={styles.errorText}
@@ -174,13 +174,13 @@ const Register = ({ navigation }) => {
               onPress={handleSubmit}
             />
             <View style={styles.row}>
-              <MyText
+              <AppText
                 style={styles.forgetText}
                 text={"¿Ya tienes una cuenta?"}
                 fontStyle="Regular"
               />
               <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-                <MyText
+                <AppText
                   style={styles.accountCreate}
                   text={"Iniciar Sesion"}
                   fontStyle="Regular"
