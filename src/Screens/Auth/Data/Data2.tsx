@@ -25,17 +25,7 @@ const validations = Yup.object().shape({
 });
 
 const Data2 = ({ route, navigation }) => {
-  const {
-    email,
-    password,
-    nVacas,
-    raza,
-    alimentacion,
-    estabulacion,
-    agua,
-    sistLimpieza,
-    solidos,
-  } = route.params;
+  const prev = route.params;
   const [loaded] = useFonts({
     Main: require("../../../../assets/fonts/Staatliches.ttf"),
   });
@@ -52,15 +42,7 @@ const Data2 = ({ route, navigation }) => {
       }}
       onSubmit={(values) => {
         navigation.navigate("Login", {
-          email: email,
-          password: password,
-          nVacas: nVacas,
-          raza: raza,
-          alimentacion: alimentacion,
-          estabulacion: estabulacion,
-          agua: agua,
-          sistLimpieza: sistLimpieza,
-          solidos: solidos,
+          ...prev,
           tipo: values.tipo,
           dimensiones: values.dimensiones,
           bomba: values.bomba,

@@ -33,7 +33,7 @@ const validations = Yup.object().shape({
 });
 
 const Data0 = ({ route, navigation }) => {
-  const { email, password } = route.params;
+  const prev = route.params;
   const [loaded] = useFonts({
     Main: require("../../../../assets/fonts/Staatliches.ttf"),
   });
@@ -50,8 +50,7 @@ const Data0 = ({ route, navigation }) => {
       }}
       onSubmit={(values) =>
         navigation.navigate("Data1", {
-          email: email,
-          password: password,
+          ...prev,
           nVacas: values.nVacas,
           raza: values.raza,
           alimentacion: values.alimentacion,

@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
+import AppContext from "../../Context/AppContext";
 import { theme } from "../../theme";
 import Container from "../../Components/Container";
 import TextInput from "../../Components/TextInput.js";
@@ -21,9 +22,15 @@ const validations = Yup.object().shape({
 });
 
 const Login = ({ navigation, route }) => {
-  /* if (route.params.email != null && route.params.password != null) {
-    const { email, password } = route.params;
-  } */
+  const { SignIn } = useContext(AppContext);
+
+  const handleSubmit = async ({ password, email }) => {
+    try {
+      await SignIn(email, password);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <Formik
@@ -31,9 +38,7 @@ const Login = ({ navigation, route }) => {
         email: "",
         password: "",
       }}
-      onSubmit={(values) => {
-        alert("LogIn Success");
-      }}
+      onSubmit={(values) => handleSubmit(values)}
       validationSchema={validations}
     >
       {({

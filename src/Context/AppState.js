@@ -33,6 +33,16 @@ const AppState = (props) => {
       return;
     }
 
+    const CollectionsQueue = await getParsedCollectionsQueue();
+    if (CollectionsQueue.length > 0) {
+      try {
+        await saveMultipleCollections(CollectionsQueue);
+        await resetCollectionQueue();
+      } catch (error) {
+        alert("Error al guardar las colecciones");
+      }
+    }
+
     try {
       dispatch({
         type: SET_TOKEN,
