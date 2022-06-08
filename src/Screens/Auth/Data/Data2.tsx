@@ -6,7 +6,6 @@ import {
 } from "react-native-responsive-screen";
 import RNPickerSelect from "react-native-picker-select";
 import { useFonts } from "expo-font";
-import { theme } from "../../../theme";
 import Container from "../../../Components/Container";
 import Button from "../../../Components/Button";
 import AppText from "../../../Components/AppText";
@@ -104,8 +103,8 @@ const Data2 = ({ route, navigation }) => {
                       value: null,
                     }}
                     items={[
-                      { label: "Tipo a", value: "a" },
-                      { label: "Tipo b", value: "b" },
+                      { label: "Opcion A", value: "a" },
+                      { label: "Opcion B", value: "b" },
                     ]}
                   />
                 </View>
@@ -137,8 +136,8 @@ const Data2 = ({ route, navigation }) => {
                       value: null,
                     }}
                     items={[
-                      { label: "500mts", value: "a" },
-                      { label: "2400mts", value: "b" },
+                      { label: "Opcion A", value: "a" },
+                      { label: "Opcion B", value: "b" },
                     ]}
                   />
                 </View>
@@ -167,8 +166,8 @@ const Data2 = ({ route, navigation }) => {
                       value: null,
                     }}
                     items={[
-                      { label: "Nuclear", value: "a" },
-                      { label: "Atomica", value: "b" },
+                      { label: "Opcion A", value: "a" },
+                      { label: "Opcion B", value: "b" },
                     ]}
                   />
                 </View>
@@ -198,8 +197,8 @@ const Data2 = ({ route, navigation }) => {
                       value: null,
                     }}
                     items={[
-                      { label: "Limpia", value: "a" },
-                      { label: "Flexible", value: "b" },
+                      { label: "Opcion A", value: "a" },
+                      { label: "Opcion B", value: "b" },
                     ]}
                   />
                 </View>

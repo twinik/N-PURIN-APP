@@ -1,17 +1,13 @@
-import React, { useState } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import React from "react";
+import { StyleSheet, View } from "react-native";
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
 import RNPickerSelect from "react-native-picker-select";
 import { useFonts } from "expo-font";
-import { theme } from "../../../theme";
 import Container from "../../../Components/Container";
-import Title from "../../../Components/Title";
-import Text from "../../../Components/NormalText";
 import TextInput from "../../../Components/TextInput.js";
-import SecureTextInput from "../../../Components/SecureTextInput";
 import Button from "../../../Components/Button";
 import AppText from "../../../Components/AppText";
 import { Formik } from "formik";
@@ -110,8 +106,8 @@ const Data1 = ({ route, navigation }) => {
                       value: null,
                     }}
                     items={[
-                      { label: "Acuatico", value: "a" },
-                      { label: "Intravenoso", value: "b" },
+                      { label: "Opcion A", value: "a" },
+                      { label: "Opcion B", value: "b" },
                     ]}
                   />
                 </View>
@@ -140,8 +136,8 @@ const Data1 = ({ route, navigation }) => {
                       value: null,
                     }}
                     items={[
-                      { label: "Tamizacion", value: "a" },
-                      { label: "Tria", value: "b" },
+                      { label: "Opcion A", value: "a" },
+                      { label: "Opcion B", value: "b" },
                     ]}
                   />
                 </View>
@@ -158,7 +154,7 @@ const Data1 = ({ route, navigation }) => {
                   label={"Litros de agua utilizados en limpieza"}
                   onChangeText={handleChange("agua")}
                   onBlur={handleBlur("agua")}
-                  value={values.agua}
+                  value={values.agua.toString()}
                   keyboardType="numeric"
                   keyboardAppearance="dark"
                   returnKeyType="next"
