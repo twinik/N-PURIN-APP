@@ -25,12 +25,6 @@ const validations = Yup.object().shape({
 
 const Data2 = ({ route, navigation }) => {
   const prev = route.params;
-  const [loaded] = useFonts({
-    Main: require("../../../../assets/fonts/Staatliches.ttf"),
-  });
-  if (!loaded) {
-    return null;
-  }
   return (
     <Formik
       initialValues={{

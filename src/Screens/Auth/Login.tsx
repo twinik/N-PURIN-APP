@@ -32,6 +32,39 @@ const Login = ({ navigation, route }) => {
     }
   };
 
+  const formValues = [
+    {
+      name: "email",
+      type: "email",
+      label: "Email",
+      placeholder: "Ingrese su email",
+      keyboardType: "email-address",
+      autoCapitalize: "none",
+      autoCorrect: false,
+      autoCompleteType: "email",
+    },
+    {
+      name: "password",
+      type: "password",
+      label: "Contraseña",
+      placeholder: "Ingrese su contraseña",
+      secureTextEntry: true,
+      autoCapitalize: "none",
+      autoCorrect: false,
+      autoCompleteType: "password",
+    },
+    {
+      name: "confirmPassword",
+      type: "password",
+      label: "Confirmar contraseña",
+      placeholder: "Confirme su contraseña",
+      secureTextEntry: true,
+      autoCapitalize: "none",
+      autoCorrect: false,
+      autoCompleteType: "password",
+    },
+  ];
+
   return (
     <Formik
       initialValues={{
@@ -67,6 +100,41 @@ const Login = ({ navigation, route }) => {
                 text={"Ingrese sus credenciales para poder iniciar sesion"}
                 fontStyle="Regular"
               />
+              {/* {formValues.map((item, index) =>
+                item.type === "email" ? (
+                  <TextInput
+                    key={index}
+                    placeholder={item.placeholder}
+                    label={item.label}
+                    onChangeText={handleChange(item.name)}
+                    onBlur={handleBlur(item.name)}
+                    value={values[item.name]}
+                    autoCapitalize={item.autoCapitalize}
+                    autoCorrect={item.autoCorrect}
+                    autoCompleteType={item.autoCompleteType}
+                    keyboardType={item.keyboardType}
+                    keyboardAppearance="dark"
+                    returnKeyType="next"
+                    returnKeyLabel="next"
+                  />
+                ) : (
+                  <SecureTextInput
+                    key={index}
+                    placeholder={item.placeholder}
+                    label={item.label}
+                    onChangeText={handleChange(item.name)}
+                    onBlur={handleBlur(item.name)}
+                    value={values[item.name]}
+                    autoCapitalize={item.autoCapitalize}
+                    autoCorrect={item.autoCorrect}
+                    autoCompleteType={item.autoCompleteType}
+                    keyboardType={item.keyboardType}
+                    keyboardAppearance="dark"
+                    returnKeyType="next"
+                    returnKeyLabel="next"
+                  />
+                )
+              )} */}
               <TextInput
                 placeholder="Ingrese su email"
                 label={"Email"}

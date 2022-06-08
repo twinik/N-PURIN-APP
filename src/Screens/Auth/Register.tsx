@@ -44,12 +44,12 @@ const validations = Yup.object().shape({
 });
 
 const Register = ({ navigation }) => {
-  const [loaded] = useFonts({
+  /*  const [loaded] = useFonts({
     Main: require("./../../../assets/fonts/Staatliches.ttf"),
   });
   if (!loaded) {
     return null;
-  }
+  } */
   return (
     <Formik
       initialValues={{
@@ -153,7 +153,7 @@ const Register = ({ navigation }) => {
                   iconStyle={{ borderColor: theme.colors.primary }}
                   textStyle={[
                     styles.checkBoxText,
-                    { fontFamily: "Main", textDecorationLine: "none" },
+                    { /* fontFamily: "Main", */ textDecorationLine: "none" },
                   ]}
                   onPress={() => {
                     setFieldValue("acceptTerms", !values.acceptTerms);
