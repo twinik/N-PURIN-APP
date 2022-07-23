@@ -143,13 +143,13 @@ const Register = ({ navigation }) => {
                 />
               )}
 
-              <View style={{ marginTop: hp(1.5), width: wp(70) }}>
+              <View style={{ marginTop: hp(1.5), width: wp(60) }}>
                 <BouncyCheckbox
                   isChecked={values.acceptTerms}
-                  size={25}
+                  size={20}
                   fillColor={theme.colors.primary}
                   unfillColor="#FFFFFF"
-                  text="Acepto los terminos y condiciones establecidos por la ley n°237 de la Republica Nacional"
+                  text="Acepto los terminos del servicio y póliza de seguridad"
                   iconStyle={{ borderColor: theme.colors.primary }}
                   textStyle={[
                     styles.checkBoxText,
@@ -176,7 +176,7 @@ const Register = ({ navigation }) => {
             <View style={styles.row}>
               <AppText
                 style={styles.forgetText}
-                text={"¿Ya tienes una cuenta?"}
+                text={"¿Tiene una cuenta?"}
                 fontStyle="Regular"
               />
               <TouchableOpacity onPress={() => navigation.navigate("Login")}>
@@ -203,8 +203,8 @@ const styles = StyleSheet.create({
     marginTop: hp(5),
   },
   form: {
-    width: wp(80),
-    height: hp(52),
+    width: wp(75),
+    marginBottom: hp(3),
   },
   logo: {
     width: wp(60),
@@ -234,11 +234,11 @@ const styles = StyleSheet.create({
   },
   forgetText: {
     color: theme.colors.secondary,
-    fontSize: hp(1.85),
+    fontSize: hp(2),
   },
   accountCreate: {
     color: theme.colors.primary,
-    fontSize: hp(1.85),
+    fontSize: hp(2),
   },
   checkBoxText: {
     color: "gray",

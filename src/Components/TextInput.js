@@ -33,10 +33,11 @@ const styles = StyleSheet.create({
     borderBottomColor: theme.colors.secondary,
     borderBottomWidth: 1,
     paddingBottom: hp(0.5),
+    height: hp(5),
   },
   label: {
     color: theme.colors.primary,
-    fontSize: theme.sizes.fourteen,
+    fontSize: theme.sizes.fifteen,
     marginTop: hp(2),
   },
 });

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -14,18 +14,25 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 
 const validations = Yup.object().shape({
-  nVacas: Yup.number()
-    .required("Seleccione cantidad de vacas")
+  ubicacion: Yup.string()
+    .required("Seleccione una ubicación")
+    .label("Ubicación"),
+  estanque: Yup.number()
+    .required("Ingrese una capacidad")
     .positive("Cantidad inválida")
     .integer("Cantidad inválida")
-    .label("Cantidad de vacas"),
-  raza: Yup.string().required("Seleccione una raza").label("Raza"),
-  alimentacion: Yup.string()
-    .required("Seleccione un tipo de alimentación")
-    .label("Alimentación"),
-  estabulacion: Yup.string()
-    .required("Seleccione un tipo de estabulación")
-    .label("Estabulación"),
+    .label("Capacidad del estanque"),
+  equipos: Yup.number()
+    .required("Ingrese número de unidades")
+    .positive("Cantidad inválida")
+    .integer("Cantidad inválida")
+    .label("Unidades del equipo de ordeña"),
+  sistLimpieza: Yup.string()
+    .required("Seleccione un sistema de limpieza")
+    .label("Sistema de limpieza"),
+  solidos: Yup.string()
+    .required("Seleccione un tipo de separación de solidos")
+    .label("Separación de solidos"),
 });
 
 const Data0 = ({ route, navigation }) => {
@@ -33,18 +40,20 @@ const Data0 = ({ route, navigation }) => {
   return (
     <Formik
       initialValues={{
-        nVacas: 0,
-        raza: "",
-        alimentacion: "",
-        estabulacion: "",
+        ubicacion: "",
+        estanque: "",
+        equipos: "",
+        sistLimpieza: "",
+        solidos: "",
       }}
       onSubmit={(values) =>
         navigation.navigate("Data1", {
           ...prev,
-          nVacas: values.nVacas,
-          raza: values.raza,
-          alimentacion: values.alimentacion,
-          estabulacion: values.estabulacion,
+          ubicacion: values.ubicacion,
+          estanque: values.estanque,
+          equipos: values.equipos,
+          sistLimpieza: values.sistLimpieza,
+          solidos: values.solidos,
         })
       }
       validationSchema={validations}
@@ -61,150 +70,172 @@ const Data0 = ({ route, navigation }) => {
         <Container>
           <View style={styles.container}>
             <View style={styles.content}>
-              <View style={styles.title_box}>
-                <View style={styles.title_align}>
-                  <AppText
-                    style={styles.title}
-                    text={"Ingreso de datos"}
-                    fontStyle="Regular"
+              <ScrollView style={styles.scroll}>
+                <View style={styles.title_box}>
+                  <View style={styles.title_align}>
+                    <AppText
+                      style={styles.title}
+                      text={"Ingreso de datos"}
+                      fontStyle="Regular"
+                    />
+                    <AppText
+                      style={{ fontSize: 22 }}
+                      text={"1/4"}
+                      fontStyle="Regular"
+                    />
+                  </View>
+                  <View style={{ flex: 1, justifyContent: "flex-end" }}>
+                    <AppText
+                      style={styles.subtitle}
+                      text={"Ingrese los datos de la sala de ordeña"}
+                      fontStyle="Regular"
+                    />
+                  </View>
+                </View>
+
+                <View style={styles.form_box}>
+                  <View style={styles.input_box}>
+                    <AppText
+                      style={styles.inputLabel}
+                      text={"Ubicación"}
+                      fontStyle="Regular"
+                    />
+
+                    <RNPickerSelect
+                      onValueChange={(value) =>
+                        setFieldValue("ubicacion", value)
+                      }
+                      value={values.ubicacion}
+                      useNativeAndroidPickerStyle={true}
+                      fixAndroidTouchableBug={true}
+                      doneText="Aceptar"
+                      placeholder={{
+                        label: "Seleccione una comuna",
+                        value: null,
+                      }}
+                      items={[
+                        { label: "Opcion A", value: "a" },
+                        { label: "Opcion B", value: "b" },
+                      ]}
+                    />
+                  </View>
+                  {errors.ubicacion && touched.ubicacion && (
+                    <AppText
+                      text={errors.ubicacion}
+                      fontStyle="Regular"
+                      style={styles.errorText}
+                    />
+                  )}
+
+                  <TextInput
+                    placeholder="Ingrese capacidad en lt(s) del estanque de leche"
+                    label={"Capacidad del estanque"}
+                    onChangeText={handleChange("estanque")}
+                    onBlur={handleBlur("estanque")}
+                    value={values.estanque.toString()}
+                    keyboardType="numeric"
+                    keyboardAppearance="dark"
+                    returnKeyType="next"
+                    returnKeyLabel="next"
                   />
-                  <AppText
-                    style={{ fontSize: 22 }}
-                    text={"1/3"}
-                    fontStyle="Regular"
+                  {errors.estanque && touched.estanque && (
+                    <AppText
+                      text={errors.estanque}
+                      fontStyle="Regular"
+                      style={styles.errorText}
+                    />
+                  )}
+
+                  <TextInput
+                    placeholder="Ingrese el numero de equipos de ordeña"
+                    label={"Unidades del equipo de ordeña"}
+                    onChangeText={handleChange("equipos")}
+                    onBlur={handleBlur("equipos")}
+                    value={values.equipos.toString()}
+                    keyboardType="numeric"
+                    keyboardAppearance="dark"
+                    returnKeyType="next"
+                    returnKeyLabel="next"
+                  />
+                  {errors.equipos && touched.equipos && (
+                    <AppText
+                      text={errors.equipos}
+                      fontStyle="Regular"
+                      style={styles.errorText}
+                    />
+                  )}
+
+                  <View style={styles.input_box}>
+                    <AppText
+                      style={styles.inputLabel}
+                      text={"Sistema de  limpieza"}
+                      fontStyle="Regular"
+                    />
+                    <RNPickerSelect
+                      onValueChange={(value) =>
+                        setFieldValue("sistLimpieza", value)
+                      }
+                      value={values.sistLimpieza}
+                      useNativeAndroidPickerStyle={true}
+                      fixAndroidTouchableBug={true}
+                      doneText="Aceptar"
+                      placeholder={{
+                        label: "Seleccione un sistema de limpieza",
+                        value: null,
+                      }}
+                      items={[
+                        { label: "Opcion A", value: "a" },
+                        { label: "Opcion B", value: "b" },
+                      ]}
+                    />
+                  </View>
+                  {errors.sistLimpieza && touched.sistLimpieza && (
+                    <AppText
+                      text={errors.sistLimpieza}
+                      fontStyle="Regular"
+                      style={styles.errorText}
+                    />
+                  )}
+
+                  <View style={styles.input_box}>
+                    <AppText
+                      style={styles.inputLabel}
+                      text={"Separacion de solidos"}
+                      fontStyle="Regular"
+                    />
+                    <RNPickerSelect
+                      onValueChange={(value) => setFieldValue("solidos", value)}
+                      value={values.solidos}
+                      useNativeAndroidPickerStyle={true}
+                      fixAndroidTouchableBug={true}
+                      doneText="Aceptar"
+                      placeholder={{
+                        label: "Seleccione un tipo de separación de solidos",
+                        value: null,
+                      }}
+                      items={[
+                        { label: "Opcion A", value: "a" },
+                        { label: "Opcion B", value: "b" },
+                      ]}
+                    />
+                  </View>
+                  {errors.solidos && touched.solidos && (
+                    <AppText
+                      text={errors.solidos}
+                      fontStyle="Regular"
+                      style={styles.errorText}
+                    />
+                  )}
+                </View>
+
+                <View style={styles.btn_box}>
+                  <Button
+                    style={styles.button}
+                    label={"Continuar"}
+                    onPress={handleSubmit}
                   />
                 </View>
-                <View style={{ flex: 1, justifyContent: "flex-end" }}>
-                  <AppText
-                    style={styles.subtitle}
-                    text={"Ingrese sus datos para poder continuar."}
-                    fontStyle="Regular"
-                  />
-                </View>
-              </View>
-
-              <View style={styles.form_box}>
-                <TextInput
-                  placeholder="Ingrese N° de vacas"
-                  label={"N° de vacas"}
-                  onChangeText={handleChange("nVacas")}
-                  onBlur={handleBlur("nVacas")}
-                  value={values.nVacas.toString()}
-                  keyboardType="numeric"
-                  keyboardAppearance="dark"
-                  returnKeyType="next"
-                  returnKeyLabel="next"
-                />
-                {errors.nVacas && touched.nVacas && (
-                  <AppText
-                    text={errors.nVacas}
-                    fontStyle="Regular"
-                    style={styles.errorText}
-                  />
-                )}
-
-                <View style={styles.input_box}>
-                  <AppText
-                    style={styles.inputLabel}
-                    text={"Raza"}
-                    fontStyle="Regular"
-                  />
-
-                  <RNPickerSelect
-                    onValueChange={(value) => setFieldValue("raza", value)}
-                    value={values.raza}
-                    useNativeAndroidPickerStyle={true}
-                    fixAndroidTouchableBug={true}
-                    doneText="Aceptar"
-                    placeholder={{
-                      label: "Seleccione una raza",
-                      value: null,
-                    }}
-                    items={[
-                      { label: "Opcion A", value: "a" },
-                      { label: "Opcion B", value: "b" },
-                    ]}
-                  />
-                </View>
-                {errors.raza && touched.raza && (
-                  <AppText
-                    text={errors.raza}
-                    fontStyle="Regular"
-                    style={styles.errorText}
-                  />
-                )}
-
-                <View style={styles.input_box}>
-                  <AppText
-                    style={styles.inputLabel}
-                    text={"Tipo de alimentación"}
-                    fontStyle="Regular"
-                  />
-                  <RNPickerSelect
-                    onValueChange={(value) =>
-                      setFieldValue("alimentacion", value)
-                    }
-                    value={values.alimentacion}
-                    useNativeAndroidPickerStyle={true}
-                    fixAndroidTouchableBug={true}
-                    doneText="Aceptar"
-                    placeholder={{
-                      label: "Seleccione un tipo de alimentación",
-                      value: null,
-                    }}
-                    items={[
-                      { label: "Opcion A", value: "a" },
-                      { label: "Opcion B", value: "b" },
-                    ]}
-                  />
-                </View>
-                {errors.alimentacion && touched.alimentacion && (
-                  <AppText
-                    text={errors.alimentacion}
-                    fontStyle="Regular"
-                    style={styles.errorText}
-                  />
-                )}
-                <View style={styles.input_box}>
-                  <AppText
-                    style={styles.inputLabel}
-                    text={"Tipo de estabulación"}
-                    fontStyle="Regular"
-                  />
-                  <RNPickerSelect
-                    onValueChange={(value) =>
-                      setFieldValue("estabulacion", value)
-                    }
-                    value={values.estabulacion}
-                    useNativeAndroidPickerStyle={true}
-                    fixAndroidTouchableBug={true}
-                    doneText="Aceptar"
-                    placeholder={{
-                      label: "Seleccione un tipo de estabulación",
-                      value: null,
-                    }}
-                    items={[
-                      { label: "Opcion A", value: "a" },
-                      { label: "Opcion B", value: "b" },
-                    ]}
-                  />
-                </View>
-                {errors.estabulacion && touched.estabulacion && (
-                  <AppText
-                    text={errors.estabulacion}
-                    fontStyle="Regular"
-                    style={styles.errorText}
-                  />
-                )}
-              </View>
-
-              <View style={styles.btn_box}>
-                <Button
-                  style={styles.button}
-                  label={"Continuar"}
-                  onPress={handleSubmit}
-                />
-              </View>
+              </ScrollView>
             </View>
           </View>
         </Container>
@@ -224,20 +255,23 @@ const styles = StyleSheet.create({
   },
   content: {
     width: wp(80),
-    height: hp(80),
+    height: hp(90),
+  },
+  scroll: {
+    width: "100%",
+    height: "100%",
   },
   title_box: {
-    height: hp(15),
+    height: hp(11),
   },
   form_box: {
-    height: hp(55),
     paddingTop: 10,
     paddingBottom: 10,
   },
   btn_box: {
-    flex: 2,
     alignItems: "center",
     justifyContent: "center",
+    marginVertical: hp(2),
   },
   title_align: {
     flex: 1,

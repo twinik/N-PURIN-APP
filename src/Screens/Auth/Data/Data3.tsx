@@ -14,32 +14,29 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 
 const validations = Yup.object().shape({
-  nVacas: Yup.number()
+  diametro: Yup.number()
     .required("Ingrese una cantidad")
     .positive("Cantidad inválida")
     .integer("Cantidad inválida"),
-  alimentacion: Yup.string().required("Seleccione un tipo de alimentación"),
-  confinamiento: Yup.number()
+  profundidad: Yup.number()
     .required("Ingrese una cantidad")
     .positive("Cantidad inválida")
     .integer("Cantidad inválida"),
 });
 
-const Data2 = ({ route, navigation }) => {
+const Data3 = ({ route, navigation }) => {
   const prev = route.params;
   return (
     <Formik
       initialValues={{
-        nVacas: "",
-        alimentacion: "",
-        confinamiento: "",
+        diametro: "",
+        profundidad: "",
       }}
       onSubmit={(values) => {
-        navigation.navigate("Data3", {
+        navigation.navigate("Login", {
           ...prev,
-          nVacas: values.nVacas,
-          alimentacion: values.alimentacion,
-          confinamiento: values.confinamiento,
+          diametro: values.diametro,
+          profundidad: values.profundidad,
         });
       }}
       validationSchema={validations}
@@ -65,14 +62,14 @@ const Data2 = ({ route, navigation }) => {
                   />
                   <AppText
                     style={{ fontSize: 22 }}
-                    text={"3/4"}
+                    text={"4/4"}
                     fontStyle="Regular"
                   />
                 </View>
                 <View style={{ flex: 1, justifyContent: "flex-end" }}>
                   <AppText
                     style={styles.subtitle}
-                    text={"Ingrese los datos de vacas en ordeña"}
+                    text={"Ingrese los datos del pozo purinero"}
                     fontStyle="Regular"
                   />
                 </View>
@@ -80,70 +77,38 @@ const Data2 = ({ route, navigation }) => {
 
               <View style={styles.form_box}>
                 <TextInput
-                  placeholder="Ingrese canitdad de vacas"
-                  label={"N° de vacas"}
-                  onChangeText={handleChange("nVacas")}
-                  onBlur={handleBlur("nVacas")}
-                  value={values.nVacas.toString()}
+                  placeholder="Ingrese diametro en mt(s)"
+                  label={"Diametro"}
+                  onChangeText={handleChange("diametro")}
+                  onBlur={handleBlur("diametro")}
+                  value={values.diametro.toString()}
                   keyboardType="numeric"
                   keyboardAppearance="dark"
                   returnKeyType="next"
                   returnKeyLabel="next"
                 />
-                {errors.nVacas && touched.nVacas && (
+                {errors.diametro && touched.diametro && (
                   <AppText
-                    text={errors.nVacas}
-                    fontStyle="Regular"
-                    style={styles.errorText}
-                  />
-                )}
-
-                <View style={styles.input_box}>
-                  <AppText
-                    style={styles.inputLabel}
-                    text={"Tipo de alimentación"}
-                    fontStyle="Regular"
-                  />
-                  <RNPickerSelect
-                    onValueChange={(value) =>
-                      setFieldValue("alimentacion", value)
-                    }
-                    value={values.alimentacion}
-                    useNativeAndroidPickerStyle={true}
-                    fixAndroidTouchableBug={true}
-                    doneText="Aceptar"
-                    placeholder={{
-                      label: "Seleccione un tipo de alimentacion",
-                      value: null,
-                    }}
-                    items={[
-                      { label: "Opcion A", value: "a" },
-                      { label: "Opcion B", value: "b" },
-                    ]}
-                  />
-                </View>
-                {errors.alimentacion && touched.alimentacion && (
-                  <AppText
-                    text={errors.alimentacion}
+                    text={errors.diametro}
                     fontStyle="Regular"
                     style={styles.errorText}
                   />
                 )}
 
                 <TextInput
-                  placeholder="Ingrese canitdad horas"
-                  label={"Horas de confinamiento"}
-                  onChangeText={handleChange("confinamiento")}
-                  onBlur={handleBlur("confinamiento")}
-                  value={values.confinamiento.toString()}
+                  placeholder="Ingrese profundidad en mt(s)"
+                  label={"Profundidad"}
+                  onChangeText={handleChange("profundidad")}
+                  onBlur={handleBlur("profundidad")}
+                  value={values.profundidad.toString()}
                   keyboardType="numeric"
                   keyboardAppearance="dark"
                   returnKeyType="next"
                   returnKeyLabel="next"
                 />
-                {errors.confinamiento && touched.confinamiento && (
+                {errors.profundidad && touched.profundidad && (
                   <AppText
-                    text={errors.confinamiento}
+                    text={errors.profundidad}
                     fontStyle="Regular"
                     style={styles.errorText}
                   />
@@ -153,7 +118,7 @@ const Data2 = ({ route, navigation }) => {
               <View style={styles.btn_box}>
                 <Button
                   style={styles.button}
-                  label={"Continuar"}
+                  label={"Finalizar"}
                   onPress={handleSubmit}
                 />
               </View>
@@ -165,7 +130,7 @@ const Data2 = ({ route, navigation }) => {
   );
 };
 
-export default Data2;
+export default Data3;
 
 const styles = StyleSheet.create({
   container: {

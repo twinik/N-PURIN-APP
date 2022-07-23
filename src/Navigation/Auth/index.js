@@ -5,6 +5,7 @@ import Register from "../../Screens/Auth/Register";
 import Data0 from "../../Screens/Auth/Data/Data0";
 import Data1 from "../../Screens/Auth/Data/Data1";
 import Data2 from "../../Screens/Auth/Data/Data2";
+import Data3 from "../../Screens/Auth/Data/Data3";
 export default function index() {
   const AuthStack = createNativeStackNavigator();
 
@@ -33,6 +34,11 @@ export default function index() {
       <AuthStack.Screen
         name="Data2"
         component={Data2}
+        options={{ headerTitleAlign: "center", headerShown: false }}
+      />
+      <AuthStack.Screen
+        name="Data3"
+        component={Data3}
         options={{ headerTitleAlign: "center", headerShown: false }}
       />
     </AuthStack.Navigator>

@@ -14,17 +14,16 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 
 const validations = Yup.object().shape({
-  agua: Yup.number()
-    .required("Seleccione cantidad de litros")
+  sinTechar: Yup.number()
+    .required("Ingrese una cantidad")
     .positive("Cantidad inválida")
     .integer("Cantidad inválida")
-    .label("Cantidad de litros"),
-  sistLimpieza: Yup.string()
-    .required("Seleccione un sistema de limpieza")
-    .label("Sistema de limpieza"),
-  solidos: Yup.string()
-    .required("Seleccione un tipo de separación de solidos")
-    .label("Separación de solidos"),
+    .label("Cantidad sin techar"),
+  sinCanalizar: Yup.number()
+    .required("Ingrese una cantidad")
+    .positive("Cantidad inválida")
+    .integer("Cantidad inválida")
+    .label("Cantidad sin canalizar"),
 });
 
 const Data1 = ({ route, navigation }) => {
@@ -32,16 +31,14 @@ const Data1 = ({ route, navigation }) => {
   return (
     <Formik
       initialValues={{
-        agua: 0,
-        sistLimpieza: "",
-        solidos: "",
+        sinTechar: "",
+        sinCanalizar: "",
       }}
       onSubmit={(values) =>
         navigation.navigate("Data2", {
           ...prev,
-          agua: values.agua,
-          sistLimpieza: values.sistLimpieza,
-          solidos: values.solidos,
+          sinTechar: values.sinTechar,
+          sinCanalizar: values.sinCanalizar,
         })
       }
       validationSchema={validations}
@@ -67,96 +64,53 @@ const Data1 = ({ route, navigation }) => {
                   />
                   <AppText
                     style={{ fontSize: 22 }}
-                    text={"2/3"}
+                    text={"2/4"}
                     fontStyle="Regular"
                   />
                 </View>
                 <View style={{ flex: 1, justifyContent: "flex-end" }}>
                   <AppText
                     style={styles.subtitle}
-                    text={"Ingrese sus datos para poder continuar."}
+                    text={"Ingrese los datos de construcciones"}
                     fontStyle="Regular"
                   />
                 </View>
               </View>
 
               <View style={styles.form_box}>
-                <View style={styles.input_box}>
+                <TextInput
+                  placeholder="Ingrese canitdad de metros cuadrados sin techar"
+                  label={"Construcciones sin techar"}
+                  onChangeText={handleChange("sinTechar")}
+                  onBlur={handleBlur("sinTechar")}
+                  value={values.sinTechar.toString()}
+                  keyboardType="numeric"
+                  keyboardAppearance="dark"
+                  returnKeyType="next"
+                  returnKeyLabel="next"
+                />
+                {errors.sinTechar && touched.sinTechar && (
                   <AppText
-                    style={styles.inputLabel}
-                    text={"Sistema de  limpieza"}
-                    fontStyle="Regular"
-                  />
-                  <RNPickerSelect
-                    onValueChange={(value) =>
-                      setFieldValue("sistLimpieza", value)
-                    }
-                    value={values.sistLimpieza}
-                    useNativeAndroidPickerStyle={true}
-                    fixAndroidTouchableBug={true}
-                    doneText="Aceptar"
-                    placeholder={{
-                      label: "Seleccione un sistema de limpieza",
-                      value: null,
-                    }}
-                    items={[
-                      { label: "Opcion A", value: "a" },
-                      { label: "Opcion B", value: "b" },
-                    ]}
-                  />
-                </View>
-                {errors.sistLimpieza && touched.sistLimpieza && (
-                  <AppText
-                    text={errors.sistLimpieza}
-                    fontStyle="Regular"
-                    style={styles.errorText}
-                  />
-                )}
-
-                <View style={styles.input_box}>
-                  <AppText
-                    style={styles.inputLabel}
-                    text={"Separacion de solidos"}
-                    fontStyle="Regular"
-                  />
-                  <RNPickerSelect
-                    onValueChange={(value) => setFieldValue("solidos", value)}
-                    value={values.solidos}
-                    useNativeAndroidPickerStyle={true}
-                    fixAndroidTouchableBug={true}
-                    doneText="Aceptar"
-                    placeholder={{
-                      label: "Seleccione un tipo de separación de solidos",
-                      value: null,
-                    }}
-                    items={[
-                      { label: "Opcion A", value: "a" },
-                      { label: "Opcion B", value: "b" },
-                    ]}
-                  />
-                </View>
-                {errors.solidos && touched.solidos && (
-                  <AppText
-                    text={errors.solidos}
+                    text={errors.sinTechar}
                     fontStyle="Regular"
                     style={styles.errorText}
                   />
                 )}
 
                 <TextInput
-                  placeholder="Ingrese litros de agua"
-                  label={"Litros de agua utilizados en limpieza"}
-                  onChangeText={handleChange("agua")}
-                  onBlur={handleBlur("agua")}
-                  value={values.agua.toString()}
+                  placeholder="Ingrese canitdad de metros cuadrados sin canalizar"
+                  label={"Construcciones sin canalizar"}
+                  onChangeText={handleChange("sinCanalizar")}
+                  onBlur={handleBlur("sinCanalizar")}
+                  value={values.sinCanalizar.toString()}
                   keyboardType="numeric"
                   keyboardAppearance="dark"
                   returnKeyType="next"
                   returnKeyLabel="next"
                 />
-                {errors.agua && touched.agua && (
+                {errors.sinCanalizar && touched.sinCanalizar && (
                   <AppText
-                    text={errors.agua}
+                    text={errors.sinCanalizar}
                     fontStyle="Regular"
                     style={styles.errorText}
                   />
@@ -192,7 +146,7 @@ const styles = StyleSheet.create({
     height: hp(80),
   },
   title_box: {
-    height: hp(15),
+    height: hp(11),
   },
   form_box: {
     height: hp(55),
