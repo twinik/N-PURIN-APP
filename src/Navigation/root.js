@@ -23,5 +23,6 @@ export default function root() {
     return <Loader />;
   }
 
-  return Token != null ? <AppStack /> : <AuthStack />;
+  /* return Token != null ? <AppStack /> : <AuthStack />; */
+  return <AppStack />;
 }
