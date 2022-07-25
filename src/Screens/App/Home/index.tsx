@@ -8,12 +8,14 @@ import { theme } from "../../../theme";
 import AppText from "../../../Components/AppText";
 import Container from "../../../Components/Container";
 import DataSection from "../../../Components/DataSection";
+import MenuButton from "../../../Components/MenuButton";
 
-const Home = () => {
+const Home = ({ navigation }) => {
   return (
     <>
       <Container>
         <View style={styles.container}>
+          <MenuButton onPress={() => navigation.toggleDrawer()} />
           <AppText
             text="Cantidad de Purin"
             style={styles.title}
@@ -33,7 +35,6 @@ const Home = () => {
               />
             </View>
           </DataSection>
-
           <DataSection title="Produccion respecto al año anterior">
             <View style={styles.section1}>
               <AppText
@@ -48,7 +49,6 @@ const Home = () => {
               />
             </View>
           </DataSection>
-
           <DataSection title="Aguas utilizadas en el ultimo mes">
             <View style={styles.section1}>
               <AppText
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: hp(4),
-    color: "gray",
+    color: "black",
     marginVertical: hp(2),
   },
   section1: {

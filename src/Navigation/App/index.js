@@ -1,16 +1,16 @@
 import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import Home from "../../Screens/App/Home";
 export default function index() {
-  const AppStack = createNativeStackNavigator();
+  const Drawer = createDrawerNavigator();
 
   return (
-    <AppStack.Navigator headerMode="none">
-      <AppStack.Screen
+    <Drawer.Navigator>
+      <Drawer.Screen
         name="Home"
         component={Home}
         options={{ headerTitleAlign: "center", headerShown: false }}
       />
-    </AppStack.Navigator>
+    </Drawer.Navigator>
   );
 }
