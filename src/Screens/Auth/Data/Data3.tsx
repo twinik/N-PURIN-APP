@@ -4,8 +4,6 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
-import RNPickerSelect from "react-native-picker-select";
-import { useFonts } from "expo-font";
 import Container from "../../../Components/Container";
 import TextInput from "../../../Components/TextInput.js";
 import Button from "../../../Components/Button";
@@ -26,19 +24,26 @@ const validations = Yup.object().shape({
 
 const Data3 = ({ route, navigation }) => {
   const prev = route.params;
+
+  const handleSubmit = (values) => {
+    const userObject = {
+      ...prev,
+      ...values,
+      diametro: values.diametro,
+      profundidad: values.profundidad,
+    };
+
+    console.log("Usuario: ", { userObject });
+    navigation.navigate("Login", { userObject });
+  };
+
   return (
     <Formik
       initialValues={{
         diametro: "",
         profundidad: "",
       }}
-      onSubmit={(values) => {
-        navigation.navigate("Login", {
-          ...prev,
-          diametro: values.diametro,
-          profundidad: values.profundidad,
-        });
-      }}
+      onSubmit={(values) => handleSubmit(values)}
       validationSchema={validations}
     >
       {({

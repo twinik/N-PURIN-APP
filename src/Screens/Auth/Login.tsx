@@ -32,7 +32,7 @@ const Login = ({ navigation, route }) => {
     }
   };
 
-  const formValues = [
+  /*   const formValues = [
     {
       name: "email",
       type: "email",
@@ -63,7 +63,7 @@ const Login = ({ navigation, route }) => {
       autoCorrect: false,
       autoCompleteType: "password",
     },
-  ];
+  ]; */
 
   return (
     <Formik
@@ -100,41 +100,6 @@ const Login = ({ navigation, route }) => {
                 text={"Ingrese sus credenciales para poder iniciar sesion"}
                 fontStyle="Regular"
               />
-              {/* {formValues.map((item, index) =>
-                item.type === "email" ? (
-                  <TextInput
-                    key={index}
-                    placeholder={item.placeholder}
-                    label={item.label}
-                    onChangeText={handleChange(item.name)}
-                    onBlur={handleBlur(item.name)}
-                    value={values[item.name]}
-                    autoCapitalize={item.autoCapitalize}
-                    autoCorrect={item.autoCorrect}
-                    autoCompleteType={item.autoCompleteType}
-                    keyboardType={item.keyboardType}
-                    keyboardAppearance="dark"
-                    returnKeyType="next"
-                    returnKeyLabel="next"
-                  />
-                ) : (
-                  <SecureTextInput
-                    key={index}
-                    placeholder={item.placeholder}
-                    label={item.label}
-                    onChangeText={handleChange(item.name)}
-                    onBlur={handleBlur(item.name)}
-                    value={values[item.name]}
-                    autoCapitalize={item.autoCapitalize}
-                    autoCorrect={item.autoCorrect}
-                    autoCompleteType={item.autoCompleteType}
-                    keyboardType={item.keyboardType}
-                    keyboardAppearance="dark"
-                    returnKeyType="next"
-                    returnKeyLabel="next"
-                  />
-                )
-              )} */}
               <TextInput
                 placeholder="Ingrese su email"
                 label={"Email"}

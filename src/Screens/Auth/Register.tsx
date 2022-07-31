@@ -11,7 +11,6 @@ import SecureTextInput from "../../Components/SecureTextInput";
 import Button from "../../Components/Button";
 import AppText from "../../Components/AppText";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { useFonts } from "expo-font";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
@@ -20,6 +19,7 @@ const validations = Yup.object().shape({
     .email("Por favor ingrese un email valido")
     .required("Email es requerido")
     .label("Email"),
+  name: Yup.string().required("Nombre es requerido").label("Nombre"),
   password: Yup.string()
     .matches(
       /\w*[a-z]\w*/,
@@ -44,16 +44,11 @@ const validations = Yup.object().shape({
 });
 
 const Register = ({ navigation }) => {
-  /*  const [loaded] = useFonts({
-    Main: require("./../../../assets/fonts/Staatliches.ttf"),
-  });
-  if (!loaded) {
-    return null;
-  } */
   return (
     <Formik
       initialValues={{
         email: "",
+        name: "",
         password: "",
         confirmPassword: "",
         acceptTerms: false,
@@ -61,6 +56,7 @@ const Register = ({ navigation }) => {
       onSubmit={(values) =>
         navigation.navigate("Data0", {
           email: values.email,
+          name: values.name,
           password: values.password,
         })
       }
@@ -99,6 +95,24 @@ const Register = ({ navigation }) => {
               {errors.email && touched.email && (
                 <AppText
                   text={errors.email}
+                  fontStyle="Regular"
+                  style={styles.errorText}
+                />
+              )}
+
+              <TextInput
+                placeholder="Ingrese su nombre"
+                label={"Nombre"}
+                onChangeText={handleChange("name")}
+                onBlur={handleBlur("name")}
+                value={values.name}
+                keyboardAppearance="dark"
+                returnKeyType="next"
+                returnKeyLabel="next"
+              />
+              {errors.name && touched.name && (
+                <AppText
+                  text={errors.name}
                   fontStyle="Regular"
                   style={styles.errorText}
                 />

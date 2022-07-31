@@ -5,7 +5,6 @@ import {
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
 import RNPickerSelect from "react-native-picker-select";
-import { useFonts } from "expo-font";
 import Container from "../../../Components/Container";
 import TextInput from "../../../Components/TextInput.js";
 import Button from "../../../Components/Button";

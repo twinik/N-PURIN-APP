@@ -12,6 +12,6 @@ function combineReducers(reducers) {
 }
 
 export const rootReducer = combineReducers({
-  data:AuthReducer,
-  functionalData:FunctionalDataReducer
+  data: AuthReducer,
+  functionalData: FunctionalDataReducer,
 });
