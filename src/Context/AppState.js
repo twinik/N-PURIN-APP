@@ -1,15 +1,11 @@
 import React, { useReducer, useState, useEffect } from "react";
 import AppContext from "./AppContext";
-import { SET_TOKEN } from "./types";
+import { SET_TOKEN, SET_USER } from "./types";
 import { rootReducer } from "./Reducers";
-import NetInfo from "@react-native-community/netinfo";
-import { find } from "lodash";
-
+import { fetchUser } from "../Services/auth";
 const AppState = (props) => {
   const initialState = {
     data: { token: null, user: null },
-    collections: [],
-    connection: true,
     functionalData: {
       suppliers: [],
       halls: [],
@@ -19,34 +15,17 @@ const AppState = (props) => {
 
   const [state, dispatch] = useReducer(rootReducer, initialState);
 
-  const initializeOffline = async () => {};
-
   const SignIn = async (email, password) => {
-    const connection = await NetInfo.fetch();
-
-    if (!connection.isConnected) {
-      dispatch({
-        type: SET_CONNECTION,
-        payload: false,
-      });
-      await initializeOffline();
-      return;
-    }
-
-    const CollectionsQueue = await getParsedCollectionsQueue();
-    if (CollectionsQueue.length > 0) {
-      try {
-        await saveMultipleCollections(CollectionsQueue);
-        await resetCollectionQueue();
-      } catch (error) {
-        alert("Error al guardar las colecciones");
-      }
-    }
-
     try {
+      const result = await fetchUser(email, password);
+
       dispatch({
         type: SET_TOKEN,
         payload: "id",
+      });
+      dispatch({
+        type: SET_USER,
+        payload: result,
       });
     } catch (error) {
       throw error;
@@ -60,7 +39,6 @@ const AppState = (props) => {
         SignIn,
         Token: state.data.token,
         FunctionalData: state.functionalData,
-        Connection: state.connection,
       }}
     >
       {props.children}

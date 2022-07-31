@@ -1,6 +1,4 @@
 import AuthReducer from "./AuthReducer";
-import ConnectionReducer from "./ConnectionReducer";
-import CollectionsReducer from "./CollectionsReducer";
 import FunctionalDataReducer from "./FunctionalDataReducer";
 
 function combineReducers(reducers) {
@@ -15,7 +13,5 @@ function combineReducers(reducers) {
 
 export const rootReducer = combineReducers({
   data:AuthReducer,
-  connection:ConnectionReducer,
-  collections:CollectionsReducer,
   functionalData:FunctionalDataReducer
 });
