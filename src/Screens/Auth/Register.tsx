@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import {
   heightPercentageToDP as hp,
@@ -13,6 +13,7 @@ import AppText from "../../Components/AppText";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import * as Crypto from "expo-crypto";
 
 const validations = Yup.object().shape({
   email: Yup.string()
@@ -44,6 +45,34 @@ const validations = Yup.object().shape({
 });
 
 const Register = ({ navigation }) => {
+  const cryptoPassword = async (password) => {
+    const sha256 = Crypto.digestStringAsync(
+      Crypto.CryptoDigestAlgorithm.SHA256,
+      password
+    );
+    return sha256;
+  };
+
+  const handleSubmit = (values) => {
+    const userObject = {
+      ...values,
+      email: values.email,
+      name: values.name,
+      password: values.password,
+    };
+    cryptoPassword(values.password).then(
+      (hash) => {
+        userObject.password = hash;
+        userObject.confirmPassword = hash;
+        console.log("Usuario: ", { userObject });
+        navigation.navigate("Data0", { userObject });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+
   return (
     <Formik
       initialValues={{
@@ -53,13 +82,7 @@ const Register = ({ navigation }) => {
         confirmPassword: "",
         acceptTerms: false,
       }}
-      onSubmit={(values) =>
-        navigation.navigate("Data0", {
-          email: values.email,
-          name: values.name,
-          password: values.password,
-        })
-      }
+      onSubmit={(values) => handleSubmit(values)}
       validationSchema={validations}
     >
       {({

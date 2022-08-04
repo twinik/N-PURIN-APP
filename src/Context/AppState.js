@@ -18,7 +18,6 @@ const AppState = (props) => {
   const SignIn = async (email, password) => {
     try {
       const result = await fetchUser(email, password);
-
       dispatch({
         type: SET_TOKEN,
         payload: "id",
