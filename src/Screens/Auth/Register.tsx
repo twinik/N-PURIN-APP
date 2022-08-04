@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
 import { theme } from "../../theme";
+import AppContext from "../../Context/AppContext";
 import Container from "../../Components/Container";
 import TextInput from "../../Components/TextInput.js";
 import SecureTextInput from "../../Components/SecureTextInput";
@@ -45,6 +46,8 @@ const validations = Yup.object().shape({
 });
 
 const Register = ({ navigation }) => {
+  const { SignUp } = useContext(AppContext);
+
   const cryptoPassword = async (password) => {
     const sha256 = Crypto.digestStringAsync(
       Crypto.CryptoDigestAlgorithm.SHA256,
@@ -53,24 +56,22 @@ const Register = ({ navigation }) => {
     return sha256;
   };
 
-  const handleSubmit = (values) => {
-    const userObject = {
-      ...values,
+  const handleSubmit = async (values) => {
+    const User = {
       email: values.email,
       name: values.name,
-      password: values.password,
+      password: await cryptoPassword(values.password),
     };
-    cryptoPassword(values.password).then(
-      (hash) => {
-        userObject.password = hash;
-        userObject.confirmPassword = hash;
-        console.log("Usuario: ", { userObject });
-        navigation.navigate("Data0", { userObject });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+
+    console.log("User: ", { User });
+    navigation.navigate("Data0", { User });
+
+    /* try {
+      await SignUp(User);
+      navigation.navigate("Data0", { User });
+    } catch (error) {
+      alert(error.message);
+    } */
   };
 
   return (

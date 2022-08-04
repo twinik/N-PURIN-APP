@@ -31,6 +31,13 @@ const AppState = (props) => {
     }
   };
 
+  const SignUp = () => {
+    dispatch({
+      type: RESET,
+      payload: "",
+    });
+  };
+
   return (
     <AppContext.Provider
       value={{
