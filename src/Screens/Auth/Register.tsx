@@ -64,14 +64,13 @@ const Register = ({ navigation }) => {
     };
 
     console.log("User: ", { User });
-    navigation.navigate("Data0", { User });
 
-    /* try {
+    try {
       await SignUp(User);
       navigation.navigate("Data0", { User });
     } catch (error) {
       alert(error.message);
-    } */
+    }
   };
 
   return (

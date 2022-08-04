@@ -43,6 +43,7 @@ const AppState = (props) => {
       value={{
         User: state.data.user,
         SignIn,
+        SignUp,
         Token: state.data.token,
         FunctionalData: state.functionalData,
       }}
