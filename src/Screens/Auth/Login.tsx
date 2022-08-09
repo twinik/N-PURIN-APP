@@ -29,15 +29,9 @@ const Login = ({ navigation, route }) => {
     const password = values.password;
 
     try {
-      const response = await SignIn(email, password);
-      if (response.status === 200) {
-        //navigation.navigate("Home");
-        alert("Login exitoso");
-        console.log("Login exitoso");
-      }
+      await SignIn(email, password);
     } catch (error) {
-      alert(error.message);
-      console.log(error);
+      alert("No se ha podido iniciar sesion");
     }
   };
 

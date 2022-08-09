@@ -26,19 +26,24 @@ const validations = Yup.object().shape({
 
 const Data1 = ({ route, navigation }) => {
   const prev = route.params;
+
+  const handleSubmit = (values) => {
+    const formConstruccion = {
+      ...values,
+    };
+
+    navigation.navigate("Data2", {
+      ...prev,
+      formConstruccion,
+    });
+  };
   return (
     <Formik
       initialValues={{
         sinTechar: "",
         sinCanalizar: "",
       }}
-      onSubmit={(values) =>
-        navigation.navigate("Data2", {
-          ...prev,
-          sinTechar: values.sinTechar,
-          sinCanalizar: values.sinCanalizar,
-        })
-      }
+      onSubmit={(values) => handleSubmit(values)}
       validationSchema={validations}
     >
       {({

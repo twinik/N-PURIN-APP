@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View } from "react-native";
 import {
   heightPercentageToDP as hp,
@@ -6,6 +6,7 @@ import {
 } from "react-native-responsive-screen";
 import Container from "../../../Components/Container";
 import TextInput from "../../../Components/TextInput.js";
+import AppContext from "../../../Context/AppContext";
 import Button from "../../../Components/Button";
 import AppText from "../../../Components/AppText";
 import { Formik } from "formik";
@@ -23,18 +24,21 @@ const validations = Yup.object().shape({
 });
 
 const Data3 = ({ route, navigation }) => {
+  const { SendForms } = useContext(AppContext);
   const prev = route.params;
 
-  const handleSubmit = (values) => {
-    const userObject = {
-      ...prev,
+  const handleSubmit = async (values) => {
+    const formPozoPurinero = {
       ...values,
-      diametro: values.diametro,
-      profundidad: values.profundidad,
     };
 
-    console.log("Usuario: ", { userObject });
-    navigation.navigate("Login", { userObject });
+    try {
+      await SendForms({ ...prev, formPozoPurinero });
+      navigation.navigate("Login");
+    } catch (error) {
+      alert("Ups! Algo salió mal");
+      console.log(error);
+    }
   };
 
   return (

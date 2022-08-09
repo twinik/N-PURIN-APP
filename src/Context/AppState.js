@@ -9,6 +9,12 @@ import {
   SistemaLimpieza,
   SeparacionSolidos,
 } from "../Services/dropdowns";
+import {
+  setSalaOrdena,
+  setConstruccion,
+  setVacaOrdena,
+  setPozoPurinero,
+} from "../Services/forms";
 const AppState = (props) => {
   const initialState = {
     data: { token: null, user: null },
@@ -46,23 +52,43 @@ const AppState = (props) => {
     }
   };
 
-  const InitalizeDropdowns = async () => {
+  const InitializeDropdowns = async () => {
     Promise.all([
       Ubicaciones(),
       Alimentacion(),
       SistemaLimpieza(),
       SeparacionSolidos(),
     ])
-      .then(([ubicaciones, alimentacion, sistLimpieza, sepSolidos]) => {
+      .then(([ubicaciones, alimentaciones, sistemaLimpieza, sepSolidos]) => {
         dispatch({
           type: SET_FUNCTIONAL_DATA,
           payload: {
             drop_ubicaciones: ubicaciones,
-            drop_alimentacion: alimentacion,
-            drop_sistLimpieza: sistLimpieza,
+            drop_alimentacion: alimentaciones,
+            drop_sistLimpieza: sistemaLimpieza,
             drop_sepSolidos: sepSolidos,
           },
         });
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+
+  const SendForms = async ({
+    formSalaOrdena,
+    formConstruccion,
+    formVacaOrdena,
+    formPozoPurinero,
+  }) => {
+    Promise.all([
+      setSalaOrdena(formSalaOrdena),
+      setConstruccion(formConstruccion),
+      setVacaOrdena(formVacaOrdena),
+      setPozoPurinero(formPozoPurinero),
+    ])
+      .then(() => {
+        console.log("Forms sent");
       })
       .catch((error) => {
         throw error;
@@ -75,7 +101,8 @@ const AppState = (props) => {
         User: state.data.user,
         SignIn,
         SignUp,
-        InitalizeDropdowns,
+        InitializeDropdowns,
+        SendForms,
         Token: state.data.token,
         FunctionalData: state.functionalData,
       }}

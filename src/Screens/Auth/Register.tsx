@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import {
   heightPercentageToDP as hp,
@@ -46,7 +46,15 @@ const validations = Yup.object().shape({
 });
 
 const Register = ({ navigation }) => {
-  const { SignUp } = useContext(AppContext);
+  const { SignUp, InitializeDropdowns } = useContext(AppContext);
+
+  useEffect(() => {
+    try {
+      InitializeDropdowns();
+    } catch (error) {
+      alert(error.message);
+    }
+  }, []);
 
   const cryptoPassword = async (password) => {
     const sha256 = Crypto.digestStringAsync(
@@ -60,19 +68,18 @@ const Register = ({ navigation }) => {
     const User = {
       email: values.email,
       name: values.name,
-      password: await cryptoPassword(values.password),
+      password: values.password,
+      //password: await cryptoPassword(values.password),
     };
 
     console.log("User: ", { User });
 
     try {
-      const response = await SignUp(User);
-      if (response.status === 200) {
-        console.log("Usuario cargado");
-        navigation.navigate("Data0", { User });
-      }
+      await SignUp(User);
+      console.log("Usuario cargado");
+      navigation.navigate("Data0", { User });
     } catch (error) {
-      alert(error.message);
+      alert("No se ha podido registrar el usuario");
     }
   };
 

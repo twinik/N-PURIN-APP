@@ -27,9 +27,20 @@ const validations = Yup.object().shape({
 
 const Data2 = ({ route, navigation }) => {
   const { FunctionalData } = useContext(AppContext);
-  const { alimentacion } = FunctionalData;
+  const { drop_alimentacion } = FunctionalData;
 
   const prev = route.params;
+
+  const handleSubmit = (values) => {
+    const formVacaOrdena = {
+      ...values,
+    };
+
+    navigation.navigate("Data3", {
+      ...prev,
+      formVacaOrdena,
+    });
+  };
   return (
     <Formik
       initialValues={{
@@ -37,14 +48,7 @@ const Data2 = ({ route, navigation }) => {
         alimentacion: "",
         confinamiento: "",
       }}
-      onSubmit={(values) => {
-        navigation.navigate("Data3", {
-          ...prev,
-          nVacas: values.nVacas,
-          alimentacion: values.alimentacion,
-          confinamiento: values.confinamiento,
-        });
-      }}
+      onSubmit={(values) => handleSubmit(values)}
       validationSchema={validations}
     >
       {({
@@ -119,9 +123,9 @@ const Data2 = ({ route, navigation }) => {
                       label: "Seleccione un tipo de alimentacion",
                       value: null,
                     }}
-                    items={alimentacion.map((i) => ({
-                      label: alimentacion[i],
-                      value: alimentacion[i],
+                    items={drop_alimentacion.map(({ descripcion, id }) => ({
+                      label: descripcion,
+                      value: id,
                     }))}
                   />
                 </View>

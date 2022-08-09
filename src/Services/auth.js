@@ -3,9 +3,9 @@ const baseURL = "https://conectamilk-npurin.herokuapp.com";
 
 export const Login = async (email, password) => {
   const configurationObject = {
-    method: "get",
+    method: "post",
     url: `${baseURL}/login`,
-    params: {
+    data: {
       email,
       password,
     },
@@ -14,20 +14,6 @@ export const Login = async (email, password) => {
   console.log("Login success", response.data);
 };
 
-/* export const Register = async (user) => {
-  const configurationObject = {
-    method: "post",
-    url: `${baseURL}/crear_usuario`,
-    data: {
-      email: user.email,
-      nombre: user.name,
-      password: user.password,
-    },
-  };
-  const response = await axios(configurationObject);
-  console.log("Usuario creado", response.data);
-}; */
-
 export const Register = async (user) => {
   try {
     const response = await axios.post(`${baseURL}/crear_usuario`, {
@@ -35,6 +21,5 @@ export const Register = async (user) => {
       nombre: user.name,
       password: user.password,
     });
-    console.log("Usuario creado", response.data);
   } catch (error) {}
 };

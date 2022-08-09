@@ -35,27 +35,25 @@ const validations = Yup.object().shape({
     .label("Separación de solidos"),
 });
 
+const Capitalize = (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
 const Data0 = ({ route, navigation }) => {
-  const { InitalizeDropdowns, FunctionalData } = useContext(AppContext);
-  const { ubicaciones, sistLimpieza, sepSolidos } = FunctionalData;
+  const { FunctionalData } = useContext(AppContext);
+  const { drop_ubicaciones, drop_sistLimpieza, drop_sepSolidos } =
+    FunctionalData;
 
-  useEffect(() => {
-    try {
-      InitalizeDropdowns();
-      console.log(
-        "Ubicaciones: ",
-        ubicaciones,
-        "SistLimpieza: ",
-        sistLimpieza,
-        "SepSolidos: ",
-        sepSolidos
-      );
-    } catch (error) {
-      alert(error.message);
-    }
-  }, []);
+  const handleSubmit = (values) => {
+    const formSalaOrdena = {
+      ...values,
+    };
 
-  const prev = route.params;
+    navigation.navigate("Data1", {
+      formSalaOrdena,
+    });
+  };
+
   return (
     <Formik
       initialValues={{
@@ -65,16 +63,7 @@ const Data0 = ({ route, navigation }) => {
         sistLimpieza: "",
         solidos: "",
       }}
-      onSubmit={(values) =>
-        navigation.navigate("Data1", {
-          ...prev,
-          ubicacion: values.ubicacion,
-          estanque: values.estanque,
-          equipos: values.equipos,
-          sistLimpieza: values.sistLimpieza,
-          solidos: values.solidos,
-        })
-      }
+      onSubmit={(values) => handleSubmit(values)}
       validationSchema={validations}
     >
       {({
@@ -132,9 +121,9 @@ const Data0 = ({ route, navigation }) => {
                         label: "Seleccione una comuna",
                         value: null,
                       }}
-                      items={ubicaciones.map((i) => ({
-                        label: ubicaciones[i],
-                        value: ubicaciones[i],
+                      items={drop_ubicaciones.map(({ comuna, id }) => ({
+                        label: comuna,
+                        value: id,
                       }))}
                     />
                   </View>
@@ -202,10 +191,16 @@ const Data0 = ({ route, navigation }) => {
                         label: "Seleccione un sistema de limpieza",
                         value: null,
                       }}
-                      items={sistLimpieza.map((i) => ({
-                        label: sistLimpieza[i],
-                        value: sistLimpieza[i],
-                      }))}
+                      items={drop_sistLimpieza.map(
+                        ({ descripcion, id, porcentaje_eficiencia }) => ({
+                          label:
+                            Capitalize(descripcion) +
+                            " - " +
+                            porcentaje_eficiencia +
+                            "%",
+                          value: id,
+                        })
+                      )}
                     />
                   </View>
                   {errors.sistLimpieza && touched.sistLimpieza && (
@@ -229,12 +224,12 @@ const Data0 = ({ route, navigation }) => {
                       fixAndroidTouchableBug={true}
                       doneText="Aceptar"
                       placeholder={{
-                        label: "Seleccione un tipo de separación de solidos",
+                        label: "Seleccione separación de solidos",
                         value: null,
                       }}
-                      items={sepSolidos.map((i) => ({
-                        label: sepSolidos[i],
-                        value: sepSolidos[i],
+                      items={drop_sepSolidos.map(({ descripcion, id }) => ({
+                        label: descripcion,
+                        value: id,
                       }))}
                     />
                   </View>
