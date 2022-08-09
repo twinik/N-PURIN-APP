@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
 import RNPickerSelect from "react-native-picker-select";
+import AppContext from "../../../Context/AppContext";
 import Container from "../../../Components/Container";
 import TextInput from "../../../Components/TextInput.js";
 import Button from "../../../Components/Button";
@@ -35,6 +36,16 @@ const validations = Yup.object().shape({
 });
 
 const Data0 = ({ route, navigation }) => {
+  const { InitalizeDropdowns } = useContext(AppContext);
+
+  useEffect(() => {
+    try {
+      InitalizeDropdowns();
+    } catch (error) {
+      alert(error.message);
+    }
+  }, []);
+
   const prev = route.params;
   return (
     <Formik

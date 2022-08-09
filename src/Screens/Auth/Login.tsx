@@ -32,39 +32,6 @@ const Login = ({ navigation, route }) => {
     }
   };
 
-  /*   const formValues = [
-    {
-      name: "email",
-      type: "email",
-      label: "Email",
-      placeholder: "Ingrese su email",
-      keyboardType: "email-address",
-      autoCapitalize: "none",
-      autoCorrect: false,
-      autoCompleteType: "email",
-    },
-    {
-      name: "password",
-      type: "password",
-      label: "Contraseña",
-      placeholder: "Ingrese su contraseña",
-      secureTextEntry: true,
-      autoCapitalize: "none",
-      autoCorrect: false,
-      autoCompleteType: "password",
-    },
-    {
-      name: "confirmPassword",
-      type: "password",
-      label: "Confirmar contraseña",
-      placeholder: "Confirme su contraseña",
-      secureTextEntry: true,
-      autoCapitalize: "none",
-      autoCorrect: false,
-      autoCompleteType: "password",
-    },
-  ]; */
-
   return (
     <Formik
       initialValues={{
