@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseURL = "https://conectamilk-npurin.herokuapp.com/";
+const baseURL = "https://conectamilk-npurin.herokuapp.com";
 
 export const Ubicaciones = async () => {
   const configurationObject = {

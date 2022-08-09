@@ -63,6 +63,7 @@ const AppState = (props) => {
             drop_sepSolidos: sepSolidos,
           },
         });
+        console.log("Data dropdowns: ", state.functionalData);
       })
       .catch((error) => {
         throw error;

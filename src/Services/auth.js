@@ -1,25 +1,29 @@
 import axios from "axios";
-const baseURL = "https://conectamilk-npurin.herokuapp.com/";
+const baseURL = "https://conectamilk-npurin.herokuapp.com";
 
-export const Login = async () => {
+export const Login = async (email, password) => {
   const configurationObject = {
     method: "get",
     url: `${baseURL}/login`,
-  };
-  const response = await axios(configurationObject);
-  console.log(response.data);
-};
-
-export const Register = async (email, name, password) => {
-  const configurationObject = {
-    method: "post",
-    url: `${baseURL}/crear_usuario`,
-    data: {
+    params: {
       email,
-      name,
       password,
     },
   };
   const response = await axios(configurationObject);
-  console.log(response.data);
+  console.log("Login success", response.data);
+};
+
+export const Register = async (user) => {
+  const configurationObject = {
+    method: "post",
+    url: `${baseURL}/crear_usuario`,
+    data: {
+      email_: user.email,
+      name: user.name,
+      password: user.password,
+    },
+  };
+  const response = await axios(configurationObject);
+  console.log("Usuario creado", response.data);
 };

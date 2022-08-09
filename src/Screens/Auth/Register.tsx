@@ -66,8 +66,11 @@ const Register = ({ navigation }) => {
     console.log("User: ", { User });
 
     try {
-      await SignUp(User);
-      navigation.navigate("Data0", { User });
+      const response = await SignUp(User);
+      if (response.status === 200) {
+        console.log("Usuario cargado");
+        navigation.navigate("Data0", { User });
+      }
     } catch (error) {
       alert(error.message);
     }

@@ -24,11 +24,20 @@ const validations = Yup.object().shape({
 const Login = ({ navigation, route }) => {
   const { SignIn } = useContext(AppContext);
 
-  const handleSubmit = async ({ password, email }) => {
+  const handleSubmit = async (values) => {
+    const email = values.email;
+    const password = values.password;
+
     try {
-      await SignIn(email, password);
+      const response = await SignIn(email, password);
+      if (response.status === 200) {
+        //navigation.navigate("Home");
+        alert("Login exitoso");
+        console.log("Login exitoso");
+      }
     } catch (error) {
       alert(error.message);
+      console.log(error);
     }
   };
 
