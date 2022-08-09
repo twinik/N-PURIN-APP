@@ -14,7 +14,7 @@ export const Login = async (email, password) => {
   console.log("Login success", response.data);
 };
 
-export const Register = async (user) => {
+/* export const Register = async (user) => {
   const configurationObject = {
     method: "post",
     url: `${baseURL}/crear_usuario`,
@@ -26,4 +26,15 @@ export const Register = async (user) => {
   };
   const response = await axios(configurationObject);
   console.log("Usuario creado", response.data);
+}; */
+
+export const Register = async (user) => {
+  try {
+    const response = await axios.post(`${baseURL}/crear_usuario`, {
+      email: user.email,
+      nombre: user.name,
+      password: user.password,
+    });
+    console.log("Usuario creado", response.data);
+  } catch (error) {}
 };

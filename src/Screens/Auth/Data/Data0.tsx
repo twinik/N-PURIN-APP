@@ -36,11 +36,20 @@ const validations = Yup.object().shape({
 });
 
 const Data0 = ({ route, navigation }) => {
-  const { InitalizeDropdowns } = useContext(AppContext);
+  const { InitalizeDropdowns, FunctionalData } = useContext(AppContext);
+  const { ubicaciones, sistLimpieza, sepSolidos } = FunctionalData;
 
   useEffect(() => {
     try {
       InitalizeDropdowns();
+      console.log(
+        "Ubicaciones: ",
+        ubicaciones,
+        "SistLimpieza: ",
+        sistLimpieza,
+        "SepSolidos: ",
+        sepSolidos
+      );
     } catch (error) {
       alert(error.message);
     }
@@ -123,10 +132,10 @@ const Data0 = ({ route, navigation }) => {
                         label: "Seleccione una comuna",
                         value: null,
                       }}
-                      items={[
-                        { label: "Opcion A", value: "a" },
-                        { label: "Opcion B", value: "b" },
-                      ]}
+                      items={ubicaciones.map((i) => ({
+                        label: ubicaciones[i],
+                        value: ubicaciones[i],
+                      }))}
                     />
                   </View>
                   {errors.ubicacion && touched.ubicacion && (
@@ -193,10 +202,10 @@ const Data0 = ({ route, navigation }) => {
                         label: "Seleccione un sistema de limpieza",
                         value: null,
                       }}
-                      items={[
-                        { label: "Opcion A", value: "a" },
-                        { label: "Opcion B", value: "b" },
-                      ]}
+                      items={sistLimpieza.map((i) => ({
+                        label: sistLimpieza[i],
+                        value: sistLimpieza[i],
+                      }))}
                     />
                   </View>
                   {errors.sistLimpieza && touched.sistLimpieza && (
@@ -223,10 +232,10 @@ const Data0 = ({ route, navigation }) => {
                         label: "Seleccione un tipo de separación de solidos",
                         value: null,
                       }}
-                      items={[
-                        { label: "Opcion A", value: "a" },
-                        { label: "Opcion B", value: "b" },
-                      ]}
+                      items={sepSolidos.map((i) => ({
+                        label: sepSolidos[i],
+                        value: sepSolidos[i],
+                      }))}
                     />
                   </View>
                   {errors.solidos && touched.solidos && (

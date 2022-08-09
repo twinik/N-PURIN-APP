@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View } from "react-native";
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
 import RNPickerSelect from "react-native-picker-select";
+import AppContext from "../../../Context/AppContext";
 import Container from "../../../Components/Container";
 import TextInput from "../../../Components/TextInput.js";
 import Button from "../../../Components/Button";
@@ -25,6 +26,9 @@ const validations = Yup.object().shape({
 });
 
 const Data2 = ({ route, navigation }) => {
+  const { FunctionalData } = useContext(AppContext);
+  const { alimentacion } = FunctionalData;
+
   const prev = route.params;
   return (
     <Formik
@@ -115,10 +119,10 @@ const Data2 = ({ route, navigation }) => {
                       label: "Seleccione un tipo de alimentacion",
                       value: null,
                     }}
-                    items={[
-                      { label: "Opcion A", value: "a" },
-                      { label: "Opcion B", value: "b" },
-                    ]}
+                    items={alimentacion.map((i) => ({
+                      label: alimentacion[i],
+                      value: alimentacion[i],
+                    }))}
                   />
                 </View>
                 {errors.alimentacion && touched.alimentacion && (
