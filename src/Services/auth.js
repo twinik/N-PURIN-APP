@@ -19,7 +19,7 @@ export const Register = async (user) => {
     method: "post",
     url: `${baseURL}/crear_usuario`,
     data: {
-      email_: user.email,
+      email: user.email,
       name: user.name,
       password: user.password,
     },
