@@ -20,7 +20,7 @@ export const Register = async (user) => {
     url: `${baseURL}/crear_usuario`,
     data: {
       email: user.email,
-      name: user.name,
+      nombre: user.name,
       password: user.password,
     },
   };
