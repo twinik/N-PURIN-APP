@@ -49,8 +49,9 @@ const AppState = (props) => {
       const result = await Register(email, name, password);
       dispatch({
         type: SET_USER,
-        payload: { user_id: result },
+        payload:  result ,
       });
+      console.log("User registered", result);
     } catch (error) {
       throw error;
     }

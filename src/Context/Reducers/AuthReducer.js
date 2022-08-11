@@ -26,7 +26,7 @@ export default (state, action) => {
 
       return {
         ...state,
-        user: payload,
+        user_id: payload,
       };
     default:
       return state;

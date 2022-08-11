@@ -30,19 +30,20 @@ const Data3 = ({ route, navigation }) => {
   const handleSubmit = async (values) => {
     const formPozoPurinero = {
       ...values,
+      id_usuario:prev.formConstruccion.id_usuario
     };
     const form = {
       ...prev,
       formPozoPurinero,
     };
     console.log("formmmm", form);
-    /* try {
+    try {
       await SendForms(form);
       navigation.navigate("Login");
     } catch (error) {
       alert("Ups! Algo salió mal. Intenta de nuevo");
       console.log(error);
-    } */
+    } 
   };
 
   return (

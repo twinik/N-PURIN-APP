@@ -12,12 +12,12 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 
 const validations = Yup.object().shape({
-  sinTechar: Yup.number()
+  metros_sin_techar: Yup.number()
     .required("Ingrese una cantidad")
     .positive("Cantidad inválida")
     .integer("Cantidad inválida")
     .label("Cantidad sin techar"),
-  sinCanalizar: Yup.number()
+  metros_sin_canalizar: Yup.number()
     .required("Ingrese una cantidad")
     .positive("Cantidad inválida")
     .integer("Cantidad inválida")
@@ -30,7 +30,9 @@ const Data1 = ({ route, navigation }) => {
   const handleSubmit = (values) => {
     const formConstruccion = {
       ...values,
+      id_usuario:prev.formSalaOrdena.id_usuario
     };
+    console.log("form2", formConstruccion);
     navigation.navigate("Data2", {
       ...prev,
       formConstruccion,

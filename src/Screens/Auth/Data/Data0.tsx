@@ -14,23 +14,23 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 
 const validations = Yup.object().shape({
-  ubicacion: Yup.string()
+  id_ubicacion: Yup.string()
     .required("Seleccione una ubicación")
     .label("Ubicación"),
-  estanque: Yup.number()
+    capacidad_estanque: Yup.number()
     .required("Ingrese una capacidad")
     .positive("Cantidad inválida")
     .integer("Cantidad inválida")
     .label("Capacidad del estanque"),
-  equipos: Yup.number()
+    unidades_equipo_ordena: Yup.number()
     .required("Ingrese número de unidades")
     .positive("Cantidad inválida")
     .integer("Cantidad inválida")
     .label("Unidades del equipo de ordeña"),
-  sistLimpieza: Yup.string()
+    id_sistema_limpieza: Yup.string()
     .required("Seleccione un sistema de limpieza")
     .label("Sistema de limpieza"),
-  solidos: Yup.string()
+    id_separacion_solidos: Yup.string()
     .required("Seleccione separación de solidos")
     .label("Separación de solidos"),
 });
@@ -40,17 +40,17 @@ const Capitalize = (str) => {
 };
 
 const Data0 = ({ route, navigation }) => {
-  const { FunctionalData } = useContext(AppContext);
+  const { FunctionalData, User_ID  } = useContext(AppContext);
   const { drop_ubicaciones, drop_sistLimpieza, drop_sepSolidos } =
     FunctionalData;
-  const prev = route.params;
-  const id = prev.id;
 
   const handleSubmit = (values) => {
     //console.log("id: ", id);
     const formSalaOrdena = {
       ...values,
+      id_usuario: User_ID,
     };
+    console.log("formSalaOrdena: ", formSalaOrdena);
     navigation.navigate("Data1", {
       formSalaOrdena,
     });

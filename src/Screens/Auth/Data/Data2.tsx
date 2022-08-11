@@ -14,12 +14,14 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 
 const validations = Yup.object().shape({
-  nVacas: Yup.number()
+  num_vacas: Yup.number()
     .required("Ingrese una cantidad")
     .positive("Cantidad inválida")
     .integer("Cantidad inválida"),
-  alimentacion: Yup.string().required("Seleccione un tipo de alimentación"),
-  confinamiento: Yup.number()
+  id_tipo_alimentacion: Yup.string().required(
+    "Seleccione un tipo de alimentación"
+  ),
+  horas_confinamiento: Yup.number()
     .required("Ingrese una cantidad")
     .positive("Cantidad inválida")
     .integer("Cantidad inválida"),
@@ -34,6 +36,7 @@ const Data2 = ({ route, navigation }) => {
   const handleSubmit = (values) => {
     const formVacaOrdena = {
       ...values,
+      id_usuario:prev.formConstruccion.id_usuario
     };
     console.log("form3", {
       ...prev,
