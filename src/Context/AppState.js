@@ -17,7 +17,7 @@ import {
 } from "../Services/forms";
 const AppState = (props) => {
   const initialState = {
-    data: { token: null, user: null },
+    data: { token: null, user_id: null },
     functionalData: {
       drop_ubicaciones: [],
       drop_alimentacion: [],
@@ -44,9 +44,13 @@ const AppState = (props) => {
     }
   };
 
-  const SignUp = (email, name, password) => {
+  const SignUp = async (email, name, password) => {
     try {
-      Register(email, name, password);
+      const result = await Register(email, name, password);
+      dispatch({
+        type: SET_USER,
+        payload: { user_id: result },
+      });
     } catch (error) {
       throw error;
     }
@@ -98,7 +102,7 @@ const AppState = (props) => {
   return (
     <AppContext.Provider
       value={{
-        User: state.data.user,
+        User_ID: state.data.user_id,
         SignIn,
         SignUp,
         InitializeDropdowns,

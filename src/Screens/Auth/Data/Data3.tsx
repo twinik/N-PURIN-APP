@@ -31,14 +31,18 @@ const Data3 = ({ route, navigation }) => {
     const formPozoPurinero = {
       ...values,
     };
-
-    try {
-      await SendForms({ ...prev, formPozoPurinero });
+    const form = {
+      ...prev,
+      formPozoPurinero,
+    };
+    console.log("formmmm", form);
+    /* try {
+      await SendForms(form);
       navigation.navigate("Login");
     } catch (error) {
-      alert("Ups! Algo salió mal");
+      alert("Ups! Algo salió mal. Intenta de nuevo");
       console.log(error);
-    }
+    } */
   };
 
   return (

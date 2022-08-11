@@ -31,7 +31,7 @@ const validations = Yup.object().shape({
     .required("Seleccione un sistema de limpieza")
     .label("Sistema de limpieza"),
   solidos: Yup.string()
-    .required("Seleccione un tipo de separación de solidos")
+    .required("Seleccione separación de solidos")
     .label("Separación de solidos"),
 });
 
@@ -43,12 +43,14 @@ const Data0 = ({ route, navigation }) => {
   const { FunctionalData } = useContext(AppContext);
   const { drop_ubicaciones, drop_sistLimpieza, drop_sepSolidos } =
     FunctionalData;
+  const prev = route.params;
+  const id = prev.id;
 
   const handleSubmit = (values) => {
+    //console.log("id: ", id);
     const formSalaOrdena = {
       ...values,
     };
-
     navigation.navigate("Data1", {
       formSalaOrdena,
     });
@@ -57,11 +59,11 @@ const Data0 = ({ route, navigation }) => {
   return (
     <Formik
       initialValues={{
-        ubicacion: "",
-        estanque: "",
-        equipos: "",
-        sistLimpieza: "",
-        solidos: "",
+        id_ubicacion: "",
+        capacidad_estanque: "",
+        unidades_equipo_ordena: "",
+        id_sistema_limpieza: "",
+        id_separacion_solidos: "",
       }}
       onSubmit={(values) => handleSubmit(values)}
       validationSchema={validations}
@@ -111,9 +113,9 @@ const Data0 = ({ route, navigation }) => {
 
                     <RNPickerSelect
                       onValueChange={(value) =>
-                        setFieldValue("ubicacion", value)
+                        setFieldValue("id_ubicacion", value)
                       }
-                      value={values.ubicacion}
+                      value={values.id_ubicacion}
                       useNativeAndroidPickerStyle={true}
                       fixAndroidTouchableBug={true}
                       doneText="Aceptar"
@@ -127,9 +129,9 @@ const Data0 = ({ route, navigation }) => {
                       }))}
                     />
                   </View>
-                  {errors.ubicacion && touched.ubicacion && (
+                  {errors.id_ubicacion && touched.id_ubicacion && (
                     <AppText
-                      text={errors.ubicacion}
+                      text={errors.id_ubicacion}
                       fontStyle="Regular"
                       style={styles.errorText}
                     />
@@ -138,17 +140,17 @@ const Data0 = ({ route, navigation }) => {
                   <TextInput
                     placeholder="Ingrese capacidad en lt(s) del estanque de leche"
                     label={"Capacidad del estanque"}
-                    onChangeText={handleChange("estanque")}
-                    onBlur={handleBlur("estanque")}
-                    value={values.estanque.toString()}
+                    onChangeText={handleChange("capacidad_estanque")}
+                    onBlur={handleBlur("capacidad_estanque")}
+                    value={values.capacidad_estanque.toString()}
                     keyboardType="numeric"
                     keyboardAppearance="dark"
                     returnKeyType="next"
                     returnKeyLabel="next"
                   />
-                  {errors.estanque && touched.estanque && (
+                  {errors.capacidad_estanque && touched.capacidad_estanque && (
                     <AppText
-                      text={errors.estanque}
+                      text={errors.capacidad_estanque}
                       fontStyle="Regular"
                       style={styles.errorText}
                     />
@@ -157,21 +159,22 @@ const Data0 = ({ route, navigation }) => {
                   <TextInput
                     placeholder="Ingrese el numero de equipos de ordeña"
                     label={"Unidades del equipo de ordeña"}
-                    onChangeText={handleChange("equipos")}
-                    onBlur={handleBlur("equipos")}
-                    value={values.equipos.toString()}
+                    onChangeText={handleChange("unidades_equipo_ordena")}
+                    onBlur={handleBlur("unidades_equipo_ordena")}
+                    value={values.unidades_equipo_ordena.toString()}
                     keyboardType="numeric"
                     keyboardAppearance="dark"
                     returnKeyType="next"
                     returnKeyLabel="next"
                   />
-                  {errors.equipos && touched.equipos && (
-                    <AppText
-                      text={errors.equipos}
-                      fontStyle="Regular"
-                      style={styles.errorText}
-                    />
-                  )}
+                  {errors.unidades_equipo_ordena &&
+                    touched.unidades_equipo_ordena && (
+                      <AppText
+                        text={errors.unidades_equipo_ordena}
+                        fontStyle="Regular"
+                        style={styles.errorText}
+                      />
+                    )}
 
                   <View style={styles.input_box}>
                     <AppText
@@ -181,9 +184,9 @@ const Data0 = ({ route, navigation }) => {
                     />
                     <RNPickerSelect
                       onValueChange={(value) =>
-                        setFieldValue("sistLimpieza", value)
+                        setFieldValue("id_sistema_limpieza", value)
                       }
-                      value={values.sistLimpieza}
+                      value={values.id_sistema_limpieza}
                       useNativeAndroidPickerStyle={true}
                       fixAndroidTouchableBug={true}
                       doneText="Aceptar"
@@ -203,13 +206,14 @@ const Data0 = ({ route, navigation }) => {
                       )}
                     />
                   </View>
-                  {errors.sistLimpieza && touched.sistLimpieza && (
-                    <AppText
-                      text={errors.sistLimpieza}
-                      fontStyle="Regular"
-                      style={styles.errorText}
-                    />
-                  )}
+                  {errors.id_sistema_limpieza &&
+                    touched.id_sistema_limpieza && (
+                      <AppText
+                        text={errors.id_sistema_limpieza}
+                        fontStyle="Regular"
+                        style={styles.errorText}
+                      />
+                    )}
 
                   <View style={styles.input_box}>
                     <AppText
@@ -218,8 +222,10 @@ const Data0 = ({ route, navigation }) => {
                       fontStyle="Regular"
                     />
                     <RNPickerSelect
-                      onValueChange={(value) => setFieldValue("solidos", value)}
-                      value={values.solidos}
+                      onValueChange={(value) =>
+                        setFieldValue("id_separacion_solidos", value)
+                      }
+                      value={values.id_separacion_solidos}
                       useNativeAndroidPickerStyle={true}
                       fixAndroidTouchableBug={true}
                       doneText="Aceptar"
@@ -233,13 +239,14 @@ const Data0 = ({ route, navigation }) => {
                       }))}
                     />
                   </View>
-                  {errors.solidos && touched.solidos && (
-                    <AppText
-                      text={errors.solidos}
-                      fontStyle="Regular"
-                      style={styles.errorText}
-                    />
-                  )}
+                  {errors.id_separacion_solidos &&
+                    touched.id_separacion_solidos && (
+                      <AppText
+                        text={errors.id_separacion_solidos}
+                        fontStyle="Regular"
+                        style={styles.errorText}
+                      />
+                    )}
                 </View>
 
                 <View style={styles.btn_box}>

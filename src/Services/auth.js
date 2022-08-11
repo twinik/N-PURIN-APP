@@ -21,5 +21,21 @@ export const Register = async (user) => {
       nombre: user.name,
       password: user.password,
     });
+    return response.data;
   } catch (error) {}
 };
+
+/* export const Register = async (user) => {
+  const configurationObject = {
+    method: "post",
+    url: `${baseURL}/crear_usuario`,
+    data: {
+      email: user.email,
+      nombre: user.name,
+      password: user.password,
+    },
+  };
+  const response = await axios(configurationObject);
+  console.log("User registered", response.data);
+    return response.data;
+}; */

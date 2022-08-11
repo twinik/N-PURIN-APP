@@ -4,7 +4,7 @@ const baseURL = "https://conectamilk-npurin.herokuapp.com";
 export const Ubicaciones = async () => {
   try {
     const configurationObject = {
-      method: "post",
+      method: "get",
       url: `${baseURL}/dropdown_ubicacion`,
     };
     const response = await axios(configurationObject);
@@ -17,7 +17,7 @@ export const Ubicaciones = async () => {
 export const SistemaLimpieza = async () => {
   try {
     const configurationObject = {
-      method: "post",
+      method: "get",
       url: `${baseURL}/dropdown_sistema_limpieza`,
     };
     const response = await axios(configurationObject);
@@ -30,7 +30,7 @@ export const SistemaLimpieza = async () => {
 export const SeparacionSolidos = async () => {
   try {
     const configurationObject = {
-      method: "post",
+      method: "get",
       url: `${baseURL}/dropdown_separacion_solidos`,
     };
     const response = await axios(configurationObject);
@@ -43,7 +43,7 @@ export const SeparacionSolidos = async () => {
 export const Alimentacion = async () => {
   try {
     const configurationObject = {
-      method: "post",
+      method: "get",
       url: `${baseURL}/dropdown_alimentacion`,
     };
     const response = await axios(configurationObject);

@@ -35,7 +35,10 @@ const Data2 = ({ route, navigation }) => {
     const formVacaOrdena = {
       ...values,
     };
-
+    console.log("form3", {
+      ...prev,
+      formVacaOrdena,
+    });
     navigation.navigate("Data3", {
       ...prev,
       formVacaOrdena,
@@ -44,9 +47,9 @@ const Data2 = ({ route, navigation }) => {
   return (
     <Formik
       initialValues={{
-        nVacas: "",
-        alimentacion: "",
-        confinamiento: "",
+        num_vacas: "",
+        id_tipo_alimentacion: "",
+        horas_confinamiento: "",
       }}
       onSubmit={(values) => handleSubmit(values)}
       validationSchema={validations}
@@ -89,17 +92,17 @@ const Data2 = ({ route, navigation }) => {
                 <TextInput
                   placeholder="Ingrese canitdad de vacas"
                   label={"N° de vacas"}
-                  onChangeText={handleChange("nVacas")}
-                  onBlur={handleBlur("nVacas")}
-                  value={values.nVacas.toString()}
+                  onChangeText={handleChange("num_vacas")}
+                  onBlur={handleBlur("num_vacas")}
+                  value={values.num_vacas.toString()}
                   keyboardType="numeric"
                   keyboardAppearance="dark"
                   returnKeyType="next"
                   returnKeyLabel="next"
                 />
-                {errors.nVacas && touched.nVacas && (
+                {errors.num_vacas && touched.num_vacas && (
                   <AppText
-                    text={errors.nVacas}
+                    text={errors.num_vacas}
                     fontStyle="Regular"
                     style={styles.errorText}
                   />
@@ -113,9 +116,9 @@ const Data2 = ({ route, navigation }) => {
                   />
                   <RNPickerSelect
                     onValueChange={(value) =>
-                      setFieldValue("alimentacion", value)
+                      setFieldValue("id_tipo_alimentacion", value)
                     }
-                    value={values.alimentacion}
+                    value={values.id_tipo_alimentacion}
                     useNativeAndroidPickerStyle={true}
                     fixAndroidTouchableBug={true}
                     doneText="Aceptar"
@@ -129,28 +132,29 @@ const Data2 = ({ route, navigation }) => {
                     }))}
                   />
                 </View>
-                {errors.alimentacion && touched.alimentacion && (
-                  <AppText
-                    text={errors.alimentacion}
-                    fontStyle="Regular"
-                    style={styles.errorText}
-                  />
-                )}
+                {errors.id_tipo_alimentacion &&
+                  touched.id_tipo_alimentacion && (
+                    <AppText
+                      text={errors.id_tipo_alimentacion}
+                      fontStyle="Regular"
+                      style={styles.errorText}
+                    />
+                  )}
 
                 <TextInput
                   placeholder="Ingrese canitdad horas"
                   label={"Horas de confinamiento"}
-                  onChangeText={handleChange("confinamiento")}
-                  onBlur={handleBlur("confinamiento")}
-                  value={values.confinamiento.toString()}
+                  onChangeText={handleChange("horas_confinamiento")}
+                  onBlur={handleBlur("horas_confinamiento")}
+                  value={values.horas_confinamiento.toString()}
                   keyboardType="numeric"
                   keyboardAppearance="dark"
                   returnKeyType="next"
                   returnKeyLabel="next"
                 />
-                {errors.confinamiento && touched.confinamiento && (
+                {errors.horas_confinamiento && touched.horas_confinamiento && (
                   <AppText
-                    text={errors.confinamiento}
+                    text={errors.horas_confinamiento}
                     fontStyle="Regular"
                     style={styles.errorText}
                   />

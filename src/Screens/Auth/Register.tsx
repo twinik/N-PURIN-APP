@@ -46,7 +46,7 @@ const validations = Yup.object().shape({
 });
 
 const Register = ({ navigation }) => {
-  const { SignUp, InitializeDropdowns } = useContext(AppContext);
+  const { SignUp, InitializeDropdowns, User_ID } = useContext(AppContext);
 
   useEffect(() => {
     try {
@@ -65,19 +65,19 @@ const Register = ({ navigation }) => {
   };
 
   const handleSubmit = async (values) => {
-    const User = {
+    const user = {
       email: values.email,
       name: values.name,
       password: values.password,
       //password: await cryptoPassword(values.password),
     };
 
-    console.log("User: ", { User });
+    console.log(user);
 
     try {
-      await SignUp(User);
+      await SignUp(user);
       console.log("Usuario cargado");
-      navigation.navigate("Data0", { User });
+      navigation.navigate("Data0", { user, id: User_ID });
     } catch (error) {
       alert("No se ha podido registrar el usuario");
     }

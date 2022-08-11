@@ -31,7 +31,6 @@ const Data1 = ({ route, navigation }) => {
     const formConstruccion = {
       ...values,
     };
-
     navigation.navigate("Data2", {
       ...prev,
       formConstruccion,
@@ -40,8 +39,8 @@ const Data1 = ({ route, navigation }) => {
   return (
     <Formik
       initialValues={{
-        sinTechar: "",
-        sinCanalizar: "",
+        metros_sin_techar: "",
+        metros_sin_canalizar: "",
       }}
       onSubmit={(values) => handleSubmit(values)}
       validationSchema={validations}
@@ -84,17 +83,17 @@ const Data1 = ({ route, navigation }) => {
                 <TextInput
                   placeholder="Ingrese canitdad de metros cuadrados sin techar"
                   label={"Construcciones sin techar"}
-                  onChangeText={handleChange("sinTechar")}
-                  onBlur={handleBlur("sinTechar")}
-                  value={values.sinTechar.toString()}
+                  onChangeText={handleChange("metros_sin_techar")}
+                  onBlur={handleBlur("metros_sin_techar")}
+                  value={values.metros_sin_techar.toString()}
                   keyboardType="numeric"
                   keyboardAppearance="dark"
                   returnKeyType="next"
                   returnKeyLabel="next"
                 />
-                {errors.sinTechar && touched.sinTechar && (
+                {errors.metros_sin_techar && touched.metros_sin_techar && (
                   <AppText
-                    text={errors.sinTechar}
+                    text={errors.metros_sin_techar}
                     fontStyle="Regular"
                     style={styles.errorText}
                   />
@@ -103,21 +102,22 @@ const Data1 = ({ route, navigation }) => {
                 <TextInput
                   placeholder="Ingrese canitdad de metros cuadrados sin canalizar"
                   label={"Construcciones sin canalizar"}
-                  onChangeText={handleChange("sinCanalizar")}
-                  onBlur={handleBlur("sinCanalizar")}
-                  value={values.sinCanalizar.toString()}
+                  onChangeText={handleChange("metros_sin_canalizar")}
+                  onBlur={handleBlur("metros_sin_canalizar")}
+                  value={values.metros_sin_canalizar.toString()}
                   keyboardType="numeric"
                   keyboardAppearance="dark"
                   returnKeyType="next"
                   returnKeyLabel="next"
                 />
-                {errors.sinCanalizar && touched.sinCanalizar && (
-                  <AppText
-                    text={errors.sinCanalizar}
-                    fontStyle="Regular"
-                    style={styles.errorText}
-                  />
-                )}
+                {errors.metros_sin_canalizar &&
+                  touched.metros_sin_canalizar && (
+                    <AppText
+                      text={errors.metros_sin_canalizar}
+                      fontStyle="Regular"
+                      style={styles.errorText}
+                    />
+                  )}
               </View>
 
               <View style={styles.btn_box}>
