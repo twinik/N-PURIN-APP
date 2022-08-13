@@ -1,4 +1,4 @@
-import { DELETE_TOKEN, SET_TOKEN, RESET, SET_USER } from "../types";
+import { DELETE_TOKEN, SET_TOKEN, RESET, SET_USER, SET_FORM } from "../types";
 
 export default (state, action) => {
   const { payload, type } = action;
@@ -27,6 +27,13 @@ export default (state, action) => {
       return {
         ...state,
         user_id: payload,
+      };
+      case SET_FORM:
+      console.log("Set_FORM");
+
+      return {
+        ...state,
+        form_completed: payload,
       };
     default:
       return state;

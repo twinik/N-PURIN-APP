@@ -46,7 +46,7 @@ const validations = Yup.object().shape({
 });
 
 const Register = ({ navigation }) => {
-  const { SignUp, InitializeDropdowns} = useContext(AppContext);
+  const { SignUp, InitializeDropdowns } = useContext(AppContext);
 
   useEffect(() => {
     try {
@@ -68,8 +68,7 @@ const Register = ({ navigation }) => {
     const user = {
       email: values.email,
       name: values.name,
-      password: values.password,
-      //password: await cryptoPassword(values.password),
+      password: await cryptoPassword(values.password),
     };
 
     console.log(user);

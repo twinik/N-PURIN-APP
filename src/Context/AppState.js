@@ -1,6 +1,6 @@
 import React, { useReducer, useState, useEffect } from "react";
 import AppContext from "./AppContext";
-import { SET_TOKEN, SET_USER, ADD_USER, SET_FUNCTIONAL_DATA } from "./types";
+import { SET_TOKEN, SET_USER, SET_FORM, SET_FUNCTIONAL_DATA } from "./types";
 import { rootReducer } from "./Reducers";
 import { Login, Register } from "../Services/auth";
 import {
@@ -14,10 +14,11 @@ import {
   setConstruccion,
   setVacaOrdena,
   setPozoPurinero,
+  setCompletedForms
 } from "../Services/forms";
 const AppState = (props) => {
   const initialState = {
-    data: { token: null, user_id: null },
+    data: { token: null, user_id: null, form_completed: null },
     functionalData: {
       drop_ubicaciones: [],
       drop_alimentacion: [],
@@ -35,9 +36,14 @@ const AppState = (props) => {
         type: SET_TOKEN,
         payload: "id",
       });
+      console.log(result);
       dispatch({
         type: SET_USER,
-        payload: result,
+        payload: result[0].id_usuario,
+      });
+      dispatch({
+        type: SET_FORM,
+        payload: result[0].form_completado,
       });
     } catch (error) {
       throw error;
@@ -51,7 +57,6 @@ const AppState = (props) => {
         type: SET_USER,
         payload:  result ,
       });
-      console.log("User registered", result);
     } catch (error) {
       throw error;
     }
@@ -92,8 +97,14 @@ const AppState = (props) => {
       setVacaOrdena(formVacaOrdena),
       setPozoPurinero(formPozoPurinero),
     ])
-      .then(() => {
+      .then(async () => {
         console.log("Forms sent");
+        try {
+          await setCompletedForms(state.data.user_id)
+        }
+        catch (error) {
+          throw error;
+        }
       })
       .catch((error) => {
         throw error;
@@ -104,6 +115,7 @@ const AppState = (props) => {
     <AppContext.Provider
       value={{
         User_ID: state.data.user_id,
+        Form_completed: state.data.form_completed,
         SignIn,
         SignUp,
         InitializeDropdowns,

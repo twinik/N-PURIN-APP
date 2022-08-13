@@ -11,7 +11,7 @@ export const Login = async (email, password) => {
     },
   };
   const response = await axios(configurationObject);
-  console.log("Login success", response.data);
+  return response.data;
 };
 
 export const Register = async (user) => {
@@ -20,6 +20,7 @@ export const Register = async (user) => {
       email: user.email,
       nombre: user.name,
       password: user.password,
+      form_completado: 0,
     });
     return response.data;
   } catch (error) {}

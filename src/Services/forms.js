@@ -60,3 +60,20 @@ export const setPozoPurinero = async (data) => {
     throw error;
   }
 };
+
+
+export const setCompletedForms = async (idUsuario) => {
+  try {
+    const configurationObject = {
+      method: "post",
+      url: `${baseURL}/form_completado`,
+      data: {
+        form_completado: 1,
+        id_usuario: idUsuario,
+      },
+    };
+    const response = await axios(configurationObject);
+  } catch (error) {
+    throw error;
+  }
+};
