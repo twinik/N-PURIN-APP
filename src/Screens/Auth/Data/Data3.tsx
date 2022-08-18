@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ToastAndroid } from "react-native";
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
 import Container from "../../../Components/Container";
+import { theme } from "../../../theme";
 import TextInput from "../../../Components/TextInput.js";
 import AppContext from "../../../Context/AppContext";
 import Button from "../../../Components/Button";
@@ -27,6 +28,10 @@ const Data3 = ({ route, navigation }) => {
   const { SendForms } = useContext(AppContext);
   const prev = route.params;
 
+  function showToast() {
+    ToastAndroid.show("Usuario registrado exitosamente", ToastAndroid.SHORT);
+  }
+
   const handleSubmit = async (values) => {
     const formPozoPurinero = {
       ...values,
@@ -39,6 +44,7 @@ const Data3 = ({ route, navigation }) => {
     console.log("formmmm", form);
     try {
       await SendForms(form);
+      showToast();
       navigation.navigate("Login");
     } catch (error) {
       alert("Ups! Algo salió mal. Intenta de nuevo");
@@ -192,7 +198,7 @@ const styles = StyleSheet.create({
   },
   inputLabel: {
     fontSize: 16,
-    color: "#7936E4",
+    color: theme.colors.green,
   },
   input: {
     height: 40,

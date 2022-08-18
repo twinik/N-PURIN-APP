@@ -5,6 +5,7 @@ import {
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
 import RNPickerSelect from "react-native-picker-select";
+import { theme } from "../../../theme";
 import AppContext from "../../../Context/AppContext";
 import Container from "../../../Components/Container";
 import TextInput from "../../../Components/TextInput.js";
@@ -316,7 +317,7 @@ const styles = StyleSheet.create({
   },
   inputLabel: {
     fontSize: 16,
-    color: "#7936E4",
+    color: theme.colors.green,
   },
   input: {
     height: 40,

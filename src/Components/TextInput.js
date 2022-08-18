@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     height: hp(5),
   },
   label: {
-    color: theme.colors.primary,
+    color: theme.colors.green,
     fontSize: theme.sizes.fifteen,
     marginTop: hp(2),
   },

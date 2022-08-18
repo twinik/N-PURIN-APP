@@ -194,10 +194,10 @@ const Register = ({ navigation }) => {
                 <BouncyCheckbox
                   isChecked={values.acceptTerms}
                   size={20}
-                  fillColor={theme.colors.primary}
+                  fillColor={theme.colors.green}
                   unfillColor="#FFFFFF"
                   text="Acepto los términos del servicio y póliza de seguridad"
-                  iconStyle={{ borderColor: theme.colors.primary }}
+                  iconStyle={{ borderColor: theme.colors.green }}
                   textStyle={[
                     styles.checkBoxText,
                     { /* fontFamily: "Main", */ textDecorationLine: "none" },
@@ -284,7 +284,7 @@ const styles = StyleSheet.create({
     fontSize: hp(2),
   },
   accountCreate: {
-    color: theme.colors.primary,
+    color: theme.colors.green,
     fontSize: hp(2),
   },
   checkBoxText: {

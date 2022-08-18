@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     fontSize: theme.sizes.fourteen,
   },
   label: {
-    color: theme.colors.primary,
+    color: theme.colors.green,
     fontSize: theme.sizes.fourteen,
     marginTop: hp(2),
   },

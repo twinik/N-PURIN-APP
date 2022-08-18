@@ -18,5 +18,6 @@ export default function button({ label, style = {}, onPress }) {
 const styles = StyleSheet.create({
   button: {
     width: wp(70),
+    backgroundColor: theme.colors.green,
   },
 });

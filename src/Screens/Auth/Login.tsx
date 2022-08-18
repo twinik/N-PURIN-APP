@@ -1,5 +1,11 @@
 import React, { useContext } from "react";
-import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  TouchableOpacity,
+  ToastAndroid,
+} from "react-native";
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -20,6 +26,10 @@ const validations = Yup.object().shape({
     .required("La contraseña es requerida")
     .label("Contraseña"),
 });
+
+function showToast() {
+  ToastAndroid.show("Olvide mi contraseña", ToastAndroid.SHORT);
+}
 
 const Login = ({ navigation, route }) => {
   const { SignIn } = useContext(AppContext);
@@ -57,7 +67,7 @@ const Login = ({ navigation, route }) => {
           <View style={styles.container}>
             <Image
               style={styles.logo}
-              source={require("../../../assets/logo.png")}
+              source={require("../../../assets/npurin.png")}
             />
             <View style={styles.form}>
               <AppText
@@ -116,11 +126,14 @@ const Login = ({ navigation, route }) => {
               onPress={handleSubmit}
             />
             <View style={styles.row}>
-              <AppText
-                style={styles.forgetText}
-                text={"Olvide mi contraseña"}
-                fontStyle="Regular"
-              />
+              <TouchableOpacity onPress={showToast}>
+                <AppText
+                  style={styles.forgetText}
+                  text={"Olvide mi contraseña"}
+                  fontStyle="Regular"
+                />
+              </TouchableOpacity>
+
               <TouchableOpacity onPress={() => navigation.navigate("Register")}>
                 <AppText
                   style={styles.accountCreate}
@@ -177,7 +190,7 @@ const styles = StyleSheet.create({
     color: theme.colors.secondary,
   },
   accountCreate: {
-    color: theme.colors.primary,
+    color: theme.colors.green,
   },
   errorText: {
     color: "red",
