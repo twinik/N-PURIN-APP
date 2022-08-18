@@ -29,7 +29,7 @@ const Data3 = ({ route, navigation }) => {
   const prev = route.params;
 
   function showToast() {
-    ToastAndroid.show("Usuario registrado exitosamente", ToastAndroid.SHORT);
+    ToastAndroid.show("Registrado correctamente", ToastAndroid.SHORT);
   }
 
   const handleSubmit = async (values) => {

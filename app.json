@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "Conecta Milk",
-    "slug": "conectaMilk",
-    "version": "1.0.0",
+    "name": "N-Purin",
+    "slug": "npurin",
+    "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/iconpurin.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -22,10 +22,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
+        "foregroundImage": "./assets/iconpurin.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.conectamilk"
+      "package": "com.npurin"
     },
     "web": {
       "favicon": "./assets/favicon.png"

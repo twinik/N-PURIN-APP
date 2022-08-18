@@ -61,7 +61,6 @@ export const setPozoPurinero = async (data) => {
   }
 };
 
-
 export const setCompletedForms = async (idUsuario) => {
   try {
     const configurationObject = {
