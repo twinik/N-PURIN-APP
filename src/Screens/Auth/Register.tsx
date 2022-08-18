@@ -68,7 +68,8 @@ const Register = ({ navigation }) => {
     const user = {
       email: values.email,
       name: values.name,
-      password: await cryptoPassword(values.password),
+      password: values.password,
+      //password: await cryptoPassword(values.password),
     };
 
     console.log(user);
@@ -195,7 +196,7 @@ const Register = ({ navigation }) => {
                   size={20}
                   fillColor={theme.colors.primary}
                   unfillColor="#FFFFFF"
-                  text="Acepto los terminos del servicio y póliza de seguridad"
+                  text="Acepto los términos del servicio y póliza de seguridad"
                   iconStyle={{ borderColor: theme.colors.primary }}
                   textStyle={[
                     styles.checkBoxText,
@@ -228,7 +229,7 @@ const Register = ({ navigation }) => {
               <TouchableOpacity onPress={() => navigation.navigate("Login")}>
                 <AppText
                   style={styles.accountCreate}
-                  text={"Iniciar Sesion"}
+                  text={"Iniciar Sesión"}
                   fontStyle="Regular"
                 />
               </TouchableOpacity>

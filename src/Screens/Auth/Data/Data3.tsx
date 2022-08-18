@@ -30,7 +30,7 @@ const Data3 = ({ route, navigation }) => {
   const handleSubmit = async (values) => {
     const formPozoPurinero = {
       ...values,
-      id_usuario:prev.formConstruccion.id_usuario
+      id_usuario: prev.formConstruccion.id_usuario,
     };
     const form = {
       ...prev,
@@ -43,7 +43,7 @@ const Data3 = ({ route, navigation }) => {
     } catch (error) {
       alert("Ups! Algo salió mal. Intenta de nuevo");
       console.log(error);
-    } 
+    }
   };
 
   return (
@@ -91,8 +91,8 @@ const Data3 = ({ route, navigation }) => {
 
               <View style={styles.form_box}>
                 <TextInput
-                  placeholder="Ingrese diametro en mt(s)"
-                  label={"Diametro"}
+                  placeholder="Ingrese diámetro en mt(s)"
+                  label={"Diámetro"}
                   onChangeText={handleChange("diametro")}
                   onBlur={handleBlur("diametro")}
                   value={values.diametro.toString()}

@@ -36,7 +36,7 @@ const Data2 = ({ route, navigation }) => {
   const handleSubmit = (values) => {
     const formVacaOrdena = {
       ...values,
-      id_usuario:prev.formConstruccion.id_usuario
+      id_usuario: prev.formConstruccion.id_usuario,
     };
     console.log("form3", {
       ...prev,
@@ -93,7 +93,7 @@ const Data2 = ({ route, navigation }) => {
 
               <View style={styles.form_box}>
                 <TextInput
-                  placeholder="Ingrese canitdad de vacas"
+                  placeholder="Ingrese cantidad de vacas"
                   label={"N° de vacas"}
                   onChangeText={handleChange("num_vacas")}
                   onBlur={handleBlur("num_vacas")}
@@ -126,7 +126,7 @@ const Data2 = ({ route, navigation }) => {
                     fixAndroidTouchableBug={true}
                     doneText="Aceptar"
                     placeholder={{
-                      label: "Seleccione un tipo de alimentacion",
+                      label: "Seleccione un tipo de alimentación",
                       value: null,
                     }}
                     items={drop_alimentacion.map(({ descripcion, id }) => ({
@@ -145,7 +145,7 @@ const Data2 = ({ route, navigation }) => {
                   )}
 
                 <TextInput
-                  placeholder="Ingrese canitdad horas"
+                  placeholder="Ingrese la cantidad horas"
                   label={"Horas de confinamiento"}
                   onChangeText={handleChange("horas_confinamiento")}
                   onBlur={handleBlur("horas_confinamiento")}

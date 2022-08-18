@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 import {
   heightPercentageToDP as hp,
@@ -17,20 +17,20 @@ const validations = Yup.object().shape({
   id_ubicacion: Yup.string()
     .required("Seleccione una ubicación")
     .label("Ubicación"),
-    capacidad_estanque: Yup.number()
+  capacidad_estanque: Yup.number()
     .required("Ingrese una capacidad")
     .positive("Cantidad inválida")
     .integer("Cantidad inválida")
     .label("Capacidad del estanque"),
-    unidades_equipo_ordena: Yup.number()
+  unidades_equipo_ordena: Yup.number()
     .required("Ingrese número de unidades")
     .positive("Cantidad inválida")
     .integer("Cantidad inválida")
     .label("Unidades del equipo de ordeña"),
-    id_sistema_limpieza: Yup.string()
+  id_sistema_limpieza: Yup.string()
     .required("Seleccione un sistema de limpieza")
     .label("Sistema de limpieza"),
-    id_separacion_solidos: Yup.string()
+  id_separacion_solidos: Yup.string()
     .required("Seleccione separación de solidos")
     .label("Separación de solidos"),
 });
@@ -40,12 +40,12 @@ const Capitalize = (str) => {
 };
 
 const Data0 = ({ route, navigation }) => {
-  const { FunctionalData, User_ID  } = useContext(AppContext);
+  const { FunctionalData, User_ID } = useContext(AppContext);
   const { drop_ubicaciones, drop_sistLimpieza, drop_sepSolidos } =
     FunctionalData;
 
   const handleSubmit = (values) => {
-    //console.log("id: ", id);
+    console.log("id: ", User_ID);
     const formSalaOrdena = {
       ...values,
       id_usuario: User_ID,
@@ -157,7 +157,7 @@ const Data0 = ({ route, navigation }) => {
                   )}
 
                   <TextInput
-                    placeholder="Ingrese el numero de equipos de ordeña"
+                    placeholder="Ingrese el número de equipos de ordeña"
                     label={"Unidades del equipo de ordeña"}
                     onChangeText={handleChange("unidades_equipo_ordena")}
                     onBlur={handleBlur("unidades_equipo_ordena")}
@@ -218,7 +218,7 @@ const Data0 = ({ route, navigation }) => {
                   <View style={styles.input_box}>
                     <AppText
                       style={styles.inputLabel}
-                      text={"Separacion de solidos"}
+                      text={"Separación de solidos"}
                       fontStyle="Regular"
                     />
                     <RNPickerSelect

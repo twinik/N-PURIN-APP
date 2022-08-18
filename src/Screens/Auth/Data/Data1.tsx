@@ -30,7 +30,7 @@ const Data1 = ({ route, navigation }) => {
   const handleSubmit = (values) => {
     const formConstruccion = {
       ...values,
-      id_usuario:prev.formSalaOrdena.id_usuario
+      id_usuario: prev.formSalaOrdena.id_usuario,
     };
     console.log("form2", formConstruccion);
     navigation.navigate("Data2", {
@@ -83,7 +83,7 @@ const Data1 = ({ route, navigation }) => {
 
               <View style={styles.form_box}>
                 <TextInput
-                  placeholder="Ingrese canitdad de metros cuadrados sin techar"
+                  placeholder="Ingrese cantidad de metros cuadrados sin techar"
                   label={"Construcciones sin techar"}
                   onChangeText={handleChange("metros_sin_techar")}
                   onBlur={handleBlur("metros_sin_techar")}
@@ -102,7 +102,7 @@ const Data1 = ({ route, navigation }) => {
                 )}
 
                 <TextInput
-                  placeholder="Ingrese canitdad de metros cuadrados sin canalizar"
+                  placeholder="Ingrese cantidad de metros cuadrados sin canalizar"
                   label={"Construcciones sin canalizar"}
                   onChangeText={handleChange("metros_sin_canalizar")}
                   onBlur={handleBlur("metros_sin_canalizar")}
