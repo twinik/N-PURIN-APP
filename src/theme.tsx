@@ -15,6 +15,7 @@ export const theme = {
     black: "#2c3e42",
     gray: "#B6B6B8",
     green: "#38b48c",
+    blue: "#072e45",
   },
   fonts: {
     ...Platform.select({

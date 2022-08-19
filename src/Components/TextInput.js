@@ -17,6 +17,7 @@ export default function textInput({ label, placeholder, ...props }) {
         style={styles.TextInput}
         label={label}
         placeholder={placeholder}
+        placeholderTextColor={"lightgray"}
         value={value}
         onChangeText={handleChange}
         {...props}
@@ -27,7 +28,7 @@ export default function textInput({ label, placeholder, ...props }) {
 
 const styles = StyleSheet.create({
   TextInput: {
-    color: theme.colors.black,
+    color: "#fff",
     fontSize: theme.sizes.fourteen,
     marginBottom: hp(1),
     borderBottomColor: theme.colors.secondary,

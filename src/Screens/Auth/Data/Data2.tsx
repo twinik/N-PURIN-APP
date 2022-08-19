@@ -78,7 +78,7 @@ const Data2 = ({ route, navigation }) => {
                     fontStyle="Regular"
                   />
                   <AppText
-                    style={{ fontSize: 22 }}
+                    style={{ fontSize: 22, color: "#fff" }}
                     text={"3/4"}
                     fontStyle="Regular"
                   />
@@ -129,6 +129,10 @@ const Data2 = ({ route, navigation }) => {
                     placeholder={{
                       label: "Seleccione un tipo de alimentación",
                       value: null,
+                    }}
+                    style={{
+                      inputAndroid: { color: "#fff" },
+                      inputIOS: { color: "#fff" },
                     }}
                     items={drop_alimentacion.map(({ descripcion, id }) => ({
                       label: descripcion,
@@ -215,10 +219,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 35,
     textTransform: "uppercase",
+    color: "#fff",
   },
   subtitle: {
     fontSize: 18,
-    color: "gray",
+    color: theme.colors.secondary,
   },
   input_box: {
     marginBottom: 10,

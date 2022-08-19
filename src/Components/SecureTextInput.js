@@ -22,6 +22,7 @@ export default function textInput({ label, placeholder, ...props }) {
           style={styles.TextInput}
           label={label}
           placeholder={placeholder}
+          placeholderTextColor={"lightgray"}
           value={value}
           onChangeText={handleChange}
           secureTextEntry={!visibility}
@@ -31,7 +32,7 @@ export default function textInput({ label, placeholder, ...props }) {
           <Feather
             name="eye"
             size={20}
-            color="black"
+            color="white"
             style={styles.icon}
             onPress={() => setVisibility(!visibility)}
           />
@@ -39,7 +40,7 @@ export default function textInput({ label, placeholder, ...props }) {
           <Feather
             name="eye-off"
             size={20}
-            color="black"
+            color="white"
             style={styles.icon}
             onPress={() => setVisibility(!visibility)}
           />
@@ -51,7 +52,7 @@ export default function textInput({ label, placeholder, ...props }) {
 
 const styles = StyleSheet.create({
   TextInput: {
-    color: theme.colors.black,
+    color: "#fff",
     fontSize: theme.sizes.fourteen,
   },
   label: {

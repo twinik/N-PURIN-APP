@@ -81,7 +81,7 @@ const Data3 = ({ route, navigation }) => {
                     fontStyle="Regular"
                   />
                   <AppText
-                    style={{ fontSize: 22 }}
+                    style={{ fontSize: 22, color: "#fff" }}
                     text={"4/4"}
                     fontStyle="Regular"
                   />
@@ -185,10 +185,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 35,
     textTransform: "uppercase",
+    color: "#fff",
   },
   subtitle: {
     fontSize: 18,
-    color: "gray",
+    color: theme.colors.secondary,
   },
   input_box: {
     marginBottom: 10,

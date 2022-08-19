@@ -170,10 +170,11 @@ const styles = StyleSheet.create({
   title: {
     textAlign: "left",
     fontSize: hp(4),
+    color: "#fff",
   },
   subtitle: {
     fontSize: 15,
-    color: "gray",
+    color: theme.colors.secondary,
   },
   row: {
     flexDirection: "row",

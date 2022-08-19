@@ -263,10 +263,11 @@ const styles = StyleSheet.create({
     textAlign: "left",
     fontSize: hp(4),
     marginBottom: hp(2),
+    color: "#fff",
   },
   subtitle: {
     fontSize: 15,
-    color: "gray",
+    color: theme.colors.secondary,
   },
   row: {
     flexDirection: "row",

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView, Platform } from "react-native";
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -90,7 +90,7 @@ const Data0 = ({ route, navigation }) => {
                       fontStyle="Regular"
                     />
                     <AppText
-                      style={{ fontSize: 22 }}
+                      style={{ fontSize: 22, color: "#fff" }}
                       text={"1/4"}
                       fontStyle="Regular"
                     />
@@ -120,6 +120,10 @@ const Data0 = ({ route, navigation }) => {
                       useNativeAndroidPickerStyle={true}
                       fixAndroidTouchableBug={true}
                       doneText="Aceptar"
+                      style={{
+                        inputAndroid: { color: "#fff" },
+                        inputIOS: { color: "#fff" },
+                      }}
                       placeholder={{
                         label: "Seleccione una comuna",
                         value: null,
@@ -195,6 +199,10 @@ const Data0 = ({ route, navigation }) => {
                         label: "Seleccione un sistema de limpieza",
                         value: null,
                       }}
+                      style={{
+                        inputAndroid: { color: "#fff" },
+                        inputIOS: { color: "#fff" },
+                      }}
                       items={drop_sistLimpieza.map(
                         ({ descripcion, id, porcentaje_eficiencia }) => ({
                           label:
@@ -233,6 +241,10 @@ const Data0 = ({ route, navigation }) => {
                       placeholder={{
                         label: "Seleccione separación de solidos",
                         value: null,
+                      }}
+                      style={{
+                        inputAndroid: { color: "#fff" },
+                        inputIOS: { color: "#fff" },
                       }}
                       items={drop_sepSolidos.map(({ descripcion, id }) => ({
                         label: descripcion,
@@ -304,10 +316,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 35,
     textTransform: "uppercase",
+    color: "#fff",
   },
   subtitle: {
     fontSize: 18,
-    color: "gray",
+    color: theme.colors.secondary,
   },
   input_box: {
     marginBottom: 10,
