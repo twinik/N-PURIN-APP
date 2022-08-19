@@ -162,8 +162,8 @@ const styles = StyleSheet.create({
     height: hp(40),
   },
   logo: {
-    width: wp(60),
-    height: hp(24),
+    width: wp(85),
+    height: hp(25),
     marginBottom: hp(2),
     resizeMode: "contain",
   },
