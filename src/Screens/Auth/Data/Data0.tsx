@@ -120,10 +120,7 @@ const Data0 = ({ route, navigation }) => {
                       useNativeAndroidPickerStyle={true}
                       fixAndroidTouchableBug={true}
                       doneText="Aceptar"
-                      style={{
-                        inputAndroid: { color: "#fff" },
-                        inputIOS: { color: "#fff" },
-                      }}
+                      style={PickerStyles}
                       placeholder={{
                         label: "Seleccione una comuna",
                         value: null,
@@ -199,10 +196,7 @@ const Data0 = ({ route, navigation }) => {
                         label: "Seleccione un sistema de limpieza",
                         value: null,
                       }}
-                      style={{
-                        inputAndroid: { color: "#fff" },
-                        inputIOS: { color: "#fff" },
-                      }}
+                      style={PickerStyles}
                       items={drop_sistLimpieza.map(
                         ({ descripcion, id, porcentaje_eficiencia }) => ({
                           label:
@@ -242,10 +236,7 @@ const Data0 = ({ route, navigation }) => {
                         label: "Seleccione separación de solidos",
                         value: null,
                       }}
-                      style={{
-                        inputAndroid: { color: "#fff" },
-                        inputIOS: { color: "#fff" },
-                      }}
+                      style={PickerStyles}
                       items={drop_sepSolidos.map(({ descripcion, id }) => ({
                         label: descripcion,
                         value: id,
@@ -342,5 +333,21 @@ const styles = StyleSheet.create({
   errorText: {
     color: "red",
     fontSize: hp(1.5),
+  },
+});
+
+const PickerStyles = StyleSheet.create({
+  inputIOS: {
+    marginLeft: -6.5,
+    color: "white",
+    paddingRight: 30,
+  },
+  inputAndroid: {
+    marginLeft: -6.5,
+    color: "white",
+    paddingRight: 30,
+  },
+  placeholder: {
+    color: "lightgray",
   },
 });

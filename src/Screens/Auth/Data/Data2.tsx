@@ -130,10 +130,7 @@ const Data2 = ({ route, navigation }) => {
                       label: "Seleccione un tipo de alimentación",
                       value: null,
                     }}
-                    style={{
-                      inputAndroid: { color: "#fff" },
-                      inputIOS: { color: "#fff" },
-                    }}
+                    style={PickerStyles}
                     items={drop_alimentacion.map(({ descripcion, id }) => ({
                       label: descripcion,
                       value: id,
@@ -245,5 +242,21 @@ const styles = StyleSheet.create({
   errorText: {
     color: "red",
     fontSize: hp(1.5),
+  },
+});
+
+const PickerStyles = StyleSheet.create({
+  inputIOS: {
+    marginLeft: -6.5,
+    color: "white",
+    paddingRight: 30,
+  },
+  inputAndroid: {
+    marginLeft: -6.5,
+    color: "white",
+    paddingRight: 30,
+  },
+  placeholder: {
+    color: "lightgray",
   },
 });
