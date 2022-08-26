@@ -97,7 +97,7 @@ const Data3 = ({ route, navigation }) => {
 
               <View style={styles.form_box}>
                 <TextInput
-                  placeholder="Ingrese diámetro en mt(s)"
+                  placeholder="Ingrese diámetro en metros"
                   label={"Diámetro"}
                   onChangeText={handleChange("diametro")}
                   onBlur={handleBlur("diametro")}
@@ -116,7 +116,7 @@ const Data3 = ({ route, navigation }) => {
                 )}
 
                 <TextInput
-                  placeholder="Ingrese profundidad en mt(s)"
+                  placeholder="Ingrese profundidad en metros"
                   label={"Profundidad"}
                   onChangeText={handleChange("profundidad")}
                   onBlur={handleBlur("profundidad")}

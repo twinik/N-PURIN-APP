@@ -140,7 +140,7 @@ const Data0 = ({ route, navigation }) => {
                   )}
 
                   <TextInput
-                    placeholder="Ingrese capacidad en lt(s) del estanque de leche"
+                    placeholder="Ingrese capacidad en litros del estanque de leche"
                     label={"Capacidad del estanque"}
                     onChangeText={handleChange("capacidad_estanque")}
                     onBlur={handleBlur("capacidad_estanque")}

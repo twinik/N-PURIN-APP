@@ -77,7 +77,7 @@ const Login = ({ navigation, route }) => {
               />
               <AppText
                 style={styles.subtitle}
-                text={"Ingrese sus credenciales para poder iniciar sesión"}
+                text={"Ingrese sus credenciales"}
                 fontStyle="Regular"
               />
               <TextInput
