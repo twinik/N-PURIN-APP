@@ -4,25 +4,25 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
-import { theme } from "../../../theme";
-import AppText from "../../../Components/AppText";
-import Container from "../../../Components/Container";
-import DataSection from "../../../Components/DataSection";
-import MenuButton from "../../../Components/MenuButton";
+import { theme } from "../../theme";
+import AppText from "../../Components/AppText";
+import Container from "../../Components/Container";
+import DataSection from "../../Components/DataSection";
+import MenuButton from "../../Components/MenuButton";
 
 const year = new Date().getFullYear();
-const title1 = "Produccion acumulada año" + year;
-const title2 = "Aguas caidas acumuladas año " + year;
-const title3 = "Aguas acumuladas año " + year;
+const title1 = "Unidades / año";
+const title2 = "Equivalente fertilizantes " + year;
+const title3 = "Equivalente en pesos";
 
-const Home = ({ navigation }) => {
+const NPK = ({ navigation }) => {
   return (
     <>
       <Container>
         <View style={styles.container}>
           <MenuButton onPress={() => navigation.toggleDrawer()} />
           <AppText
-            text="Cantidad de Purin"
+            text="Valorización NPK"
             style={styles.title}
             fontStyle="Regular"
           />
@@ -74,7 +74,7 @@ const Home = ({ navigation }) => {
   );
 };
 
-export default Home;
+export default NPK;
 
 const styles = StyleSheet.create({
   container: {

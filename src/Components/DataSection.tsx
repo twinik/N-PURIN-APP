@@ -27,10 +27,10 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     borderBottomColor: "gray",
     borderBottomWidth: 3,
-    marginBottom: hp(2),
+    marginBottom: hp(1),
   },
   title: {
     fontSize: hp(2.5),
-    color: "black",
+    color: "white",
   },
 });
