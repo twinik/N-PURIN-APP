@@ -5,6 +5,7 @@ import { useFonts } from "expo-font";
 const AppText = ({ text, fontStyle, style }) => {
   const [loaded] = useFonts({
     Regular: require("../../assets/fonts/Staatliches.ttf"),
+    //Regular: require("../../assets/fonts/RobotoSlab/RobotoSlab-Regular.ttf"),
   });
 
   if (!loaded) {
