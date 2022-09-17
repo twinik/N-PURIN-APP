@@ -11,7 +11,7 @@ import DataSection from "../../../Components/DataSection";
 import MenuButton from "../../../Components/MenuButton";
 
 const year = new Date().getFullYear();
-const title1 = "Produccion acumulada año" + year;
+const title1 = "Produccion acumulada año " + year;
 const title2 = "Aguas caidas acumuladas año " + year;
 const title3 = "Aguas acumuladas año " + year;
 

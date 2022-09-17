@@ -60,9 +60,15 @@ export default function CustomDrawerContent(props) {
       </View>
       <DrawerItemList {...filteredProps} />
       <DrawerItem
-        label="Logout"
+        label="Recalcular"
+        style={styles.recalcular}
+        activeTintColor="orange"
+        inactiveTintColor="lightgray"
+        icon={({ color, size }) => (
+          <AntDesign name="reload1" size={size} color={color} />
+        )}
         onPress={() => {
-          alert("Logout");
+          alert("Recalcular");
         }}
       />
     </DrawerContentScrollView>
@@ -109,4 +115,5 @@ const styles = StyleSheet.create({
   close: {
     margin: wp(5),
   },
+  recalcular: {},
 });
