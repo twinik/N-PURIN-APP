@@ -14,7 +14,7 @@ import {
   setConstruccion,
   setVacaOrdena,
   setPozoPurinero,
-  setCompletedForms
+  setCompletedForms,
 } from "../Services/forms";
 const AppState = (props) => {
   const initialState = {
@@ -50,12 +50,12 @@ const AppState = (props) => {
     }
   };
 
-  const SignUp = async (email, name, password) => {
+  const SignUp = async (email, name, password, usertype) => {
     try {
-      const result = await Register(email, name, password);
+      const result = await Register(email, name, password, usertype);
       dispatch({
         type: SET_USER,
-        payload:  result ,
+        payload: result,
       });
     } catch (error) {
       throw error;
@@ -100,9 +100,8 @@ const AppState = (props) => {
       .then(async () => {
         console.log("Forms sent");
         try {
-          await setCompletedForms(state.data.user_id)
-        }
-        catch (error) {
+          await setCompletedForms(state.data.user_id);
+        } catch (error) {
           throw error;
         }
       })

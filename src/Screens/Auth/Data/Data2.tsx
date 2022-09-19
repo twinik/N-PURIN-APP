@@ -26,6 +26,10 @@ const validations = Yup.object().shape({
     .required("Ingrese una cantidad")
     .positive("Cantidad inválida")
     .integer("Cantidad inválida"),
+  peso_promedio_vacas: Yup.number()
+    .required("Ingrese una cantidad")
+    .positive("Cantidad inválida")
+    .integer("Cantidad inválida"),
 });
 
 const Data2 = ({ route, navigation }) => {
@@ -33,6 +37,8 @@ const Data2 = ({ route, navigation }) => {
   const { drop_alimentacion } = FunctionalData;
 
   const prev = route.params;
+
+  const usertype = prev.usertype;
 
   const handleSubmit = (values) => {
     const formVacaOrdena = {
@@ -54,6 +60,7 @@ const Data2 = ({ route, navigation }) => {
         num_vacas: "",
         id_tipo_alimentacion: "",
         horas_confinamiento: "",
+        peso_promedio_vacas: "",
       }}
       onSubmit={(values) => handleSubmit(values)}
       validationSchema={validations}
@@ -164,6 +171,30 @@ const Data2 = ({ route, navigation }) => {
                     style={styles.errorText}
                   />
                 )}
+
+                {
+                  //SOLO SI ES ADMINISTRADOR
+                  /* usertype === "user_admin" */ 1 == 1 && (
+                    <TextInput
+                      placeholder="Ingrese peso promedio de las vacas"
+                      label={"Peso promedio de las vacas"}
+                      onChangeText={handleChange("peso_promedio_vacas")}
+                      onBlur={handleBlur("peso_promedio_vacas")}
+                      value={values.peso_promedio_vacas.toString()}
+                      keyboardType="numeric"
+                      keyboardAppearance="dark"
+                      returnKeyType="next"
+                      returnKeyLabel="next"
+                    />
+                  )
+                  /* {errors.peso_promedio_vacas && touched.peso_promedio_vacas && (
+                      <AppText
+                        text={errors.peso_promedio_vacas}
+                        fontStyle="Regular"
+                        style={styles.errorText}
+                      />
+                    )} */
+                }
               </View>
 
               <View style={styles.btn_box}>

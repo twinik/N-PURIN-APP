@@ -12,6 +12,7 @@ import SecureTextInput from "../../Components/SecureTextInput";
 import Button from "../../Components/Button";
 import AppText from "../../Components/AppText";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
+import RNPickerSelect from "react-native-picker-select";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import * as Crypto from "expo-crypto";
@@ -39,6 +40,7 @@ const validations = Yup.object().shape({
     .oneOf([Yup.ref("password"), null], "Las contraseñas no coinciden")
     .required("Confirmar contraseña es requerida")
     .label("Confirmar contraseña"),
+  userType: Yup.string().required("Tipo de usuario es requerido"),
   acceptTerms: Yup.bool().oneOf(
     [true],
     "Debe aceptar los terminos y condiciones"
@@ -70,6 +72,7 @@ const Register = ({ navigation }) => {
       name: values.name,
       password: values.password,
       //password: await cryptoPassword(values.password),
+      userType: values.userType,
     };
 
     console.log(user);
@@ -90,6 +93,7 @@ const Register = ({ navigation }) => {
         name: "",
         password: "",
         confirmPassword: "",
+        userType: "",
         acceptTerms: false,
       }}
       onSubmit={(values) => handleSubmit(values)}
@@ -185,6 +189,38 @@ const Register = ({ navigation }) => {
               {errors.confirmPassword && touched.confirmPassword && (
                 <AppText
                   text={errors.confirmPassword}
+                  fontStyle="Regular"
+                  style={styles.errorText}
+                />
+              )}
+
+              <View style={styles.input_box}>
+                <AppText
+                  style={styles.inputLabel}
+                  text={"Usuario"}
+                  fontStyle="Regular"
+                />
+
+                <RNPickerSelect
+                  onValueChange={(value) => setFieldValue("userType", value)}
+                  value={values.userType}
+                  useNativeAndroidPickerStyle={true}
+                  fixAndroidTouchableBug={true}
+                  doneText="Aceptar"
+                  style={PickerStyles}
+                  placeholder={{
+                    label: "Seleccione el tipo de usuario",
+                    value: null,
+                  }}
+                  items={[
+                    { label: "Usuario", value: "user_regular" },
+                    { label: "Administrador", value: "user_admin" },
+                  ]}
+                />
+              </View>
+              {errors.userType && touched.userType && (
+                <AppText
+                  text={errors.userType}
                   fontStyle="Regular"
                   style={styles.errorText}
                 />
@@ -295,5 +331,31 @@ const styles = StyleSheet.create({
   errorText: {
     color: "red",
     fontSize: hp(1.5),
+  },
+  input_box: {
+    marginBottom: 10,
+    marginTop: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "grey",
+  },
+  inputLabel: {
+    fontSize: 16,
+    color: theme.colors.green,
+  },
+});
+
+const PickerStyles = StyleSheet.create({
+  inputIOS: {
+    marginLeft: -6.5,
+    color: "white",
+    paddingRight: 30,
+  },
+  inputAndroid: {
+    marginLeft: -6.5,
+    color: "white",
+    paddingRight: 30,
+  },
+  placeholder: {
+    color: "lightgray",
   },
 });
