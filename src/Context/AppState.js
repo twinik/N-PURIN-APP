@@ -16,6 +16,7 @@ import {
   setPozoPurinero,
   setCompletedForms,
 } from "../Services/forms";
+
 const AppState = (props) => {
   const initialState = {
     data: { token: null, user_id: null, form_completed: null },
@@ -115,12 +116,12 @@ const AppState = (props) => {
       value={{
         User_ID: state.data.user_id,
         Form_completed: state.data.form_completed,
+        Token: state.data.token,
+        FunctionalData: state.functionalData,
         SignIn,
         SignUp,
         InitializeDropdowns,
         SendForms,
-        Token: state.data.token,
-        FunctionalData: state.functionalData,
       }}
     >
       {props.children}

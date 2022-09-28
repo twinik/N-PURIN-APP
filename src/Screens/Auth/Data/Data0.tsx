@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { StyleSheet, View, ScrollView, Platform } from "react-native";
 import {
   heightPercentageToDP as hp,
@@ -11,6 +11,7 @@ import Container from "../../../Components/Container";
 import TextInput from "../../../Components/TextInput.js";
 import Button from "../../../Components/Button";
 import AppText from "../../../Components/AppText";
+import { getForm, setForm } from "../../../Context/asyncStorage";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
@@ -45,6 +46,19 @@ const Data0 = ({ route, navigation }) => {
   const { drop_ubicaciones, drop_sistLimpieza, drop_sepSolidos } =
     FunctionalData;
 
+  var prevForm = null;
+
+  useEffect(() => {
+    try {
+      const getform = async () => {
+        prevForm = await getForm();
+      };
+      getform();
+    } catch (error) {
+      alert(error.message);
+    }
+  }, []);
+
   const handleSubmit = (values) => {
     console.log("id: ", User_ID);
     const formSalaOrdena = {
@@ -57,15 +71,17 @@ const Data0 = ({ route, navigation }) => {
     });
   };
 
+  const templateForm = {
+    id_ubicacion: "",
+    capacidad_estanque: "",
+    unidades_equipo_ordena: "",
+    id_sistema_limpieza: "",
+    id_separacion_solidos: "",
+  };
+
   return (
     <Formik
-      initialValues={{
-        id_ubicacion: "",
-        capacidad_estanque: "",
-        unidades_equipo_ordena: "",
-        id_sistema_limpieza: "",
-        id_separacion_solidos: "",
-      }}
+      initialValues={prevForm != null ? { ...prevForm[0] } : templateForm}
       onSubmit={(values) => handleSubmit(values)}
       validationSchema={validations}
     >

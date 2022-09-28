@@ -2,12 +2,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const FormCacheKey = "FormKey";
 
-export const setForm = async () => {
+export const setForm = async (form) => {
   try {
     const jsonForm = JSON.stringify(form);
     await AsyncStorage.setItem(FormCacheKey, jsonForm);
   } catch (error) {
-    return null;
+    throw error;
   }
 };
 

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { StyleSheet, View, ToastAndroid } from "react-native";
 import {
   heightPercentageToDP as hp,
@@ -12,6 +12,7 @@ import Button from "../../../Components/Button";
 import AppText from "../../../Components/AppText";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { getForm, setForm } from "../../../Context/asyncStorage";
 
 const validations = Yup.object().shape({
   diametro: Yup.number()
@@ -27,6 +28,18 @@ const validations = Yup.object().shape({
 const Data3 = ({ route, navigation }) => {
   const { SendForms } = useContext(AppContext);
   const prev = route.params;
+  var prevForm = null;
+
+  useEffect(() => {
+    try {
+      const getform = async () => {
+        prevForm = await getForm();
+      };
+      getform();
+    } catch (error) {
+      alert(error.message);
+    }
+  }, []);
 
   function showToast() {
     ToastAndroid.show("Registrado correctamente", ToastAndroid.SHORT);
@@ -52,12 +65,14 @@ const Data3 = ({ route, navigation }) => {
     }
   };
 
+  const templateForm = {
+    diametro: "",
+    profundidad: "",
+  };
+
   return (
     <Formik
-      initialValues={{
-        diametro: "",
-        profundidad: "",
-      }}
+      initialValues={prevForm != null ? { ...prevForm[0] } : templateForm}
       onSubmit={(values) => handleSubmit(values)}
       validationSchema={validations}
     >

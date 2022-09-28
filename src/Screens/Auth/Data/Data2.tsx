@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import {
   heightPercentageToDP as hp,
@@ -13,6 +13,7 @@ import Button from "../../../Components/Button";
 import AppText from "../../../Components/AppText";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { getForm, setForm } from "../../../Context/asyncStorage";
 
 const validations = Yup.object().shape({
   num_vacas: Yup.number()
@@ -37,8 +38,19 @@ const Data2 = ({ route, navigation }) => {
   const { drop_alimentacion } = FunctionalData;
 
   const prev = route.params;
-
+  var prevForm = null;
   const usertype = prev.usertype;
+
+  useEffect(() => {
+    try {
+      const getform = async () => {
+        prevForm = await getForm();
+      };
+      getform();
+    } catch (error) {
+      alert(error.message);
+    }
+  }, []);
 
   const handleSubmit = (values) => {
     const formVacaOrdena = {
@@ -54,14 +66,17 @@ const Data2 = ({ route, navigation }) => {
       formVacaOrdena,
     });
   };
+
+  const templateForm = {
+    num_vacas: "",
+    id_tipo_alimentacion: "",
+    horas_confinamiento: "",
+    peso_promedio_vacas: "",
+  };
+
   return (
     <Formik
-      initialValues={{
-        num_vacas: "",
-        id_tipo_alimentacion: "",
-        horas_confinamiento: "",
-        peso_promedio_vacas: "",
-      }}
+      initialValues={prevForm != null ? { ...prevForm[2] } : templateForm}
       onSubmit={(values) => handleSubmit(values)}
       validationSchema={validations}
     >

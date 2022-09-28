@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import {
   heightPercentageToDP as hp,
@@ -11,6 +11,7 @@ import Button from "../../../Components/Button";
 import AppText from "../../../Components/AppText";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { getForm, setForm } from "../../../Context/asyncStorage";
 
 const validations = Yup.object().shape({
   metros_sin_techar: Yup.number()
@@ -27,6 +28,18 @@ const validations = Yup.object().shape({
 
 const Data1 = ({ route, navigation }) => {
   const prev = route.params;
+  var prevForm = null;
+
+  useEffect(() => {
+    try {
+      const getform = async () => {
+        prevForm = await getForm();
+      };
+      getform();
+    } catch (error) {
+      alert(error.message);
+    }
+  }, []);
 
   const handleSubmit = (values) => {
     const formConstruccion = {
@@ -39,12 +52,15 @@ const Data1 = ({ route, navigation }) => {
       formConstruccion,
     });
   };
+
+  const templateForm = {
+    metros_sin_techar: "",
+    metros_sin_canalizar: "",
+  };
+
   return (
     <Formik
-      initialValues={{
-        metros_sin_techar: "",
-        metros_sin_canalizar: "",
-      }}
+      initialValues={prevForm != null ? { ...prevForm[1] } : templateForm}
       onSubmit={(values) => handleSubmit(values)}
       validationSchema={validations}
     >
