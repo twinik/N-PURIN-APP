@@ -58,10 +58,6 @@ const Data2 = ({ route, navigation }) => {
       id_usuario: prev.formConstruccion.id_usuario,
     };
     await setForm(formVacaOrdena);
-    console.log("form3", {
-      ...prev,
-      formVacaOrdena,
-    });
     navigation.navigate("Data3", {
       ...prev,
       formVacaOrdena,

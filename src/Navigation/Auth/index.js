@@ -6,11 +6,11 @@ import Data0 from "../../Screens/Auth/Data/Data0";
 import Data1 from "../../Screens/Auth/Data/Data1";
 import Data2 from "../../Screens/Auth/Data/Data2";
 import Data3 from "../../Screens/Auth/Data/Data3";
-export default function index({initPage="Login"}) {
+export default function index({ initPage = "Login" }) {
   const AuthStack = createNativeStackNavigator();
 
   return (
-    <AuthStack.Navigator headerMode="none" initialRouteName={initPage} >
+    <AuthStack.Navigator headerMode="none" initialRouteName={initPage}>
       <AuthStack.Screen
         name="Login"
         component={Login}

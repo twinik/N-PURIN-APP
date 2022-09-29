@@ -48,16 +48,16 @@ const Data0 = ({ route, navigation }) => {
 
   var prevForm = null;
 
-  useEffect(() => {
+  /* useEffect(() => {
     try {
-      const getform = async () => {
+      const getFormAsync = async () => {
         prevForm = await getForm();
       };
-      getform();
+      getFormAsync();
     } catch (error) {
       alert(error.message);
     }
-  }, []);
+  }, []); */
 
   const handleSubmit = async (values) => {
     console.log("id: ", User_ID);
@@ -66,7 +66,6 @@ const Data0 = ({ route, navigation }) => {
       id_usuario: User_ID,
     };
     await setForm(formSalaOrdena);
-    console.log("formSalaOrdena: ", formSalaOrdena);
     navigation.navigate("Data1", {
       formSalaOrdena,
     });
