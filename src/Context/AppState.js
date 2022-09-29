@@ -112,7 +112,7 @@ const AppState = (props) => {
       });
   };
 
-  const GetForms = async () => {
+  /* const GetForms = async () => {
     try {
       const result = await getForm();
       return result;
@@ -127,7 +127,7 @@ const AppState = (props) => {
     } catch (error) {
       throw error;
     }
-  };
+  }; */
 
   return (
     <AppContext.Provider
@@ -138,8 +138,6 @@ const AppState = (props) => {
         FunctionalData: state.functionalData,
         SignIn,
         SignUp,
-        GetForms,
-        SetForms,
         InitializeDropdowns,
         SendForms,
       }}
