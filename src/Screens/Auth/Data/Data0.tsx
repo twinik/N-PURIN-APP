@@ -59,12 +59,13 @@ const Data0 = ({ route, navigation }) => {
     }
   }, []);
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     console.log("id: ", User_ID);
     const formSalaOrdena = {
       ...values,
       id_usuario: User_ID,
     };
+    await setForm(formSalaOrdena);
     console.log("formSalaOrdena: ", formSalaOrdena);
     navigation.navigate("Data1", {
       formSalaOrdena,

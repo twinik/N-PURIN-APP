@@ -56,6 +56,7 @@ const Data3 = ({ route, navigation }) => {
     };
     console.log("formmmm", form);
     try {
+      await setForm(formPozoPurinero);
       await SendForms(form);
       showToast();
       navigation.navigate("Login");

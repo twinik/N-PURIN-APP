@@ -41,11 +41,12 @@ const Data1 = ({ route, navigation }) => {
     }
   }, []);
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     const formConstruccion = {
       ...values,
       id_usuario: prev.formSalaOrdena.id_usuario,
     };
+    await setForm(formConstruccion);
     console.log("form2", formConstruccion);
     navigation.navigate("Data2", {
       ...prev,

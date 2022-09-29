@@ -3,6 +3,7 @@ import AppContext from "./AppContext";
 import { SET_TOKEN, SET_USER, SET_FORM, SET_FUNCTIONAL_DATA } from "./types";
 import { rootReducer } from "./Reducers";
 import { Login, Register } from "../Services/auth";
+import { getForm, setForm } from "./asyncStorage";
 import {
   Ubicaciones,
   Alimentacion,
@@ -111,6 +112,23 @@ const AppState = (props) => {
       });
   };
 
+  const GetForms = async () => {
+    try {
+      const result = await getForm();
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const SetForms = async (form) => {
+    try {
+      await setForm(form);
+    } catch (error) {
+      throw error;
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -120,6 +138,8 @@ const AppState = (props) => {
         FunctionalData: state.functionalData,
         SignIn,
         SignUp,
+        GetForms,
+        SetForms,
         InitializeDropdowns,
         SendForms,
       }}

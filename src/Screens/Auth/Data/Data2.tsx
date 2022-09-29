@@ -52,11 +52,12 @@ const Data2 = ({ route, navigation }) => {
     }
   }, []);
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     const formVacaOrdena = {
       ...values,
       id_usuario: prev.formConstruccion.id_usuario,
     };
+    await setForm(formVacaOrdena);
     console.log("form3", {
       ...prev,
       formVacaOrdena,
