@@ -14,8 +14,7 @@ export default (state, action) => {
     case SET_TOKEN:
       console.log("SET_TOKEN");
       return {
-        ...state,
-        token: payload,
+        ...payload
       };
 
     case DELETE_TOKEN:

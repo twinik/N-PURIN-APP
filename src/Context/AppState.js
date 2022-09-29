@@ -33,18 +33,16 @@ const AppState = (props) => {
   const SignIn = async (email, password) => {
     try {
       const result = await Login(email, password);
+
+      console.log(result);
+
       dispatch({
         type: SET_TOKEN,
-        payload: "id",
-      });
-      console.log(result);
-      dispatch({
-        type: SET_USER,
-        payload: result[0].id_usuario,
-      });
-      dispatch({
-        type: SET_FORM,
-        payload: result[0].form_completado,
+        payload: {
+          token: "token",
+          user_id: result[0].id_usuario,
+          form_completed: result[0].form_completed,
+        },
       });
     } catch (error) {
       throw error;
