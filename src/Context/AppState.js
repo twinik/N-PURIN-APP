@@ -1,6 +1,6 @@
 import React, { useReducer, useState, useEffect } from "react";
 import AppContext from "./AppContext";
-import { SET_TOKEN, SET_USER, SET_FORM, SET_FUNCTIONAL_DATA } from "./types";
+import { SET_TOKEN, SET_USER, GET_FORM, SET_FUNCTIONAL_DATA } from "./types";
 import { rootReducer } from "./Reducers";
 import { Login, Register } from "../Services/auth";
 import {
@@ -16,10 +16,11 @@ import {
   setPozoPurinero,
   setCompletedForms,
 } from "../Services/forms";
+import { getForm } from "./asyncStorage";
 
 const AppState = (props) => {
   const initialState = {
-    data: { token: null, user_id: null, form_completed: null },
+    data: { token: null, user_id: null, form_completed: null, formState: [] },
     functionalData: {
       drop_ubicaciones: [],
       drop_alimentacion: [],
@@ -30,12 +31,23 @@ const AppState = (props) => {
 
   const [state, dispatch] = useReducer(rootReducer, initialState);
 
+  const GetForm = async () => {
+    try {
+      const form = await getForm();
+      dispatch({
+        type: GET_FORM,
+        payload: form,
+      });
+    } catch (error) {
+      throw error;
+    }
+  };
+
   const SignIn = async (email, password) => {
     try {
+      GetForm();
       const result = await Login(email, password);
-
       console.log(result);
-
       dispatch({
         type: SET_TOKEN,
         payload: {
@@ -116,6 +128,7 @@ const AppState = (props) => {
         Form_completed: state.data.form_completed,
         Token: state.data.token,
         FunctionalData: state.functionalData,
+        FormState: state.data.formState,
         SignIn,
         SignUp,
         InitializeDropdowns,

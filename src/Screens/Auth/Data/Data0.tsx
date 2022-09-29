@@ -48,7 +48,7 @@ const Data0 = ({ route, navigation }) => {
 
   var prevForm = null;
 
-  /* useEffect(() => {
+  useEffect(() => {
     try {
       const getFormAsync = async () => {
         prevForm = await getForm();
@@ -57,7 +57,7 @@ const Data0 = ({ route, navigation }) => {
     } catch (error) {
       alert(error.message);
     }
-  }, []); */
+  }, []);
 
   const handleSubmit = async (values) => {
     console.log("id: ", User_ID);
