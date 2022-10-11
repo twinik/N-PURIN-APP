@@ -26,12 +26,13 @@ const validations = Yup.object().shape({
 });
 
 const Data3 = ({ route, navigation }) => {
-  const { SendForms } = useContext(AppContext);
+  const { SendForms, User_Type, User_ID } = useContext(AppContext);
   const prev = route.params;
   var prevForm = null;
 
   useEffect(() => {
     try {
+      console.log("User_Type: ", User_Type);
       const getform = async () => {
         prevForm = await getForm();
       };
@@ -46,23 +47,35 @@ const Data3 = ({ route, navigation }) => {
   }
 
   const handleSubmit = async (values) => {
-    const formPozoPurinero = {
-      ...values,
-      id_usuario: prev.formConstruccion.id_usuario,
-    };
-    const form = {
-      ...prev,
-      formPozoPurinero,
-    };
-    console.log("formmmm", form);
-    try {
+    if (User_Type === 1) {
+      const formPozoPurinero = {
+        ...values,
+        id_usuario: User_ID,
+      };
       await setForm(formPozoPurinero);
-      await SendForms(form);
-      showToast();
-      navigation.navigate("Login");
-    } catch (error) {
-      alert("Ups! Algo salió mal. Intenta de nuevo");
-      console.log(error);
+      navigation.navigate("Data4", {
+        ...prev,
+        formPozoPurinero,
+      });
+    } else {
+      const formPozoPurinero = {
+        ...values,
+        id_usuario: User_ID,
+      };
+      const form = {
+        ...prev,
+        formPozoPurinero,
+      };
+      console.log("formulario", form);
+      try {
+        await setForm(formPozoPurinero);
+        await SendForms(form);
+        showToast();
+        navigation.navigate("Login");
+      } catch (error) {
+        alert("Ups! Algo salió mal. Intenta de nuevo");
+        console.log(error);
+      }
     }
   };
 
@@ -73,7 +86,7 @@ const Data3 = ({ route, navigation }) => {
 
   return (
     <Formik
-      initialValues={prevForm != null ? { ...prevForm[0] } : templateForm}
+      initialValues={prevForm != null ? { ...prevForm[3] } : templateForm}
       onSubmit={(values) => handleSubmit(values)}
       validationSchema={validations}
     >
@@ -152,11 +165,19 @@ const Data3 = ({ route, navigation }) => {
               </View>
 
               <View style={styles.btn_box}>
-                <Button
-                  style={styles.button}
-                  label={"Finalizar"}
-                  onPress={handleSubmit}
-                />
+                {User_Type === 0 ? (
+                  <Button
+                    style={styles.button}
+                    label={"Finalizar"}
+                    onPress={handleSubmit}
+                  />
+                ) : (
+                  <Button
+                    style={styles.button}
+                    label={"Continuar"}
+                    onPress={handleSubmit}
+                  />
+                )}
               </View>
             </View>
           </View>

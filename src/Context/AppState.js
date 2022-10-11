@@ -20,7 +20,13 @@ import { getForm } from "./asyncStorage";
 
 const AppState = (props) => {
   const initialState = {
-    data: { token: null, user_id: null, form_completed: null, formState: [] },
+    data: {
+      token: null,
+      user_id: null,
+      form_completed: null,
+      form_state: [],
+      user_type: null,
+    },
     functionalData: {
       drop_ubicaciones: [],
       drop_alimentacion: [],
@@ -33,10 +39,10 @@ const AppState = (props) => {
 
   const GetForm = async () => {
     try {
-      const form = await getForm();
+      const formLocal = await getForm();
       dispatch({
         type: GET_FORM,
-        payload: form,
+        payload: formLocal,
       });
     } catch (error) {
       throw error;
@@ -47,13 +53,16 @@ const AppState = (props) => {
     try {
       GetForm();
       const result = await Login(email, password);
-      console.log(result);
+      if (result[0].form_completado === 0) {
+        InitializeDropdowns();
+      }
+      console.log("DATOS LOGIN EN STATE: ", result);
       dispatch({
         type: SET_TOKEN,
         payload: {
           token: "token",
           user_id: result[0].id_usuario,
-          form_completed: result[0].form_completed,
+          form_completed: result[0].form_completado,
         },
       });
     } catch (error) {
@@ -61,12 +70,15 @@ const AppState = (props) => {
     }
   };
 
-  const SignUp = async (email, name, password, usertype) => {
+  const SignUp = async (user) => {
     try {
-      const result = await Register(email, name, password, usertype);
+      const result = await Register(user);
       dispatch({
         type: SET_USER,
-        payload: result,
+        payload: {
+          user_id: result,
+          user_type: user.usertype,
+        },
       });
     } catch (error) {
       throw error;
@@ -81,6 +93,13 @@ const AppState = (props) => {
       SeparacionSolidos(),
     ])
       .then(([ubicaciones, alimentaciones, sistemaLimpieza, sepSolidos]) => {
+        /*  console.log(
+          "ubicaciones:",
+          ubicaciones + "alimentaciones:",
+          alimentaciones + "sistemaLimpieza:",
+          sistemaLimpieza + "sepSolidos:",
+          sepSolidos
+        ); */
         dispatch({
           type: SET_FUNCTIONAL_DATA,
           payload: {
@@ -125,10 +144,11 @@ const AppState = (props) => {
     <AppContext.Provider
       value={{
         User_ID: state.data.user_id,
+        User_Type: state.data.user_type,
         Form_completed: state.data.form_completed,
         Token: state.data.token,
         FunctionalData: state.functionalData,
-        FormState: state.data.formState,
+        FormState: state.data.form_state,
         SignIn,
         SignUp,
         InitializeDropdowns,

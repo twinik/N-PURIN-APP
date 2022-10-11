@@ -18,8 +18,17 @@ export const setForm = async (form) => {
 export const getForm = async () => {
   try {
     const jsonForm = await AsyncStorage.getItem(FormCacheKey);
-    console.log("getform:", jsonForm);
-    return jsonForm != null ? JSON.parse(jsonForm) : [];
+    //return jsonForm != null ? JSON.parse(jsonForm) : [];
+    if (
+      jsonForm === null ||
+      jsonForm === undefined ||
+      jsonForm === "" ||
+      jsonForm === []
+    ) {
+      return [];
+    } else {
+      return JSON.parse(jsonForm);
+    }
   } catch (error) {
     return [];
   }

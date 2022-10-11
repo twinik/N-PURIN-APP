@@ -61,6 +61,21 @@ export const setPozoPurinero = async (data) => {
   }
 };
 
+export const setParametrosPurin = async (data) => {
+  try {
+    const configurationObject = {
+      method: "post",
+      url: `${baseURL}/form_parametros_purin`,
+      data: {
+        ...data,
+      },
+    };
+    const response = await axios(configurationObject);
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const setCompletedForms = async (idUsuario) => {
   try {
     const configurationObject = {

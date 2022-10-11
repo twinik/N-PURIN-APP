@@ -1,14 +1,13 @@
 import React, { useContext, useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ToastAndroid } from "react-native";
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
-import { theme } from "../../../theme";
-import RNPickerSelect from "react-native-picker-select";
-import AppContext from "../../../Context/AppContext";
 import Container from "../../../Components/Container";
+import { theme } from "../../../theme";
 import TextInput from "../../../Components/TextInput.js";
+import AppContext from "../../../Context/AppContext";
 import Button from "../../../Components/Button";
 import AppText from "../../../Components/AppText";
 import { Formik } from "formik";
@@ -16,23 +15,18 @@ import * as Yup from "yup";
 import { getForm, setForm } from "../../../Context/asyncStorage";
 
 const validations = Yup.object().shape({
-  num_vacas: Yup.number()
+  peso_promedio_vaca: Yup.number()
     .required("Ingrese una cantidad")
     .positive("Cantidad inválida")
     .integer("Cantidad inválida"),
-  id_tipo_alimentacion: Yup.string().required(
-    "Seleccione un tipo de alimentación"
-  ),
-  horas_confinamiento: Yup.number()
+  porcentaje_materia_seca: Yup.number()
     .required("Ingrese una cantidad")
     .positive("Cantidad inválida")
     .integer("Cantidad inválida"),
 });
 
-const Data2 = ({ route, navigation }) => {
-  const { FunctionalData } = useContext(AppContext);
-  const { drop_alimentacion } = FunctionalData;
-
+const Data4 = ({ route, navigation }) => {
+  const { SendForms, User_ID } = useContext(AppContext);
   const prev = route.params;
   var prevForm = null;
 
@@ -47,27 +41,39 @@ const Data2 = ({ route, navigation }) => {
     }
   }, []);
 
+  function showToast() {
+    ToastAndroid.show("Registrado correctamente", ToastAndroid.SHORT);
+  }
+
   const handleSubmit = async (values) => {
-    const formVacaOrdena = {
+    const formParametrosPurin = {
       ...values,
-      id_usuario: prev.formConstruccion.id_usuario,
+      id_usuario: User_ID,
     };
-    await setForm(formVacaOrdena);
-    navigation.navigate("Data3", {
+    const form = {
       ...prev,
-      formVacaOrdena,
-    });
+      formParametrosPurin,
+    };
+    console.log("formulario", form);
+    try {
+      await setForm(formParametrosPurin);
+      await SendForms(form);
+      showToast();
+      navigation.navigate("Login");
+    } catch (error) {
+      alert("Ups! Algo salió mal. Intenta de nuevo");
+      console.log(error);
+    }
   };
 
   const templateForm = {
-    num_vacas: "",
-    id_tipo_alimentacion: "",
-    horas_confinamiento: "",
+    peso_promedio_vaca: "",
+    porcentaje_materia_seca: "",
   };
 
   return (
     <Formik
-      initialValues={prevForm != null ? { ...prevForm[2] } : templateForm}
+      initialValues={prevForm != null ? { ...prevForm[4] } : templateForm}
       onSubmit={(values) => handleSubmit(values)}
       validationSchema={validations}
     >
@@ -92,14 +98,14 @@ const Data2 = ({ route, navigation }) => {
                   />
                   <AppText
                     style={{ fontSize: 22, color: "#fff" }}
-                    text={"3/4"}
+                    text={"5/5"}
                     fontStyle="Regular"
                   />
                 </View>
                 <View style={{ flex: 1, justifyContent: "flex-end" }}>
                   <AppText
                     style={styles.subtitle}
-                    text={"Ingrese los datos de vacas en ordeña"}
+                    text={"Ingrese los datos de los parametros de purin"}
                     fontStyle="Regular"
                   />
                 </View>
@@ -107,86 +113,49 @@ const Data2 = ({ route, navigation }) => {
 
               <View style={styles.form_box}>
                 <TextInput
-                  placeholder="Ingrese cantidad de vacas"
-                  label={"N° de vacas"}
-                  onChangeText={handleChange("num_vacas")}
-                  onBlur={handleBlur("num_vacas")}
-                  value={values.num_vacas.toString()}
+                  placeholder="Ingrese peso promedio de las vacas"
+                  label={"Peso promedio de las vacas"}
+                  onChangeText={handleChange("peso_promedio_vaca")}
+                  onBlur={handleBlur("peso_promedio_vaca")}
+                  value={values.peso_promedio_vaca.toString()}
                   keyboardType="numeric"
                   keyboardAppearance="dark"
                   returnKeyType="next"
                   returnKeyLabel="next"
                 />
-                {errors.num_vacas && touched.num_vacas && (
+                {errors.peso_promedio_vaca && touched.peso_promedio_vaca && (
                   <AppText
-                    text={errors.num_vacas}
+                    text={errors.peso_promedio_vaca}
                     fontStyle="Regular"
                     style={styles.errorText}
                   />
                 )}
 
-                <View style={styles.input_box}>
-                  <AppText
-                    style={styles.inputLabel}
-                    text={"Tipo de alimentación"}
-                    fontStyle="Regular"
-                  />
-                  <RNPickerSelect
-                    onValueChange={(value) =>
-                      setFieldValue("id_tipo_alimentacion", value)
-                    }
-                    value={values.id_tipo_alimentacion}
-                    useNativeAndroidPickerStyle={true}
-                    fixAndroidTouchableBug={true}
-                    doneText="Aceptar"
-                    placeholder={{
-                      label: "Seleccione un tipo de alimentación",
-                      value: null,
-                    }}
-                    style={PickerStyles}
-                    /* items={drop_alimentacion.map(({ descripcion, id }) => ({
-                      label: descripcion,
-                      value: id,
-                    }))} */
-                    items={[
-                      { label: "Alimentacion 1", value: 0 },
-                      { label: "Alimentacion 2", value: 1 },
-                    ]}
-                  />
-                </View>
-                {errors.id_tipo_alimentacion &&
-                  touched.id_tipo_alimentacion && (
+                <TextInput
+                  placeholder="Ingrese porcentaje de materia seca"
+                  label={"Porcentaje de materia seca"}
+                  onChangeText={handleChange("porcentaje_materia_seca")}
+                  onBlur={handleBlur("porcentaje_materia_seca")}
+                  value={values.porcentaje_materia_seca.toString()}
+                  keyboardType="numeric"
+                  keyboardAppearance="dark"
+                  returnKeyType="next"
+                  returnKeyLabel="next"
+                />
+                {errors.porcentaje_materia_seca &&
+                  touched.porcentaje_materia_seca && (
                     <AppText
-                      text={errors.id_tipo_alimentacion}
+                      text={errors.porcentaje_materia_seca}
                       fontStyle="Regular"
                       style={styles.errorText}
                     />
                   )}
-
-                <TextInput
-                  placeholder="Ingrese la cantidad horas"
-                  label={"Horas de confinamiento"}
-                  onChangeText={handleChange("horas_confinamiento")}
-                  onBlur={handleBlur("horas_confinamiento")}
-                  value={values.horas_confinamiento.toString()}
-                  keyboardType="numeric"
-                  keyboardAppearance="dark"
-                  returnKeyType="next"
-                  returnKeyLabel="next"
-                />
-                {errors.horas_confinamiento && touched.horas_confinamiento && (
-                  <AppText
-                    text={errors.horas_confinamiento}
-                    fontStyle="Regular"
-                    style={styles.errorText}
-                  />
-                )}
               </View>
 
               <View style={styles.btn_box}>
                 <Button
                   style={styles.button}
-                  label={"Continuar"}
+                  label={"Finalizar"}
                   onPress={handleSubmit}
                 />
               </View>
@@ -198,7 +167,7 @@ const Data2 = ({ route, navigation }) => {
   );
 };
 
-export default Data2;
+export default Data4;
 
 const styles = StyleSheet.create({
   container: {
@@ -259,21 +228,5 @@ const styles = StyleSheet.create({
   errorText: {
     color: "red",
     fontSize: hp(1.5),
-  },
-});
-
-const PickerStyles = StyleSheet.create({
-  inputIOS: {
-    marginLeft: -6.5,
-    color: "white",
-    paddingRight: 30,
-  },
-  inputAndroid: {
-    marginLeft: -6.5,
-    color: "white",
-    paddingRight: 30,
-  },
-  placeholder: {
-    color: "lightgray",
   },
 });

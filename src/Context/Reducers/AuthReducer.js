@@ -14,7 +14,8 @@ export default (state, action) => {
     case SET_TOKEN:
       console.log("SET_TOKEN");
       return {
-        ...payload
+        ...state,
+        ...payload,
       };
 
     case DELETE_TOKEN:
@@ -34,7 +35,8 @@ export default (state, action) => {
       console.log("Set_User");
       return {
         ...state,
-        user_id: payload,
+        user_id: payload.user_id,
+        user_type: payload.user_type,
       };
 
     case SET_FORM:
@@ -45,10 +47,9 @@ export default (state, action) => {
       };
 
     case GET_FORM:
-      console.log("GET_FORM");
       return {
         ...state,
-        formState: payload,
+        form_state: payload,
       };
 
     default:

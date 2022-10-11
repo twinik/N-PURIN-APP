@@ -40,7 +40,7 @@ const validations = Yup.object().shape({
     .oneOf([Yup.ref("password"), null], "Las contraseñas no coinciden")
     .required("Confirmar contraseña es requerida")
     .label("Confirmar contraseña"),
-  userType: Yup.string().required("Tipo de usuario es requerido"),
+  usertype: Yup.string().required("Tipo de usuario es requerido"),
   acceptTerms: Yup.bool().oneOf(
     [true],
     "Debe aceptar los terminos y condiciones"
@@ -72,7 +72,7 @@ const Register = ({ navigation }) => {
       name: values.name,
       password: values.password,
       //password: await cryptoPassword(values.password),
-      userType: values.userType,
+      usertype: values.usertype,
     };
 
     console.log(user);
@@ -93,7 +93,7 @@ const Register = ({ navigation }) => {
         name: "",
         password: "",
         confirmPassword: "",
-        userType: "",
+        usertype: "",
         acceptTerms: false,
       }}
       onSubmit={(values) => handleSubmit(values)}
@@ -202,8 +202,8 @@ const Register = ({ navigation }) => {
                 />
 
                 <RNPickerSelect
-                  onValueChange={(value) => setFieldValue("userType", value)}
-                  value={values.userType}
+                  onValueChange={(value) => setFieldValue("usertype", value)}
+                  value={values.usertype}
                   useNativeAndroidPickerStyle={true}
                   fixAndroidTouchableBug={true}
                   doneText="Aceptar"
@@ -213,14 +213,14 @@ const Register = ({ navigation }) => {
                     value: null,
                   }}
                   items={[
-                    { label: "Usuario", value: "user_regular" },
-                    { label: "Administrador", value: "user_admin" },
+                    { label: "Usuario", value: 0 },
+                    { label: "Administrador", value: 1 },
                   ]}
                 />
               </View>
-              {errors.userType && touched.userType && (
+              {errors.usertype && touched.usertype && (
                 <AppText
-                  text={errors.userType}
+                  text={errors.usertype}
                   fontStyle="Regular"
                   style={styles.errorText}
                 />
