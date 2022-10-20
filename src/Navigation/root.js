@@ -5,7 +5,6 @@ import AppStack from "./App";
 
 export default function root() {
   const { Token, Form_completed, FormState } = useContext(AppContext);
-
   if (Token === null) {
     return <AuthStack initPage="Login" />;
   }

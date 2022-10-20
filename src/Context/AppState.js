@@ -1,5 +1,6 @@
 import React, { useReducer, useState, useEffect } from "react";
 import AppContext from "./AppContext";
+import { getForm } from "./asyncStorage";
 import { SET_TOKEN, SET_USER, GET_FORM, SET_FUNCTIONAL_DATA } from "./types";
 import { rootReducer } from "./Reducers";
 import { Login, Register } from "../Services/auth";
@@ -16,7 +17,13 @@ import {
   setPozoPurinero,
   setCompletedForms,
 } from "../Services/forms";
-import { getForm } from "./asyncStorage";
+import {
+  Estiercol,
+  AguasSucias,
+  AguasLimpias,
+  Ubi_Estacion,
+  AguasLluvia,
+} from "../Services/appdata";
 
 const AppState = (props) => {
   const initialState = {
@@ -26,6 +33,7 @@ const AppState = (props) => {
       form_completed: null,
       form_state: [],
       user_type: null,
+      user_ubication: null,
     },
     functionalData: {
       drop_ubicaciones: [],
@@ -145,6 +153,7 @@ const AppState = (props) => {
       value={{
         User_ID: state.data.user_id,
         User_Type: state.data.user_type,
+        User_Ubication: state.data.user_ubication,
         Form_completed: state.data.form_completed,
         Token: state.data.token,
         FunctionalData: state.functionalData,
