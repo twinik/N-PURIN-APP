@@ -4,7 +4,7 @@ const baseURL = "https://conectamilk-npurin.herokuapp.com";
 export const Login = async (email, password) => {
   try {
     const configurationObject = {
-      method: "post",
+      method: "get",
       url: `${baseURL}/login`,
       data: {
         email,

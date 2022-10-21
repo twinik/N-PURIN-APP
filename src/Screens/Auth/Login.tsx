@@ -39,7 +39,7 @@ const Login = ({ navigation, route }) => {
     const password = values.password;
 
     try {
-      await SignIn(email, password,navigation);
+      await SignIn(email, password, navigation);
     } catch (error) {
       alert("No se ha podido iniciar sesion");
     }
