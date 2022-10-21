@@ -13,7 +13,9 @@ export const Login = async (email, password) => {
     };
     const response = await axios(configurationObject);
     return response.data;
-  } catch (error) {}
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const Register = async (user) => {

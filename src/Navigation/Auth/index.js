@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import AppContext from "../../Context/AppContext";
 import Login from "../../Screens/Auth/Login";
 import Register from "../../Screens/Auth/Register";
 import Data0 from "../../Screens/Auth/Data/Data0";
@@ -7,11 +8,11 @@ import Data1 from "../../Screens/Auth/Data/Data1";
 import Data2 from "../../Screens/Auth/Data/Data2";
 import Data3 from "../../Screens/Auth/Data/Data3";
 import Data4 from "../../Screens/Auth/Data/Data4";
-export default function index({ initPage = "Login" }) {
-  const AuthStack = createNativeStackNavigator();
+export default function Aut() {
 
+  const AuthStack = createNativeStackNavigator();
   return (
-    <AuthStack.Navigator headerMode="none" initialRouteName={initPage}>
+    <AuthStack.Navigator headerMode="none">
       <AuthStack.Screen
         name="Login"
         component={Login}

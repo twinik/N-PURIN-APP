@@ -45,13 +45,6 @@ export default (state, action) => {
         ...state,
         form_completed: payload,
       };
-
-    case GET_FORM:
-      return {
-        ...state,
-        form_state: payload,
-      };
-
     default:
       return state;
   }

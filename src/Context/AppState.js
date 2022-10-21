@@ -24,6 +24,7 @@ import {
   Ubi_Estacion,
   AguasLluvia,
 } from "../Services/appdata";
+import { useQueryClient } from "@tanstack/react-query";
 
 const AppState = (props) => {
   const initialState = {
@@ -44,36 +45,50 @@ const AppState = (props) => {
   };
 
   const [state, dispatch] = useReducer(rootReducer, initialState);
+  const QueryClient = useQueryClient();
 
   const GetForm = async () => {
     try {
       const formLocal = await getForm();
-      dispatch({
-        type: GET_FORM,
-        payload: formLocal,
-      });
+      return formLocal;
     } catch (error) {
       throw error;
     }
   };
 
-  const SignIn = async (email, password) => {
+  const SignIn = async (email, password, navigation) => {
     try {
-      GetForm();
+      let form = await GetForm();
       const result = await Login(email, password);
+      console.log(result);
       if (result[0].form_completado === 0) {
-        InitializeDropdowns();
+        await InitializeDropdowns();
       }
-      console.log("DATOS LOGIN EN STATE: ", result);
       dispatch({
         type: SET_TOKEN,
         payload: {
           token: "token",
           user_id: result[0].id_usuario,
           form_completed: result[0].form_completado,
+          form_state: form,
         },
       });
+
+      if (result[0].form_completado === 0) {
+        navigation.navigate("Data" + form.length);
+        return;
+      }
+
+      await QueryClient.prefetchQuery(["Estiercol"], () => Estiercol(result[0].id_usuario));
+      await QueryClient.prefetchQuery(["AguasSucias"], () => AguasSucias(result[0].id_usuario));
+      await QueryClient.prefetchQuery(["AguasLimpias"], () => AguasLimpias(result[0].id_usuario));
+      await QueryClient.prefetchQuery(["Ubi_Estacion"], () => Ubi_Estacion(result[0].id_usuario)); 
+
+      navigation.reset({
+        routes: [{ name: "App" }],
+      });
     } catch (error) {
+      console.log(error);
       throw error;
     }
   };
@@ -94,7 +109,7 @@ const AppState = (props) => {
   };
 
   const InitializeDropdowns = async () => {
-    Promise.all([
+    await Promise.all([
       Ubicaciones(),
       Alimentacion(),
       SistemaLimpieza(),

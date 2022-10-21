@@ -1,23 +1,25 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AppContext from "../Context/AppContext";
 import AuthStack from "./Auth";
 import AppStack from "./App";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Text } from "react-native-paper";
 
-export default function root() {
-  const { Token, Form_completed, FormState } = useContext(AppContext);
-  if (Token === null) {
-    return <AuthStack initPage="Login" />;
-  }
-  if (Form_completed === 0) {
-    console.log("GETFORM LENGTH EN ROOT: ", FormState.length);
-    if (FormState.length === 0) {
-      console.log("ENTRA EN FOMULARIO == 0");
-      return <AuthStack initPage="Data0" />;
-    }
-    if (FormState.length !== 0) {
-      console.log("ENTRA EN FOMULARIO != 0");
-      return <AuthStack initPage={"Data" + FormState.length} />;
-    }
-  }
-  return <AppStack />;
+export default function Root() {
+  const GeneralStack = createNativeStackNavigator();
+
+  return (
+    <GeneralStack.Navigator>
+      <GeneralStack.Screen
+        name="Auth"
+        component={AuthStack}
+        options={{ headerShown: false }}
+      />
+      <GeneralStack.Screen
+        name="App"
+        component={AppStack}
+        options={{ headerShown: false }}
+      />
+    </GeneralStack.Navigator>
+  );
 }

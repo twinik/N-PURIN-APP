@@ -18,7 +18,7 @@ function setColor(focused) {
   return focused ? "orange" : "lightgray";
 }
 
-export default function index() {
+export default function Index() {
   const Drawer = createDrawerNavigator();
 
   return (
