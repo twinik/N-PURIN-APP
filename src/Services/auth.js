@@ -1,7 +1,7 @@
 import axios from "axios";
 const baseURL = "https://conectamilk-npurin.herokuapp.com";
 
-export const Login = async (email, password) => {
+/* export const Login = async (email, password) => {
   try {
     const configurationObject = {
       method: "get",
@@ -16,6 +16,16 @@ export const Login = async (email, password) => {
   } catch (error) {
     throw error;
   }
+}; */
+
+export const Login = async (email, password) => {
+  try {
+    const response = await axios.get(`${baseURL}/login`, {
+      email,
+      password,
+    });
+    return response.data;
+  } catch (error) {}
 };
 
 export const Register = async (user) => {
