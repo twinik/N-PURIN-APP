@@ -130,10 +130,13 @@ const Home = ({ navigation }) => {
           </DataSection>
           <DataSection title={title3}>
             <View style={styles.section2}>
-              <DataListItem title="Aguas sucias" data={aguasSuciasQuery.data} />
+              <DataListItem
+                title="Aguas sucias"
+                data={aguasSuciasQuery.data + " L"}
+              />
               <DataListItem
                 title="Aguas limpias"
-                data={aguasLimpiasQuery.data}
+                data={aguasLimpiasQuery.data + " L"}
               />
             </View>
           </DataSection>

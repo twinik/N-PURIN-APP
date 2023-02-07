@@ -8,6 +8,8 @@ import { theme } from "../../theme";
 import AppText from "../../Components/AppText";
 import Container from "../../Components/Container";
 import DataSection from "../../Components/DataSection";
+import DataSectionColumns from "../../Components/DataSectionColumns";
+import DataListItem from "../../Components/DataListItem";
 import MenuButton from "../../Components/MenuButton";
 
 const year = new Date().getFullYear();
@@ -26,46 +28,91 @@ const NPK = ({ navigation }) => {
             style={styles.title}
             fontStyle="Regular"
           />
-          <DataSection title={title1}>
+          <DataSectionColumns title={title1}>
             <View style={styles.section1}>
-              <AppText
-                text="Total Purin"
-                style={styles.text1}
-                fontStyle="Regular"
-              />
-              <AppText
-                text="738,224 m3"
-                style={styles.text2}
-                fontStyle="Regular"
-              />
+              <View style={styles.columns}>
+                <AppText
+                  text="Total Purin"
+                  style={styles.text1}
+                  fontStyle="Regular"
+                />
+                <AppText
+                  text="738,224 m3"
+                  style={styles.text2}
+                  fontStyle="Regular"
+                />
+              </View>
+              <View style={styles.columns}>
+                <AppText
+                  text="Total Purin"
+                  style={styles.text1}
+                  fontStyle="Regular"
+                />
+                <AppText
+                  text="738,224 m3"
+                  style={[styles.text2, { color: "red" }]}
+                  fontStyle="Regular"
+                />
+              </View>
+              <View style={styles.columns}>
+                <AppText
+                  text="DATA2"
+                  style={styles.text1}
+                  fontStyle="Regular"
+                />
+                <AppText
+                  text="738,224 m3"
+                  style={[styles.text2, { color: "blue" }]}
+                  fontStyle="Regular"
+                />
+              </View>
             </View>
-          </DataSection>
-          <DataSection title={title2}>
+          </DataSectionColumns>
+          <DataSectionColumns title={title2}>
             <View style={styles.section1}>
-              <AppText
-                text="Total Purin"
-                style={styles.text1}
-                fontStyle="Regular"
-              />
-              <AppText
-                text="738,224 m3"
-                style={styles.text2}
-                fontStyle="Regular"
-              />
+              <View style={styles.columns}>
+                <AppText
+                  text="Total Purin"
+                  style={styles.text1}
+                  fontStyle="Regular"
+                />
+                <AppText
+                  text="738,224 m3"
+                  style={styles.text2}
+                  fontStyle="Regular"
+                />
+              </View>
+              <View style={styles.columns}>
+                <AppText
+                  text="Total Purin"
+                  style={styles.text1}
+                  fontStyle="Regular"
+                />
+                <AppText
+                  text="738,224 m3"
+                  style={[styles.text2, { color: "red" }]}
+                  fontStyle="Regular"
+                />
+              </View>
+              <View style={styles.columns}>
+                <AppText
+                  text="DATA2"
+                  style={styles.text1}
+                  fontStyle="Regular"
+                />
+                <AppText
+                  text="738,224 m3"
+                  style={[styles.text2, { color: "blue" }]}
+                  fontStyle="Regular"
+                />
+              </View>
             </View>
-          </DataSection>
+          </DataSectionColumns>
           <DataSection title={title3}>
-            <View style={styles.section1}>
-              <AppText
-                text="Total Purin"
-                style={styles.text1}
-                fontStyle="Regular"
-              />
-              <AppText
-                text="738,224 m3"
-                style={styles.text2}
-                fontStyle="Regular"
-              />
+            <View style={styles.section2}>
+              <DataListItem title="DATA 1" data={"DATA 1"} />
+              <DataListItem title="DATA 2" data={"DATA 2"} />
+              <DataListItem title="DATA 3" data={"DATA 3"} />
             </View>
           </DataSection>
         </View>
@@ -92,6 +139,12 @@ const styles = StyleSheet.create({
     height: hp(18),
     justifyContent: "center",
     alignItems: "center",
+    flexDirection: "row",
+  },
+  section2: {
+    flex: 1,
+    flexDirection: "column",
+    paddingVertical: hp(0),
   },
   text1: {
     fontSize: hp(2.5),
@@ -99,5 +152,9 @@ const styles = StyleSheet.create({
   text2: {
     fontSize: hp(2.5),
     color: "green",
+  },
+  columns: {
+    flex: 1,
+    alignItems: "center",
   },
 });

@@ -60,7 +60,7 @@ const AppState = (props) => {
     try {
       let form = await GetForm();
       const result = await Login(email, password);
-      console.log(result);
+      console.log("result", result[0]);
       if (result[0].form_completado === 0) {
         await InitializeDropdowns();
       }
@@ -79,10 +79,18 @@ const AppState = (props) => {
         return;
       }
 
-      await QueryClient.prefetchQuery(["Estiercol"], () => Estiercol(result[0].id_usuario));
-      await QueryClient.prefetchQuery(["AguasSucias"], () => AguasSucias(result[0].id_usuario));
-      await QueryClient.prefetchQuery(["AguasLimpias"], () => AguasLimpias(result[0].id_usuario));
-      await QueryClient.prefetchQuery(["Ubi_Estacion"], () => Ubi_Estacion(result[0].id_usuario)); 
+      await QueryClient.prefetchQuery(["Estiercol"], () =>
+        Estiercol(result[0].id_usuario)
+      );
+      await QueryClient.prefetchQuery(["AguasSucias"], () =>
+        AguasSucias(result[0].id_usuario)
+      );
+      await QueryClient.prefetchQuery(["AguasLimpias"], () =>
+        AguasLimpias(result[0].id_usuario)
+      );
+      await QueryClient.prefetchQuery(["Ubi_Estacion"], () =>
+        Ubi_Estacion(result[0].id_usuario)
+      );
 
       navigation.reset({
         routes: [{ name: "App" }],

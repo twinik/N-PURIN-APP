@@ -21,7 +21,7 @@ const DataListItem = ({ title, data }) => {
         <AppText text={title} style={styles.title} />
       </View>
       <View style={{ flex: 4 }}>
-        <AppText text={data + " L"} style={styles.data} />
+        <AppText text={data} style={styles.data} />
       </View>
     </View>
   );

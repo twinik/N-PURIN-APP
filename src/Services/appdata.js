@@ -1,7 +1,7 @@
 import axios from "axios";
 const baseURL = "https://conectamilk-npurin.herokuapp.com";
 
-export const Estiercol = async (idUsuario) => {
+/* export const Estiercol = async (idUsuario) => {
   try {
     const configurationObject = {
       method: "get",
@@ -15,9 +15,20 @@ export const Estiercol = async (idUsuario) => {
   } catch (error) {
     throw error;
   }
+}; */
+
+export const Estiercol = async (idUsuario) => {
+  try {
+    const response = await axios.get(`${baseURL}/estiercol`, {
+      params: {
+        id_usuario: idUsuario,
+      },
+    });
+    return response.data;
+  } catch (error) {}
 };
 
-export const AguasSucias = async (idUsuario) => {
+/* export const AguasSucias = async (idUsuario) => {
   try {
     const configurationObject = {
       method: "get",
@@ -31,9 +42,20 @@ export const AguasSucias = async (idUsuario) => {
   } catch (error) {
     throw error;
   }
+}; */
+
+export const AguasSucias = async (idUsuario) => {
+  try {
+    const response = await axios.get(`${baseURL}/aguas_sucias`, {
+      params: {
+        id_usuario: idUsuario,
+      },
+    });
+    return response.data;
+  } catch (error) {}
 };
 
-export const AguasLimpias = async (idUsuario) => {
+/* export const AguasLimpias = async (idUsuario) => {
   try {
     const configurationObject = {
       method: "get",
@@ -47,15 +69,28 @@ export const AguasLimpias = async (idUsuario) => {
   } catch (error) {
     throw error;
   }
+}; */
+
+export const AguasLimpias = async (idUsuario) => {
+  try {
+    const response = await axios.get(`${baseURL}/aguas_limpias`, {
+      params: {
+        id_usuario: idUsuario,
+      },
+    });
+    return response.data;
+  } catch (error) {}
 };
 
-export const Ubi_Estacion = async (idUsuario) => {
+/* export const Ubi_Estacion = async (idUsuario) => {
   try {
     const configurationObject = {
       method: "get",
       url: `${baseURL}/ubicacion_comuna_estacion`,
       data: {
-        id_usuario: idUsuario,
+        params: {
+          id_usuario: idUsuario,
+        },
       },
     };
     const response = await axios(configurationObject);
@@ -63,16 +98,29 @@ export const Ubi_Estacion = async (idUsuario) => {
   } catch (error) {
     throw error;
   }
+}; */
+
+export const Ubi_Estacion = async (idUsuario) => {
+  try {
+    const response = await axios.get(`${baseURL}/ubicacion_comuna_estacion`, {
+      params: {
+        id_usuario: idUsuario,
+      },
+    });
+    return response.data;
+  } catch (error) {}
 };
 
-export const AguasLluvia = async (idUsuario, idUbicacion) => {
+/* export const AguasLluvia = async (idUsuario, idUbicacion) => {
   try {
     const configurationObject = {
       method: "get",
       url: `${baseURL}/aguas_lluvia`,
       data: {
-        id_usuario: idUsuario,
-        id_ubicacion: idUbicacion,
+        params: {
+          id_usuario: idUsuario,
+          id_ubicacion: idUbicacion,
+        },
       },
     };
     const response = await axios(configurationObject);
@@ -80,4 +128,16 @@ export const AguasLluvia = async (idUsuario, idUbicacion) => {
   } catch (error) {
     throw error;
   }
+}; */
+
+export const AguasLluvia = async (idUsuario, idUbicacion) => {
+  try {
+    const response = await axios.get(`${baseURL}/aguas_lluvia`, {
+      params: {
+        id_usuario: idUsuario,
+        id_ubicacion: idUbicacion,
+      },
+    });
+    return response.data;
+  } catch (error) {}
 };

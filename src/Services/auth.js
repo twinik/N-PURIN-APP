@@ -20,7 +20,7 @@ const baseURL = "https://conectamilk-npurin.herokuapp.com";
 
 export const Login = async (email, password) => {
   try {
-    const response = await axios.get(`${baseURL}/login`, {
+    const response = await axios.post(`${baseURL}/login`, {
       email,
       password,
     });
