@@ -10,6 +10,8 @@ import Container from "../../Components/Container";
 import DataSection from "../../Components/DataSection";
 import MenuButton from "../../Components/MenuButton";
 
+import { AntDesign, FontAwesome5, MaterialIcons } from "@expo/vector-icons";
+
 const year = new Date().getFullYear();
 const title1 = "Produccion anual";
 const title2 = "Equivalente en carbono secuestrado";
@@ -36,51 +38,70 @@ const GEI = ({ navigation }) => {
               />
               <AppText
                 text="738,224 m3"
-                style={styles.text2}
+                style={[styles.text2, { color: "red" }]}
                 fontStyle="Regular"
               />
             </View>
           </DataSection>
           <DataSection title={title2}>
-            <View style={styles.section1}>
-              <AppText
-                text="Total Purin"
-                style={styles.text1}
-                fontStyle="Regular"
-              />
-              <AppText
-                text="738,224 m3"
-                style={styles.text2}
-                fontStyle="Regular"
-              />
+            <View style={[styles.section1, { flexDirection: "row" }]}>
+              <View style={styles.iconColumn}>
+                <AntDesign name="heart" size={40} color="orange" />
+              </View>
+              <View style={styles.dataColumn}>
+                <AppText
+                  text="Total Purin"
+                  style={styles.text1}
+                  fontStyle="Regular"
+                />
+                <AppText
+                  text="738,224 m3"
+                  style={styles.text2}
+                  fontStyle="Regular"
+                />
+              </View>
             </View>
           </DataSection>
           <DataSection title={title3}>
-            <View style={styles.section1}>
-              <AppText
-                text="Total Purin"
-                style={styles.text1}
-                fontStyle="Regular"
-              />
-              <AppText
-                text="738,224 m3"
-                style={styles.text2}
-                fontStyle="Regular"
-              />
+            <View style={[styles.section1, { flexDirection: "row" }]}>
+              <View style={styles.iconColumn}>
+                <FontAwesome5 name="trash" size={40} color="orange" />
+              </View>
+              <View style={styles.dataColumn}>
+                <AppText
+                  text="Total Purin"
+                  style={styles.text1}
+                  fontStyle="Regular"
+                />
+                <AppText
+                  text="738,224 m3"
+                  style={styles.text2}
+                  fontStyle="Regular"
+                />
+              </View>
             </View>
           </DataSection>
           <DataSection title={title4}>
-            <View style={styles.section1}>
-              <AppText
-                text="Total Purin"
-                style={styles.text1}
-                fontStyle="Regular"
-              />
-              <AppText
-                text="738,224 m3"
-                style={styles.text2}
-                fontStyle="Regular"
-              />
+            <View style={[styles.section1, { flexDirection: "row" }]}>
+              <View style={styles.iconColumn}>
+                <MaterialIcons
+                  name="local-gas-station"
+                  size={40}
+                  color="orange"
+                />
+              </View>
+              <View style={styles.dataColumn}>
+                <AppText
+                  text="Total Purin"
+                  style={styles.text1}
+                  fontStyle="Regular"
+                />
+                <AppText
+                  text="738,224 m3"
+                  style={[styles.text2, { color: "red" }]}
+                  fontStyle="Regular"
+                />
+              </View>
             </View>
           </DataSection>
         </View>
@@ -114,5 +135,15 @@ const styles = StyleSheet.create({
   text2: {
     fontSize: hp(2.5),
     color: "green",
+  },
+  iconColumn: {
+    flex: 1.2,
+    alignItems: "center",
+    paddingRight: wp(0),
+  },
+  dataColumn: {
+    flex: 2,
+    alignItems: "flex-start",
+    //backgroundColor: "blueviolet",
   },
 });
