@@ -102,11 +102,13 @@ const Home = ({ navigation }) => {
               />
               <AppText
                 text={
-                  CalculoTotalPurin(
-                    estiercolQuery,
-                    aguasSuciasQuery,
-                    aguasLimpiasQuery,
-                    aguasLluviaQuery
+                  Math.trunc(
+                    CalculoTotalPurin(
+                      estiercolQuery,
+                      aguasSuciasQuery,
+                      aguasLimpiasQuery,
+                      aguasLluviaQuery
+                    )
                   ) + " m3"
                 }
                 style={styles.text2}
@@ -132,11 +134,11 @@ const Home = ({ navigation }) => {
             <View style={styles.section2}>
               <DataListItem
                 title="Aguas sucias"
-                data={aguasSuciasQuery.data + " L"}
+                data={Math.trunc(aguasSuciasQuery.data) + " L"}
               />
               <DataListItem
                 title="Aguas limpias"
-                data={aguasLimpiasQuery.data + " L"}
+                data={Math.trunc(aguasLimpiasQuery.data) + " L"}
               />
             </View>
           </DataSection>
