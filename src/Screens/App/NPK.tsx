@@ -155,9 +155,18 @@ const NPK = ({ navigation }) => {
           </DataSectionColumns>
           <DataSection title={title3}>
             <View style={styles.section2}>
-              <DataListItem title="DATA 1" data={"DATA 1"} />
-              <DataListItem title="DATA 2" data={"DATA 2"} />
-              <DataListItem title="DATA 3" data={"DATA 3"} />
+              <DataListItem
+                title="Urea"
+                data={"$ " + Math.trunc(ureaQuery.data)}
+              />
+              <DataListItem
+                title="SPT"
+                data={"$ " + Math.trunc(sptQuery.data)}
+              />
+              <DataListItem
+                title="KCL"
+                data={"$ " + Math.trunc(kclQuery.data)}
+              />
             </View>
           </DataSection>
         </View>
