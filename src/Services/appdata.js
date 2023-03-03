@@ -70,7 +70,7 @@ export const Nitrogeno = async (cantidadPurin) => {
 
 export const Urea = async (cantidadPurin) => {
   try {
-    const response = await axios.get(`${baseURL}/valorizacion_urea`, {
+    const response = await axios.get(`${baseURL}/cantidad_urea_ano`, {
       params: {
         cantidad_purin: cantidadPurin,
       },
@@ -92,7 +92,7 @@ export const Fosforo = async (cantidadPurin) => {
 
 export const SPT = async (cantidadPurin) => {
   try {
-    const response = await axios.get(`${baseURL}/valorizacion_spt`, {
+    const response = await axios.get(`${baseURL}/cantidad_spt_ano`, {
       params: {
         cantidad_purin: cantidadPurin,
       },
@@ -114,9 +114,45 @@ export const Potasio = async (cantidadPurin) => {
 
 export const KCL = async (cantidadPurin) => {
   try {
-    const response = await axios.get(`${baseURL}/valorizacion_kcl`, {
+    const response = await axios.get(`${baseURL}/cantidad_kcl_ano`, {
       params: {
         cantidad_purin: cantidadPurin,
+      },
+    });
+    return response.data;
+  } catch (error) {}
+};
+
+export const ValorUrea = async (fecha, cantidadUreaAno) => {
+  try {
+    const response = await axios.get(`${baseURL}/valorizacion_urea_ano`, {
+      params: {
+        fecha: fecha,
+        cantidad_urea_ano: cantidadUreaAno,
+      },
+    });
+    return response.data;
+  } catch (error) {}
+};
+
+export const ValorSpt = async (fecha, cantidadSptAno) => {
+  try {
+    const response = await axios.get(`${baseURL}/valorizacion_spt_ano`, {
+      params: {
+        fecha: fecha,
+        cantidad_spt_ano: cantidadSptAno,
+      },
+    });
+    return response.data;
+  } catch (error) {}
+};
+
+export const ValorKcl = async (fecha, cantidadKclAno) => {
+  try {
+    const response = await axios.get(`${baseURL}/valorizacion_kcl_ano`, {
+      params: {
+        fecha: fecha,
+        cantidad_kcl_ano: cantidadKclAno,
       },
     });
     return response.data;

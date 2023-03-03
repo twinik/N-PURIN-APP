@@ -24,6 +24,9 @@ import {
   SPT,
   Potasio,
   KCL,
+  ValorKcl,
+  ValorUrea,
+  ValorSpt,
 } from "../../Services/appdata";
 
 const year = new Date().getFullYear();
@@ -66,6 +69,18 @@ const NPK = ({ navigation }) => {
     aguasLluviaQuery
   );
 
+  function addZeroBefore(n: number) {
+    return (n < 10 ? "0" : "") + n;
+  }
+
+  const date = new Date();
+  const dateFormated =
+    date.getFullYear() +
+    "-" +
+    addZeroBefore(date.getMonth() + 1) +
+    "-" +
+    addZeroBefore(date.getDate());
+
   const nitrogenoQuery = useQuery(["Nitrogeno"], () =>
     Nitrogeno(cantidadPurin)
   );
@@ -74,6 +89,15 @@ const NPK = ({ navigation }) => {
   const sptQuery = useQuery(["SPT"], () => SPT(cantidadPurin));
   const potasioQuery = useQuery(["Potasio"], () => Potasio(cantidadPurin));
   const kclQuery = useQuery(["KCL"], () => KCL(cantidadPurin));
+  const valorUreaQuery = useQuery(["ValorUrea"], () =>
+    ValorUrea(dateFormated, ureaQuery.data)
+  );
+  const valorSptQuery = useQuery(["ValorSpt"], () =>
+    ValorSpt(dateFormated, sptQuery.data)
+  );
+  const valorKclQuery = useQuery(["ValorKcl"], () =>
+    ValorKcl(dateFormated, kclQuery.data)
+  );
 
   return (
     <>
@@ -157,15 +181,15 @@ const NPK = ({ navigation }) => {
             <View style={styles.section2}>
               <DataListItem
                 title="Urea"
-                data={"$ " + Math.trunc(ureaQuery.data)}
+                data={"$ " + Math.trunc(valorUreaQuery.data)}
               />
               <DataListItem
                 title="SPT"
-                data={"$ " + Math.trunc(sptQuery.data)}
+                data={"$ " + Math.trunc(valorSptQuery.data)}
               />
               <DataListItem
                 title="KCL"
-                data={"$ " + Math.trunc(kclQuery.data)}
+                data={"$ " + Math.trunc(valorKclQuery.data)}
               />
             </View>
           </DataSection>
