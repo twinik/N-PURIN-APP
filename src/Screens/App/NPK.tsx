@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { StyleSheet, View } from "react-native";
+import React, { useContext, useEffect } from "react";
+import { StyleSheet, View, ActivityIndicator } from "react-native";
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -74,12 +74,13 @@ const NPK = ({ navigation }) => {
   }
 
   const date = new Date();
-  const dateFormated =
+  /*  const dateFormated =
     date.getFullYear() +
     "-" +
     addZeroBefore(date.getMonth() + 1) +
     "-" +
-    addZeroBefore(date.getDate());
+    addZeroBefore(date.getDate()); */
+  const dateFormated = "2023-03-01";
 
   const nitrogenoQuery = useQuery(["Nitrogeno"], () =>
     Nitrogeno(cantidadPurin)
@@ -89,15 +90,55 @@ const NPK = ({ navigation }) => {
   const sptQuery = useQuery(["SPT"], () => SPT(cantidadPurin));
   const potasioQuery = useQuery(["Potasio"], () => Potasio(cantidadPurin));
   const kclQuery = useQuery(["KCL"], () => KCL(cantidadPurin));
-  const valorUreaQuery = useQuery(["ValorUrea"], () =>
-    ValorUrea(dateFormated, ureaQuery.data)
+
+  const valorUreaQuery = useQuery(
+    ["ValorUrea"],
+    () => ValorUrea(dateFormated, ureaQuery.data),
+    { enabled: false }
   );
+
   const valorSptQuery = useQuery(["ValorSpt"], () =>
     ValorSpt(dateFormated, sptQuery.data)
   );
   const valorKclQuery = useQuery(["ValorKcl"], () =>
     ValorKcl(dateFormated, kclQuery.data)
   );
+
+  useEffect(() => {
+    console.log("ureaQuery", ureaQuery.data);
+    console.log("valorUreaQuery", valorUreaQuery.data);
+    valorUreaQuery.refetch();
+  }, [ureaQuery.data]);
+
+  if (ureaQuery.isLoading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "#072e45",
+        }}
+      >
+        <ActivityIndicator style={{ flex: 1 }} color="#fff" />
+      </View>
+    );
+  }
+
+  if (ureaQuery.isError) {
+    return (
+      <AppText
+        text={"Error"}
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+        }}
+        fontStyle
+      />
+    );
+  }
 
   return (
     <>
