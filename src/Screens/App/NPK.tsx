@@ -91,10 +91,8 @@ const NPK = ({ navigation }) => {
   const potasioQuery = useQuery(["Potasio"], () => Potasio(cantidadPurin));
   const kclQuery = useQuery(["KCL"], () => KCL(cantidadPurin));
 
-  const valorUreaQuery = useQuery(
-    ["ValorUrea"],
-    () => ValorUrea(dateFormated, ureaQuery.data),
-    { enabled: false }
+  const valorUreaQuery = useQuery(["ValorUrea"], () =>
+    ValorUrea(dateFormated, ureaQuery.data)
   );
 
   const valorSptQuery = useQuery(["ValorSpt"], () =>
@@ -110,7 +108,7 @@ const NPK = ({ navigation }) => {
     valorUreaQuery.refetch();
   }, [ureaQuery.data]);
 
-  if (ureaQuery.isLoading) {
+  if (valorUreaQuery.isLoading && valorUreaQuery.isFetching) {
     return (
       <View
         style={{
@@ -125,7 +123,7 @@ const NPK = ({ navigation }) => {
     );
   }
 
-  if (ureaQuery.isError) {
+  if (valorUreaQuery.isError) {
     return (
       <AppText
         text={"Error"}
