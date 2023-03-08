@@ -69,6 +69,10 @@ const NPK = ({ navigation }) => {
     aguasLluviaQuery
   );
 
+  function formatNumber(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+  }
+
   function addZeroBefore(n: number) {
     return (n < 10 ? "0" : "") + n;
   }
@@ -165,7 +169,7 @@ const NPK = ({ navigation }) => {
                   fontStyle="Regular"
                 />
                 <AppText
-                  text={Math.trunc(nitrogenoQuery.data)}
+                  text={formatNumber(Math.trunc(nitrogenoQuery.data))}
                   style={styles.text2}
                   fontStyle="Regular"
                 />
@@ -177,7 +181,7 @@ const NPK = ({ navigation }) => {
                   fontStyle="Regular"
                 />
                 <AppText
-                  text={Math.trunc(fosforoQuery.data)}
+                  text={formatNumber(Math.trunc(fosforoQuery.data))}
                   style={[styles.text2, { color: "red" }]}
                   fontStyle="Regular"
                 />
@@ -189,7 +193,7 @@ const NPK = ({ navigation }) => {
                   fontStyle="Regular"
                 />
                 <AppText
-                  text={Math.trunc(potasioQuery.data)}
+                  text={formatNumber(Math.trunc(potasioQuery.data))}
                   style={[styles.text2, { color: "blue" }]}
                   fontStyle="Regular"
                 />
@@ -201,7 +205,7 @@ const NPK = ({ navigation }) => {
               <View style={styles.columns}>
                 <AppText text="Urea" style={styles.text1} fontStyle="Regular" />
                 <AppText
-                  text={Math.trunc(ureaQuery.data) + " kg"}
+                  text={formatNumber(Math.trunc(ureaQuery.data)) + " kg"}
                   style={styles.text2}
                   fontStyle="Regular"
                 />
@@ -209,7 +213,7 @@ const NPK = ({ navigation }) => {
               <View style={styles.columns}>
                 <AppText text="SPT" style={styles.text1} fontStyle="Regular" />
                 <AppText
-                  text={Math.trunc(sptQuery.data) + " kg"}
+                  text={formatNumber(Math.trunc(sptQuery.data)) + " kg"}
                   style={[styles.text2, { color: "red" }]}
                   fontStyle="Regular"
                 />
@@ -217,7 +221,7 @@ const NPK = ({ navigation }) => {
               <View style={styles.columns}>
                 <AppText text="KCL" style={styles.text1} fontStyle="Regular" />
                 <AppText
-                  text={Math.trunc(kclQuery.data) + " kg"}
+                  text={formatNumber(Math.trunc(kclQuery.data)) + " kg"}
                   style={[styles.text2, { color: "blue" }]}
                   fontStyle="Regular"
                 />
@@ -226,9 +230,18 @@ const NPK = ({ navigation }) => {
           </DataSectionColumns>
           <DataSection title={title3}>
             <View style={styles.section2}>
-              <DataListItem title="Urea" data={"$ " + Math.trunc(valorUrea)} />
-              <DataListItem title="SPT" data={"$ " + Math.trunc(valorSpt)} />
-              <DataListItem title="KCL" data={"$ " + Math.trunc(valorKcl)} />
+              <DataListItem
+                title="Urea"
+                data={"$ " + formatNumber(Math.trunc(valorUrea))}
+              />
+              <DataListItem
+                title="SPT"
+                data={"$ " + formatNumber(Math.trunc(valorSpt))}
+              />
+              <DataListItem
+                title="KCL"
+                data={"$ " + formatNumber(Math.trunc(valorKcl))}
+              />
             </View>
           </DataSection>
         </View>

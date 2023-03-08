@@ -25,6 +25,10 @@ const title1 = "Produccion acumulada año " + year;
 const title2 = "Aguas caidas acumuladas año " + year;
 const title3 = "Aguas acumuladas año " + year;
 
+function formatNumber(num) {
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+}
+
 const Home = ({ navigation }) => {
   const { User_ID } = useContext(AppContext);
 
@@ -102,12 +106,14 @@ const Home = ({ navigation }) => {
               />
               <AppText
                 text={
-                  Math.trunc(
-                    CalculoTotalPurin(
-                      estiercolQuery,
-                      aguasSuciasQuery,
-                      aguasLimpiasQuery,
-                      aguasLluviaQuery
+                  formatNumber(
+                    Math.trunc(
+                      CalculoTotalPurin(
+                        estiercolQuery,
+                        aguasSuciasQuery,
+                        aguasLimpiasQuery,
+                        aguasLluviaQuery
+                      )
                     )
                   ) + " m3"
                 }
@@ -124,7 +130,7 @@ const Home = ({ navigation }) => {
                 fontStyle="Regular"
               />
               <AppText
-                text={aguasLluviaQuery.data + " mm"}
+                text={formatNumber(Math.trunc(aguasLluviaQuery.data)) + " mm"}
                 style={styles.text2}
                 fontStyle="Regular"
               />
@@ -134,11 +140,11 @@ const Home = ({ navigation }) => {
             <View style={styles.section2}>
               <DataListItem
                 title="Aguas sucias"
-                data={Math.trunc(aguasSuciasQuery.data) + " L"}
+                data={formatNumber(Math.trunc(aguasSuciasQuery.data)) + " L"}
               />
               <DataListItem
                 title="Aguas limpias"
-                data={Math.trunc(aguasLimpiasQuery.data) + " L"}
+                data={formatNumber(Math.trunc(aguasLimpiasQuery.data)) + " L"}
               />
             </View>
           </DataSection>
