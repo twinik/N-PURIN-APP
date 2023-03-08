@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, View, ActivityIndicator } from "react-native";
 import {
   heightPercentageToDP as hp,
@@ -91,8 +91,9 @@ const NPK = ({ navigation }) => {
   const potasioQuery = useQuery(["Potasio"], () => Potasio(cantidadPurin));
   const kclQuery = useQuery(["KCL"], () => KCL(cantidadPurin));
 
-  const valorUreaQuery = useQuery(["ValorUrea"], () =>
-    ValorUrea(dateFormated, ureaQuery.data)
+  const valorUreaQuery = useQuery(
+    ["ValorUrea"],
+    async () => await ValorUrea(dateFormated, ureaQuery.data)
   );
 
   const valorSptQuery = useQuery(["ValorSpt"], () =>
@@ -102,13 +103,20 @@ const NPK = ({ navigation }) => {
     ValorKcl(dateFormated, kclQuery.data)
   );
 
-  useEffect(() => {
-    console.log("ureaQuery", ureaQuery.data);
-    console.log("valorUreaQuery", valorUreaQuery.data);
-    valorUreaQuery.refetch();
-  }, [ureaQuery.data]);
+  const [valorUrea, setValorUrea] = useState(0);
+  const [valorSpt, setValorSpt] = useState(0);
+  const [valorKcl, setValorKcl] = useState(0);
 
-  if (valorUreaQuery.isLoading && valorUreaQuery.isFetching) {
+  useEffect(() => {
+    valorUreaQuery.refetch();
+    valorSptQuery.refetch();
+    valorKclQuery.refetch();
+    valorUreaQuery.data && setValorUrea(valorUreaQuery.data);
+    valorSptQuery.data && setValorSpt(valorSptQuery.data);
+    valorKclQuery.data && setValorKcl(valorKclQuery.data);
+  }, [valorUreaQuery.data, valorSptQuery.data, valorKclQuery.data]);
+
+  if (valorUreaQuery.isLoading) {
     return (
       <View
         style={{
@@ -218,18 +226,9 @@ const NPK = ({ navigation }) => {
           </DataSectionColumns>
           <DataSection title={title3}>
             <View style={styles.section2}>
-              <DataListItem
-                title="Urea"
-                data={"$ " + Math.trunc(valorUreaQuery.data)}
-              />
-              <DataListItem
-                title="SPT"
-                data={"$ " + Math.trunc(valorSptQuery.data)}
-              />
-              <DataListItem
-                title="KCL"
-                data={"$ " + Math.trunc(valorKclQuery.data)}
-              />
+              <DataListItem title="Urea" data={"$ " + Math.trunc(valorUrea)} />
+              <DataListItem title="SPT" data={"$ " + Math.trunc(valorSpt)} />
+              <DataListItem title="KCL" data={"$ " + Math.trunc(valorKcl)} />
             </View>
           </DataSection>
         </View>
