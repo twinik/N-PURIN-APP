@@ -29,6 +29,11 @@
     },
     "web": {
       "favicon": "./assets/iconpurin.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8674dfe0-3464-4041-82e4-385fde4c83b4"
+      }
     }
   }
 }

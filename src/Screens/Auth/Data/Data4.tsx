@@ -26,7 +26,8 @@ const validations = Yup.object().shape({
 });
 
 const Data4 = ({ route, navigation }) => {
-  const { SendForms, User_ID } = useContext(AppContext);
+  const { SendForms, User_ID, SignIn, Email, Password } =
+    useContext(AppContext);
   const prev = route.params;
   var prevForm = null;
 
@@ -42,7 +43,10 @@ const Data4 = ({ route, navigation }) => {
   }, []);
 
   function showToast() {
-    ToastAndroid.show("Registrado correctamente", ToastAndroid.SHORT);
+    ToastAndroid.show(
+      "Registrado correctamente, iniciando sesión...",
+      ToastAndroid.SHORT
+    );
   }
 
   const handleSubmit = async (values) => {
@@ -59,7 +63,8 @@ const Data4 = ({ route, navigation }) => {
       await setForm(formParametrosPurin);
       await SendForms(form);
       showToast();
-      navigation.navigate("Login");
+      await SignIn(Email, Password, navigation);
+      //navigation.navigate("Login");
     } catch (error) {
       alert("Ups! Algo salió mal. Intenta de nuevo");
       console.log(error);

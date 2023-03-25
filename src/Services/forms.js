@@ -12,7 +12,7 @@ export const setSalaOrdena = async (data) => {
     };
     const response = await axios(configurationObject);
   } catch (error) {
-    throw error;
+    console.log("Error form sala ordenia", error);
   }
 };
 
@@ -27,7 +27,7 @@ export const setConstruccion = async (data) => {
     };
     const response = await axios(configurationObject);
   } catch (error) {
-    throw error;
+    console.log("Error form construccion", error);
   }
 };
 
@@ -42,7 +42,7 @@ export const setVacaOrdena = async (data) => {
     };
     const response = await axios(configurationObject);
   } catch (error) {
-    throw error;
+    console.log("Error form vaca ordenia", error);
   }
 };
 
@@ -57,7 +57,7 @@ export const setPozoPurinero = async (data) => {
     };
     const response = await axios(configurationObject);
   } catch (error) {
-    throw error;
+    console.log("Error form pozo purinero", error);
   }
 };
 
@@ -72,7 +72,7 @@ export const setParametrosPurin = async (data) => {
     };
     const response = await axios(configurationObject);
   } catch (error) {
-    throw error;
+    console.log("Error form parametros purin", error);
   }
 };
 
@@ -88,6 +88,6 @@ export const setCompletedForms = async (idUsuario) => {
     };
     const response = await axios(configurationObject);
   } catch (error) {
-    throw error;
+    console.log("Error set formCompletado", error);
   }
 };

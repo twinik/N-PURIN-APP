@@ -31,6 +31,8 @@ const AppState = (props) => {
     data: {
       token: null,
       user_id: null,
+      email: null,
+      password: null,
       form_completed: null,
       form_state: [],
       user_type: null,
@@ -61,9 +63,7 @@ const AppState = (props) => {
       let form = await GetForm();
       const result = await Login(email, password);
       console.log("result", result[0]);
-      if (result[0].form_completado === 0) {
-        await InitializeDropdowns();
-      }
+
       dispatch({
         type: SET_TOKEN,
         payload: {
@@ -74,10 +74,11 @@ const AppState = (props) => {
         },
       });
 
-      if (result[0].form_completado === 0) {
+      /* if (result[0].form_completado === 0) {
+        await InitializeDropdowns();
         navigation.navigate("Data" + form.length);
         return;
-      }
+      } */
 
       await QueryClient.prefetchQuery(["Estiercol"], () =>
         Estiercol(result[0].id_usuario)
@@ -107,6 +108,8 @@ const AppState = (props) => {
       dispatch({
         type: SET_USER,
         payload: {
+          email: user.email,
+          password: user.password,
           user_id: result,
           user_type: user.usertype,
         },
@@ -124,13 +127,6 @@ const AppState = (props) => {
       SeparacionSolidos(),
     ])
       .then(([ubicaciones, alimentaciones, sistemaLimpieza, sepSolidos]) => {
-        /*  console.log(
-          "ubicaciones:",
-          ubicaciones + "alimentaciones:",
-          alimentaciones + "sistemaLimpieza:",
-          sistemaLimpieza + "sepSolidos:",
-          sepSolidos
-        ); */
         dispatch({
           type: SET_FUNCTIONAL_DATA,
           payload: {
@@ -167,7 +163,7 @@ const AppState = (props) => {
         }
       })
       .catch((error) => {
-        throw error;
+        console.log("Error al enviar los forms", error);
       });
   };
 
@@ -175,6 +171,8 @@ const AppState = (props) => {
     <AppContext.Provider
       value={{
         User_ID: state.data.user_id,
+        Email: state.data.email,
+        Password: state.data.password,
         User_Type: state.data.user_type,
         User_Ubication: state.data.user_ubication,
         Form_completed: state.data.form_completed,

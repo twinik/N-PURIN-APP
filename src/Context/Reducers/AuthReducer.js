@@ -37,6 +37,8 @@ export default (state, action) => {
         ...state,
         user_id: payload.user_id,
         user_type: payload.user_type,
+        email: payload.email,
+        password: payload.password,
       };
 
     case SET_FORM:

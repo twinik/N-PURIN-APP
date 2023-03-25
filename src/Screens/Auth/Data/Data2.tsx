@@ -144,14 +144,10 @@ const Data2 = ({ route, navigation }) => {
                       value: null,
                     }}
                     style={PickerStyles}
-                    /* items={drop_alimentacion.map(({ descripcion, id }) => ({
+                    items={drop_alimentacion.map(({ descripcion, id }) => ({
                       label: descripcion,
                       value: id,
-                    }))} */
-                    items={[
-                      { label: "Alimentacion 1", value: 0 },
-                      { label: "Alimentacion 2", value: 1 },
-                    ]}
+                    }))}
                   />
                 </View>
                 {errors.id_tipo_alimentacion &&
